@@ -12,7 +12,7 @@ const POINTS = [
 
 export function Sherpas({ ref }: { ref?: Ref<HTMLElement> }) {
   return (
-    <section ref={ref}>
+    <section id="sherpas" ref={ref}>
       <motion.p className="eyebrow mono" {...reveal}>A taste of sherpas</motion.p>
       <motion.h2 {...reveal}>You never climb alone.</motion.h2>
       <motion.p className="lead" {...reveal}>

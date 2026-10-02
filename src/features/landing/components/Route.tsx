@@ -70,7 +70,7 @@ export function Route() {
   const shown = Math.max(0, active)
 
   return (
-    <section ref={sectionRef} className={styles.route}>
+    <section id="route" ref={sectionRef} className={styles.route}>
       <div className={styles.sticky}>
         <svg className={styles.trail} viewBox="0 0 1000 620" aria-hidden="true">
           <path ref={trailRef} className={styles.ghost} d={TRAIL} />

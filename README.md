@@ -46,14 +46,15 @@ src/
     components/              one component per section, each with a scoped *.module.css
     hooks/                   browser work: crowd canvas + animation loop, cursor-following sherpa
     utils/                   pure logic: crowd simulation (unit-tested), sprite-sheet helpers
-  components/layout/Nav.tsx  shared nav: logo + CTA
+  components/layout/Nav.tsx  shared nav: logo, CTA and the full-screen section menu
+  hooks/                     shared browser behaviour: page lock while the menu is open
   styles/global.css          design tokens, reset, type scale, shared classes (.eyebrow, .lead, .btn, .mono)
   styles/motion.ts           motion presets (the scroll-reveal fade-up)
   utils/                     framework-free helpers (clamp/lerp/colour mix, contour paths, cx)
   assets/                    logo and the Open Peeps sprite, bundled by Vite
 ```
 
-Page colours are CSS variables (`--bg`, `--fg`, `--muted`, `--line`, `--accent`) defined in `src/styles/global.css`. As you scroll, `Atmosphere.tsx` changes them, flipping the page from white to black near the summit. Anything coloured with them, including the nav logo, follows along.
+Page colours are CSS variables (`--bg`, `--fg`, `--muted`, `--line`, `--accent`) defined in `src/styles/global.css`. As you scroll, `Atmosphere.tsx` changes them, flipping the page from white to black near the summit. Anything coloured with them follows along. The nav bar doesn't use them: it is white and difference-blended, so it always inverts whatever is behind it, the open menu included.
 
 Scroll-driven effects use [`motion`](https://motion.dev) (`useScroll`, `useTransform`, `whileInView`).
 

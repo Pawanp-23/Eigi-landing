@@ -24,7 +24,7 @@ const isEigi = (col: number) => col === COLUMNS.length - 1
 
 export function Stand() {
   return (
-    <section>
+    <section id="stand">
       <motion.p className="eyebrow mono" {...reveal}>Where Eigi stands</motion.p>
       <motion.h2 {...reveal}>Everyone else gives you tools. We get you to the top.</motion.h2>
       <div className={styles.grid}>

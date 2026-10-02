@@ -16,6 +16,9 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* the nav menu locks scrolling; keep the scrollbar's space so nothing shifts sideways */
+html { scrollbar-gutter: stable; }
+
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }

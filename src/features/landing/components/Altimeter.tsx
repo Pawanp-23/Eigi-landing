@@ -1,8 +1,7 @@
 import { motion, useScroll, useTransform } from 'motion/react'
 import { cx } from '../../../utils/cx.ts'
+import { altitude } from '../utils/altitude.ts'
 import styles from './Altimeter.module.css'
-
-const SUMMIT_M = 8848
 
 /** Where on the page (0–1) each stage of the climb begins. */
 const STAGES: [at: number, label: string][] = [
@@ -20,13 +19,13 @@ const STAGES: [at: number, label: string][] = [
 /** Fixed scroll-progress gauge: page progress shown as altitude on Everest. */
 export function Altimeter() {
   const { scrollYProgress } = useScroll()
-  const altitude = useTransform(scrollYProgress, (p) => `${Math.round(p * SUMMIT_M).toLocaleString('en-US')} m`)
+  const reading = useTransform(scrollYProgress, altitude)
   const stage = useTransform(scrollYProgress, (p) => STAGES.findLast(([at]) => p >= at)![1])
 
   return (
     <div className={styles.altimeter} aria-hidden="true">
       <div className={styles.readout}>
-        <motion.div className={cx(styles.altitude, 'mono')}>{altitude}</motion.div>
+        <motion.div className={cx(styles.altitude, 'mono')}>{reading}</motion.div>
         <motion.div className={cx(styles.stage, 'mono')}>{stage}</motion.div>
       </div>
       <div className={styles.bar}>

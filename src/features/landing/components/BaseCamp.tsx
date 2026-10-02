@@ -6,7 +6,7 @@ import styles from './BaseCamp.module.css'
 
 export function BaseCamp() {
   return (
-    <section className={styles.hero}>
+    <section id="base-camp" className={styles.hero}>
       <motion.p className="eyebrow mono" {...reveal}>Base camp · 0 m</motion.p>
       <motion.h1 {...reveal}>AI is here.<br /><em>Adoption</em> isn’t.</motion.h1>
       <motion.p className="lead" {...reveal}>

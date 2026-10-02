@@ -14,7 +14,7 @@ const PEAKS = [
 
 export function Problem() {
   return (
-    <section>
+    <section id="problem">
       <motion.p className="eyebrow mono" {...reveal}>The problem · adoption</motion.p>
       <motion.h2 {...reveal}>Everyone can see the summit. Almost no one knows the route.</motion.h2>
       <motion.p className="lead" {...reveal}>
