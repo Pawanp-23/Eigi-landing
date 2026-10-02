@@ -1,0 +1,26 @@
+.map { width: 100%; overflow: visible; }
+.rings path { fill: none; stroke: var(--line); }
+.axis { stroke: var(--fg); stroke-width: 1; opacity: .5; }
+.axisLabel { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; fill: var(--muted); }
+
+.point { opacity: 0; transition: opacity .6s; }
+.point circle { fill: var(--bg); stroke: var(--fg); stroke-width: 1.5; }
+.point text { font-family: var(--font-mono); font-size: 13px; fill: var(--muted); }
+
+.climb {
+  fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 6; stroke-dashoffset: 400;
+  opacity: 0; transition: stroke-dashoffset 1.6s 1.2s ease, opacity .3s 1.2s;
+}
+.eigi { opacity: 0; transition: opacity .5s 2.6s; }
+.core { fill: var(--accent); }
+.pulse { fill: none; stroke: var(--accent); animation: pulse 2s infinite; transform-origin: center; transform-box: fill-box; }
+.flag { fill: var(--accent); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.name { font-weight: 800; font-size: 26px; letter-spacing: -.03em; fill: var(--fg); }
+.tagline { font-family: var(--font-mono); font-size: 11px; fill: var(--accent); letter-spacing: .06em; }
+@keyframes pulse {
+  0% { transform: scale(1); opacity: .9; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+.go .point, .go .eigi { opacity: 1; }
+.go .climb { opacity: 1; stroke-dashoffset: 0; }

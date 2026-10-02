@@ -1,0 +1,5 @@
+.ridge { width: 100%; margin-top: 60px; }
+.line { fill: none; stroke: var(--fg); stroke-width: 1.4; }
+.ridge text { font-family: var(--font-mono); font-size: 12px; fill: var(--muted); }
+.ridge circle { fill: var(--accent); }
+.dash { stroke: var(--muted); stroke-dasharray: 3 4; stroke-width: 1; }

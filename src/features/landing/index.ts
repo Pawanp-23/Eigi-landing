@@ -1,0 +1,11 @@
+// Public surface of the landing feature: the page chrome and its sections, top to bottom.
+export { Atmosphere } from './components/Atmosphere.tsx'
+export { SherpaCursor } from './components/SherpaCursor.tsx'
+export { Altimeter } from './components/Altimeter.tsx'
+export { BaseCamp } from './components/BaseCamp.tsx'
+export { Problem } from './components/Problem.tsx'
+export { Stand } from './components/Stand.tsx'
+export { Route } from './components/Route.tsx'
+export { Sherpas } from './components/Sherpas.tsx'
+export { Summit } from './components/Summit.tsx'
+export { FinalCta } from './components/FinalCta.tsx'
