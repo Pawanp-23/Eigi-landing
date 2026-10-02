@@ -9,7 +9,7 @@ const TRAIL = 'M60 590 C 220 590, 200 470, 360 455 S 560 420, 470 330 S 560 230,
 const CAMPS = [
   {
     at: 0.16, numeral: 'I', altitude: '1,200 m', title: 'Discover',
-    body: 'Sherpas sit with your team for a week and map every repetitive hour — inbox, sales follow-ups, ops, reporting.',
+    body: 'Sherpas sit with your team for a week and map every repetitive hour: inbox, sales follow-ups, ops, reporting.',
     chip: '→ AI opportunity map, ranked by hours saved',
   },
   {
@@ -24,7 +24,7 @@ const CAMPS = [
   },
   {
     at: 0.93, numeral: 'IV', altitude: '7,800 m', title: 'Scale',
-    body: 'Your team learns to run it themselves. We stay roped in — tuning, adding agents, pushing the ceiling higher.',
+    body: 'Your team learns to run it themselves. We stay roped in: tuning, adding agents, pushing the ceiling higher.',
     chip: '→ AI-first, permanently',
   },
 ]
@@ -57,7 +57,10 @@ export function Route() {
     const trail = trailRef.current!
     const { x, y } = trail.getPointAtLength(trail.getTotalLength() * p)
     hikerRef.current!.setAttribute('transform', `translate(${x},${y})`)
-    setActive(campAt(p))
+    const camp = campAt(p)
+    setActive(camp)
+    // the altimeter reads this; empty until camp I so it keeps showing the section before
+    sectionRef.current!.dataset.stage = camp >= 0 ? `Camp ${CAMPS[camp].numeral}` : ''
   }
   useMotionValueEvent(scrollYProgress, 'change', climb)
   useLayoutEffect(() => {
@@ -70,7 +73,7 @@ export function Route() {
   const shown = Math.max(0, active)
 
   return (
-    <section ref={sectionRef} className={styles.route}>
+    <section id="route" ref={sectionRef} className={styles.route}>
       <div className={styles.sticky}>
         <svg className={styles.trail} viewBox="0 0 1000 620" aria-hidden="true">
           <path ref={trailRef} className={styles.ghost} d={TRAIL} />

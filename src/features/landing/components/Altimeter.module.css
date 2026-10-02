@@ -9,6 +9,14 @@
 .altitude { font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
 .stage { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-top: 4px; }
 
+/* desktop: white + difference blend = black over the white page, white over the black gateway and summit */
+@media (min-width: 821px) {
+  .altimeter { color: #fff; mix-blend-mode: difference; }
+  .bar { background: rgba(255, 255, 255, .3); }
+  .fill, .tick { background: #fff; }
+  .stage { color: rgba(255, 255, 255, .65); }
+}
+
 @media (max-width: 820px) {
   .altimeter {
     right: 12px; top: auto; bottom: 14px; transform: none;

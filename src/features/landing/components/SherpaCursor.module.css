@@ -6,6 +6,9 @@
   opacity: 0; transition: opacity .3s;
 }
 .talking .tip { opacity: 1; }
+/* white + difference blend: the sherpa stays visible on the white page and the black gateway alike */
+.sherpa, .rope { --accent: #fff; mix-blend-mode: difference; }
+.tip { background: #fff; color: #000; }
 .rope { position: fixed; inset: 0; z-index: 39; pointer-events: none; width: 100vw; height: 100vh; }
 .rope path { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 4; opacity: .7; }
 

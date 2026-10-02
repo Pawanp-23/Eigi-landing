@@ -8,7 +8,7 @@ export const mixRgb = (a: Rgb, b: Rgb, t: number) =>
   `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], t))).join(',')})`
 
 /**
- * A closed, wobbly ring — one topographic contour line — as an SVG path.
+ * A closed, wobbly ring (one topographic contour line) as an SVG path.
  * `squash` flattens it vertically; `wobble(rad)` pushes the radius in or out at each angle.
  */
 export function contourPath(

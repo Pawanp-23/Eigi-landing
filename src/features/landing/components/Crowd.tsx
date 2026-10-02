@@ -6,7 +6,7 @@ import styles from './Crowd.module.css'
 function hintFor(chosen: number) {
   if (chosen === 0) return '↓ Tap anyone in the crowd to give them a sherpa'
   if (chosen === 1) return '✓ They have a sherpa now. Watch them climb ↓'
-  return `✓ ${chosen} on the route — keep going`
+  return `✓ ${chosen} on the route. Keep going`
 }
 
 /** Base-camp crowd canvas. Tap (or press Enter on) a wandering peep to give them a sherpa. */

@@ -1,5 +1,5 @@
 import { motion, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
-import { useEffect } from 'react'
+import { useEffect, type RefObject } from 'react'
 import { clamp, contourPath, mixRgb } from '../../../utils/math.ts'
 import styles from './Atmosphere.module.css'
 
@@ -11,11 +11,14 @@ const TOPO = [[300, 350], [900, 700], [500, 1150]].flatMap(([cx, cy], ci) => {
   return rings
 })
 
-/** Page-progress window where the sky flips white → black: a quick switch entering the sherpas section, no muddy greys. */
-const FLIP: [number, number] = [0.745, 0.795]
+/**
+ * The sky flips white to black while the sherpas section's top travels from 53% to 3% of the viewport:
+ * a quick switch with no muddy greys. Tied to the section, so adding sections above never moves it.
+ */
+const FLIP_OFFSET = ['start 0.53', 'start 0.03'] as const
 
 function paintSky(progress: number) {
-  const t = clamp((progress - FLIP[0]) / (FLIP[1] - FLIP[0]))
+  const t = clamp(progress)
   const root = document.documentElement.style
   root.setProperty('--bg', mixRgb([255, 255, 255], [0, 0, 0], t))
   root.setProperty('--fg', mixRgb([0, 0, 0], [255, 255, 255], t))
@@ -24,13 +27,16 @@ function paintSky(progress: number) {
 }
 
 /** Fixed backdrop: drifting topo lines and low fog. The sky darkens as you near the summit. */
-export function Atmosphere() {
-  const { scrollYProgress } = useScroll()
-  const drift = useTransform(scrollYProgress, [0, 1], ['0%', '-18%'])
-  const fog = useTransform(scrollYProgress, FLIP, [1, 0])
+type AtmosphereProps = { climb: RefObject<HTMLElement | null>; flipAt: RefObject<HTMLElement | null> }
 
-  useMotionValueEvent(scrollYProgress, 'change', paintSky)
-  useEffect(() => paintSky(scrollYProgress.get()), [scrollYProgress])
+export function Atmosphere({ climb, flipAt }: AtmosphereProps) {
+  const { scrollYProgress } = useScroll({ target: climb, offset: ['start start', 'end end'] })
+  const { scrollYProgress: flip } = useScroll({ target: flipAt, offset: [...FLIP_OFFSET] })
+  const drift = useTransform(scrollYProgress, [0, 1], ['0%', '-18%'])
+  const fog = useTransform(flip, [0, 1], [1, 0])
+
+  useMotionValueEvent(flip, 'change', paintSky)
+  useEffect(() => paintSky(flip.get()), [flip])
 
   return (
     <>

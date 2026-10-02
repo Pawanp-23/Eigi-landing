@@ -2,7 +2,7 @@
 
 Marketing site for [eigi.ai](https://eigi.ai), built with React 19, Vite 8 and TypeScript.
 
-The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, and the four camps of an Eigi engagement.
+The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), the four camps of an Eigi engagement, and finally contact.
 
 ## Run it locally
 
@@ -44,16 +44,20 @@ src/
   features/landing/          everything specific to The Ascent
     index.ts                 the feature's public surface (what pages may import)
     components/              one component per section, each with a scoped *.module.css
-    hooks/                   browser work: crowd canvas + animation loop, cursor-following sherpa
-    utils/                   pure logic: crowd simulation (unit-tested), sprite-sheet helpers
-  components/layout/Nav.tsx  shared nav: logo + CTA
+    hooks/                   browser work: crowd canvas, singularity canvas, cursor-following sherpa
+    utils/                   pure logic: crowd and singularity simulations (unit-tested), sprite-sheet helpers, altitude formatting
+  components/layout/Nav.tsx  shared nav: logo, Documentation, Contact, Go to Studio and the full-screen section menu
+  components/layout/Footer.tsx  contact section + site footer
+  hooks/                     shared browser behaviour: page lock while the menu is open
   styles/global.css          design tokens, reset, type scale, shared classes (.eyebrow, .lead, .btn, .mono)
   styles/motion.ts           motion presets (the scroll-reveal fade-up)
   utils/                     framework-free helpers (clamp/lerp/colour mix, contour paths, cx)
   assets/                    logo and the Open Peeps sprite, bundled by Vite
 ```
 
-Page colours are CSS variables (`--bg`, `--fg`, `--muted`, `--line`, `--accent`) defined in `src/styles/global.css`. As you scroll, `Atmosphere.tsx` changes them, flipping the page from white to black near the summit. Anything coloured with them, including the nav logo, follows along.
+Page colours are CSS variables (`--bg`, `--fg`, `--muted`, `--line`, `--accent`) defined in `src/styles/global.css`. As you scroll, `Atmosphere.tsx` changes them, flipping the page from white to black as you reach the sherpas. Anything coloured with them, including the nav, follows along. Two exceptions: the gateway section repaints the tokens locally (a black portal in the white page), and while the menu is open the nav bar is white and difference-blended so it always inverts whatever is behind it.
+
+The altimeter's stage label comes from each section's `data-stage` attribute, and the sky flip is tied to the sherpas section itself, so adding or resizing sections needs no retuning.
 
 Scroll-driven effects use [`motion`](https://motion.dev) (`useScroll`, `useTransform`, `whileInView`).
 

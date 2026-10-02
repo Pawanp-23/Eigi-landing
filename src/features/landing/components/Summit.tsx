@@ -5,7 +5,7 @@ import { cx } from '../../../utils/cx.ts'
 import { peepStyle } from '../utils/peeps.ts'
 import styles from './Summit.module.css'
 
-/** Two people from the base-camp crowd — now at the top. `peep` is their sprite cell. */
+/** Two people from the base-camp crowd, now at the top. `peep` is their sprite cell. */
 const FOUNDERS = [
   { name: 'You', peep: 23 },
   { name: 'Co-founder', peep: 51 },
@@ -24,12 +24,12 @@ export function Summit() {
   useMotionValueEvent(scrollYProgress, 'change', (p) => setTeam(Math.max(FOUNDERS.length, Math.round(p * TEAM_SIZE))))
 
   return (
-    <section id="summit" ref={ref}>
+    <section id="summit" ref={ref} data-stage="Summit">
       <motion.p className="eyebrow mono" {...reveal}>Summit · 8,848 m · Our mission</motion.p>
       <motion.h2 {...reveal}>Make every small team AI-first.</motion.h2>
       <p className={cx(styles.count, 'mono')}>
         {team}
-        <small>{team === TEAM_SIZE ? ' — a 2-person team, working like 20' : ' on the team'}</small>
+        <small>{team === TEAM_SIZE ? ' · a 2-person team, working like 20' : ' on the team'}</small>
       </p>
       <ul className={styles.team}>
         {FOUNDERS.map((f) => (

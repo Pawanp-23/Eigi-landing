@@ -1,33 +1,38 @@
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
+import { useState, type RefObject } from 'react'
 import { cx } from '../../../utils/cx.ts'
+import { altitude as toAltitude } from '../utils/altitude.ts'
 import styles from './Altimeter.module.css'
 
-const SUMMIT_M = 8848
+/**
+ * The current stage: the last section with a non-empty `data-stage` whose top has passed the middle
+ * of the screen. Sections own their labels (the route updates its own per camp), so adding or
+ * resizing sections never needs retuning here.
+ */
+function currentStage() {
+  let label = 'Base camp'
+  for (const el of document.querySelectorAll<HTMLElement>('[data-stage]')) {
+    if (el.dataset.stage && el.getBoundingClientRect().top <= window.innerHeight / 2) label = el.dataset.stage
+  }
+  return label
+}
 
-/** Where on the page (0–1) each stage of the climb begins. */
-const STAGES: [at: number, label: string][] = [
-  [0, 'Base camp'],
-  [0.08, 'The problem'],
-  [0.17, 'Where we stand'],
-  [0.38, 'Camp I'],
-  [0.5, 'Camp II'],
-  [0.61, 'Camp III'],
-  [0.71, 'Camp IV'],
-  [0.78, 'With your sherpa'],
-  [0.87, 'Summit'],
-]
-
-/** Fixed scroll-progress gauge: page progress shown as altitude on Everest. */
-export function Altimeter() {
-  const { scrollYProgress } = useScroll()
-  const altitude = useTransform(scrollYProgress, (p) => `${Math.round(p * SUMMIT_M).toLocaleString('en-US')} m`)
-  const stage = useTransform(scrollYProgress, (p) => STAGES.findLast(([at]) => p >= at)![1])
+/** Fixed scroll-progress gauge: climb progress shown as altitude on Everest. */
+export function Altimeter({ climb }: { climb: RefObject<HTMLElement | null> }) {
+  const { scrollYProgress } = useScroll({ target: climb, offset: ['start start', 'end end'] })
+  const altitude = useTransform(scrollYProgress, toAltitude)
+  const [stage, setStage] = useState('Base camp') // page loads at the top; any scroll (incl. restored position) updates it
+  const { scrollY } = useScroll()
+  useMotionValueEvent(scrollY, 'change', () => setStage(currentStage()))
+  // past the summit the footer takes over: fade the gauge out so it never sits on the contact form
+  const { scrollYProgress: pastSummit } = useScroll({ target: climb, offset: ['end end', 'end 0.6'] })
+  const opacity = useTransform(pastSummit, [0, 1], [1, 0])
 
   return (
-    <div className={styles.altimeter} aria-hidden="true">
+    <motion.div className={styles.altimeter} style={{ opacity }} aria-hidden="true">
       <div className={styles.readout}>
         <motion.div className={cx(styles.altitude, 'mono')}>{altitude}</motion.div>
-        <motion.div className={cx(styles.stage, 'mono')}>{stage}</motion.div>
+        <div className={cx(styles.stage, 'mono')}>{stage}</div>
       </div>
       <div className={styles.bar}>
         <motion.div className={styles.fill} style={{ scaleY: scrollYProgress }} />
@@ -35,6 +40,6 @@ export function Altimeter() {
           <div key={i} className={styles.tick} style={{ bottom: `${i * 10}%` }} />
         ))}
       </div>
-    </div>
+    </motion.div>
   )
 }
