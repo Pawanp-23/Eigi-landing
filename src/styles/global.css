@@ -3,10 +3,11 @@
  * scroll, so near the summit the sky turns black and everything drawn with them follows.
  */
 :root {
-  /* the site's cursor: a solid arrowhead, tip as the hotspot; it flips to white over anything clickable.
+  /* the site's cursor: a solid arrowhead whose sharp tip is the exact click point (hotspot 2,2),
+     pointing up-left like a system pointer; it flips to white over anything clickable.
      A thin outline in the opposite colour keeps it visible on the black sections too. */
-  --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 3 L29 15 L7 29 Z' fill='%23000' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 29 15, auto;
-  --cursor-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 3 L29 15 L7 29 Z' fill='%23fff' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 29 15, pointer;
+  --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L26 11 L11 26 Z' fill='%23000' stroke='%23fff' stroke-width='1.5' stroke-linejoin='miter' stroke-miterlimit='10'/%3E%3C/svg%3E") 2 2, auto;
+  --cursor-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L26 11 L11 26 Z' fill='%23fff' stroke='%23000' stroke-width='1.5' stroke-linejoin='miter' stroke-miterlimit='10'/%3E%3C/svg%3E") 2 2, pointer;
   --bg: #ffffff;
   --fg: #000000;
   --muted: #6b6b6b;

@@ -62,7 +62,6 @@ export function Footer() {
         </nav>
         <p className={cx(styles.legal, 'mono')}>
           © {YEAR} Eigi AI · All rights reserved, India
-          <span> · Crowd adapted from <a href="https://skiper-ui.com" target="_blank" rel="noopener noreferrer">Skiper UI</a>, illustrations by <a href="https://www.openpeeps.com" target="_blank" rel="noopener noreferrer">Open Peeps</a></span>
         </p>
       </div>
     </footer>

@@ -5,8 +5,9 @@
   mask-image: linear-gradient(to bottom, #000 72%, transparent);
 }
 .crowd:focus-visible { outline-offset: -3px; }
+/* in the hero's normal flow, right under the intro, so it can never sit on the headline at any width */
 .hint {
-  position: absolute; right: calc(var(--gutter) + 140px); top: calc(48vh - 28px); z-index: 2;
+  position: relative; z-index: 2; margin-top: 28px;
   font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
   color: var(--muted); transition: color .3s;
 }
@@ -14,5 +15,5 @@
 
 @media (max-width: 820px) {
   .crowd { height: 40vh; }
-  .hint { right: auto; left: var(--gutter); top: auto; bottom: calc(40vh - 10px); }
+  .hint { margin-top: 20px; font-size: 10px; }
 }

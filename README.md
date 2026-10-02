@@ -46,7 +46,7 @@ src/
     components/              one component per section, each with a scoped *.module.css
     hooks/                   browser work: crowd canvas, singularity canvas, the sherpa that joins your cursor in the sherpas section
     utils/                   pure logic: crowd and singularity simulations (unit-tested), sprite-sheet helpers, altitude formatting
-  components/layout/Nav.tsx  shared nav: logo, Documentation, Contact, Go to Studio and the full-screen section menu
+  components/layout/Nav.tsx  shared nav: logo, Go to Studio and the full-screen section menu (sections, Documentation, Studio, email)
   components/layout/Footer.tsx  contact section + site footer
   hooks/                     shared browser behaviour: page lock while the menu is open
   styles/global.css          design tokens, reset, type scale, shared classes (.eyebrow, .lead, .btn, .mono)

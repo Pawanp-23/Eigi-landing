@@ -2,10 +2,12 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { useRef, type PointerEvent } from 'react'
 import { reveal } from '../../../styles/motion.ts'
 import { cx } from '../../../utils/cx.ts'
+import aman from '../../../assets/founders/aman-khandelwal.webp'
+import mrunmay from '../../../assets/founders/mrunmay-chichkhede.webp'
 import styles from './Minds.module.css'
 
 /**
- * The disciplines behind the work, as on fde.eigi.ai. The portraits are illustrative stock images
+ * The disciplines behind the work, as on fde.eigi.ai. These portraits are illustrative stock images
  * (the same ones fde.eigi.ai uses); self-host them before launch.
  */
 const MINDS = [
@@ -18,10 +20,38 @@ const MINDS = [
 ]
 
 /** Colour opens out from wherever the cursor enters the photo. */
-function markEntry(e: PointerEvent<HTMLLIElement>) {
+function markEntry(e: PointerEvent<HTMLElement>) {
   const r = e.currentTarget.getBoundingClientRect()
   e.currentTarget.style.setProperty('--x', `${e.clientX - r.left}px`)
   e.currentTarget.style.setProperty('--y', `${e.clientY - r.top}px`)
+}
+
+/** The people at the front of the rope. Photos are pre-cropped to their subject in src/assets/founders. */
+const FOUNDERS = [
+  {
+    name: 'Aman Khandelwal', role: 'Founder & CEO', img: aman,
+    line: 'On a relentless pursuit of digital singularity: building the bridge between human intent and machine intelligence, one voice at a time.',
+  },
+  {
+    name: 'Mrunmay Chichkhede', role: 'Co-Founder', img: mrunmay,
+    line: 'Building the engineering backbone that powers real-time, intelligent voice experiences at scale.',
+  },
+]
+
+function Founder({ f }: { f: (typeof FOUNDERS)[number] }) {
+  return (
+    <motion.li className={styles.founder} onPointerEnter={markEntry} {...reveal}>
+      <div className={styles.photo}>
+        <img src={f.img} alt={`${f.name}, ${f.role}`} loading="lazy" decoding="async" draggable={false} />
+        <img className={styles.colour} src={f.img} alt="" aria-hidden="true" loading="lazy" decoding="async" draggable={false} />
+      </div>
+      <div className={styles.bio}>
+        <p className={cx(styles.role, 'mono')}>{f.role}</p>
+        <h3>{f.name}</h3>
+        <p className={styles.line}>{f.line}</p>
+      </div>
+    </motion.li>
+  )
 }
 
 function Card({ mind, i, copy }: { mind: (typeof MINDS)[number]; i: number; copy: boolean }) {
@@ -61,6 +91,11 @@ export function Minds() {
           Meet the disciplines behind the work. Portraits are illustrative, not staff profiles.
         </motion.p>
       </div>
+
+      <p className={cx(styles.count, 'mono')}>The founders / 02</p>
+      <ul className={styles.founders}>
+        {FOUNDERS.map((f) => <Founder key={f.name} f={f} />)}
+      </ul>
 
       <p className={cx(styles.count, 'mono')}>The disciplines / {String(MINDS.length).padStart(2, '0')}</p>
       <div className={styles.viewport}>

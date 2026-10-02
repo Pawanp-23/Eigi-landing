@@ -61,7 +61,7 @@ const ringMotion: Variants = {
 
 /**
  * Fixed top bar: transparent at the top, frosted once you scroll; tucks away while you scroll down and
- * drops back when you scroll up. Holds Documentation, Contact, Go to Studio and the menu toggle.
+ * drops back when you scroll up. Holds Go to Studio and the menu toggle; Documentation and Contact live in the menu.
  * The menu is a full-screen route map that rises over the page as a mountain range.
  */
 export function Nav({ links, formatProgress }: NavProps) {
@@ -95,8 +95,6 @@ export function Nav({ links, formatProgress }: NavProps) {
       >
         <a href="#top" className={styles.logo} aria-label="eigi.ai, back to top" onClick={close} />
         <div className={styles.links}>
-          <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className={styles.hideSm}>Documentation</a>
-          <a href="#contact" className={styles.hideSm} onClick={close}>Contact</a>
           <a className={styles.studio} href={STUDIO_URL}>
             Go to Studio <span aria-hidden="true">→</span>
           </a>
