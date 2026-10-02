@@ -11,7 +11,7 @@ const FOUNDERS = [
   { name: 'Co-founder', peep: 51 },
 ]
 const AGENTS = [
-  'Grokbot', 'Muse', 'Instinct', 'Context', 'Inbox', 'Sales', 'Support', 'Ops', 'Research',
+  'Voice', 'Chat', 'Instinct', 'Context', 'Inbox', 'Sales', 'Support', 'Ops', 'Research',
   'Finance', 'Hiring', 'QA', 'Analytics', 'Outreach', 'Docs', 'Billing', 'Scheduling', 'Content',
 ]
 const TEAM_SIZE = FOUNDERS.length + AGENTS.length

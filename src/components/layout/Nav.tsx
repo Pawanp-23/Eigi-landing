@@ -97,7 +97,7 @@ export function Nav({ links, formatProgress }: NavProps) {
         <div className={styles.links}>
           <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className={styles.hideSm}>Documentation</a>
           <a href="#contact" className={styles.hideSm} onClick={close}>Contact</a>
-          <a className={styles.studio} href={STUDIO_URL} target="_blank" rel="noopener noreferrer">
+          <a className={styles.studio} href={STUDIO_URL}>
             Go to Studio <span aria-hidden="true">→</span>
           </a>
           <button
@@ -189,7 +189,7 @@ function Menu({ id, links, formatProgress, onNavigate, onEscape }: MenuProps) {
         </ol>
         <motion.p className={cx(styles.extras, 'mono')} variants={fadeMotion} custom={links.length}>
           <a href={DOCS_URL} target="_blank" rel="noopener noreferrer">Documentation ↗</a>
-          <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">Eigi Studio ↗</a>
+          <a href={STUDIO_URL}>Eigi Studio →</a>
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </motion.p>
       </nav>

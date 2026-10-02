@@ -1,6 +1,6 @@
 .crowd {
   position: absolute; left: 0; bottom: 0; z-index: 1;
-  width: 100%; height: 52vh; cursor: pointer;
+  width: 100%; height: 52vh; cursor: var(--cursor-link);
   -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
   mask-image: linear-gradient(to bottom, #000 72%, transparent);
 }

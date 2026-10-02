@@ -2,7 +2,7 @@
 
 Marketing site for [eigi.ai](https://eigi.ai), built with React 19, Vite 8 and TypeScript.
 
-The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), the four camps of an Eigi engagement, and finally contact.
+The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), the four camps of an Eigi engagement, the creative eigi_ai minds behind the work, and finally contact.
 
 ## Run it locally
 
@@ -44,7 +44,7 @@ src/
   features/landing/          everything specific to The Ascent
     index.ts                 the feature's public surface (what pages may import)
     components/              one component per section, each with a scoped *.module.css
-    hooks/                   browser work: crowd canvas, singularity canvas, cursor-following sherpa
+    hooks/                   browser work: crowd canvas, singularity canvas, the sherpa that joins your cursor in the sherpas section
     utils/                   pure logic: crowd and singularity simulations (unit-tested), sprite-sheet helpers, altitude formatting
   components/layout/Nav.tsx  shared nav: logo, Documentation, Contact, Go to Studio and the full-screen section menu
   components/layout/Footer.tsx  contact section + site footer

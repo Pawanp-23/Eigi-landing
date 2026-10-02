@@ -25,7 +25,7 @@
   padding: 12px 14px; resize: vertical; transition: border-color .2s;
 }
 .form input:focus, .form textarea:focus { outline: none; border-color: var(--fg); }
-.send { grid-column: 1 / -1; margin-top: 6px; border: 0; cursor: pointer; font: inherit; font-weight: 600; justify-content: center; }
+.send { grid-column: 1 / -1; margin-top: 6px; border: 0; cursor: var(--cursor-link); font: inherit; font-weight: 600; justify-content: center; }
 
 .bottom {
   margin-top: 100px; padding-top: 28px; border-top: 1px solid var(--line);

@@ -51,7 +51,7 @@ export function Gateway() {
         <motion.div className={styles.finale} style={{ opacity: finale, scale: finaleScale }} aria-hidden={step < 4}>
           <h2>Your gateway to singularity.</h2>
           <p className={styles.finaleLead}>Take your step towards digital singularity with Eigi.</p>
-          <a className="btn" href={STUDIO_URL} target="_blank" rel="noopener noreferrer" tabIndex={step < 4 ? -1 : 0}>
+          <a className="btn" href={STUDIO_URL} tabIndex={step < 4 ? -1 : 0}>
             Step through <span aria-hidden="true">→</span>
           </a>
         </motion.div>

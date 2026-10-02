@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { Footer } from '../components/layout/Footer.tsx'
 import { Nav } from '../components/layout/Nav.tsx'
 import {
-  altitude, Altimeter, Atmosphere, BaseCamp, Gateway, Problem, Route, SherpaCursor, Sherpas, Stand, Stories, Summit,
+  altitude, Altimeter, Atmosphere, BaseCamp, Gateway, Minds, Problem, Radio, Route, SherpaCompanion, Sherpas, Stand, Stories, Summit,
 } from '../features/landing/index.ts'
 
 /** The menu's links, in page order. */
@@ -16,6 +16,7 @@ const SECTIONS = [
   { href: '#route', label: 'The route' },
   { href: '#sherpas', label: 'Sherpas' },
   { href: '#summit', label: 'Summit' },
+  { href: '#minds', label: 'Eigi minds' },
   { href: '#contact', label: 'Contact' },
 ] as const
 
@@ -29,9 +30,10 @@ export function HomePage() {
   return (
     <>
       <Atmosphere climb={climbRef} flipAt={sherpasRef} />
-      <SherpaCursor talking={sherpaTalks} />
+      <SherpaCompanion shown={sherpaTalks} />
       <Nav links={SECTIONS} formatProgress={altitude} />
       <Altimeter climb={climbRef} />
+      <Radio />
       <main id="top" ref={climbRef}>
         <BaseCamp />
         <Problem />
@@ -42,6 +44,8 @@ export function HomePage() {
         <Sherpas ref={sherpasRef} />
         <Summit />
       </main>
+      {/* after the climb: outside <main>, so it never shifts the altitudes */}
+      <Minds />
       <Footer />
     </>
   )

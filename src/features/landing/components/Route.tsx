@@ -14,12 +14,12 @@ const CAMPS = [
   },
   {
     at: 0.42, numeral: 'II', altitude: '3,400 m', title: 'Integrate',
-    body: 'We wire agents into the tools you already use. No rip-and-replace. Grokbot takes the inbox, Context learns your business.',
+    body: 'We wire agents into the tools you already use. No rip-and-replace. A voice agent takes the calls, Context learns your business.',
     chip: '→ First agents live in days, not quarters',
   },
   {
     at: 0.68, numeral: 'III', altitude: '5,900 m', title: 'Automate',
-    body: 'Workflows chain the agents together. Muse drafts, Instinct decides, humans approve.',
+    body: 'Workflows chain the agents together. A chat agent drafts, Instinct decides, humans approve.',
     race: true,
   },
   {
