@@ -1,0 +1,9 @@
+.topo {
+  position: fixed; top: -10%; left: -10%; width: 120%; height: 140%;
+  z-index: 0; pointer-events: none;
+}
+.topo path { fill: none; stroke: var(--line); stroke-width: 1; }
+.fog {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 70%);
+}
