@@ -2,7 +2,7 @@
 
 Marketing site for [eigi.ai](https://eigi.ai), built with React 19, Vite 8 and TypeScript.
 
-The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), Eigi Computer itself (an AI C-suite briefed like a crew on the radio, with belay rules for what it may do alone), a field test of real workflows, the four camps of an Eigi engagement, the creative eigi_ai minds behind the work, questions at base camp, and finally contact.
+The page is **The Ascent**, guided by **Sherpie**, Eigi's mascot. Base camp asks *what's heaviest this week?*; Sherpie carries that load the whole way (walking beside you, hiding in Eigi Computer, handing it to your crew at the summit), and the sections ahead personalise around it. The page is one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), Eigi Computer itself (an AI C-suite briefed like a crew on the radio, with belay rules for what it may do alone), a field test of real workflows, the four camps of an Eigi engagement, the creative eigi_ai minds behind the work, questions at base camp, and finally contact.
 
 ## Run it locally
 
@@ -44,7 +44,9 @@ src/
   features/landing/          everything specific to The Ascent
     index.ts                 the feature's public surface (what pages may import)
     components/              one component per section, each with a scoped *.module.css
-    hooks/                   browser work: crowd canvas, singularity canvas, the sherpa that joins your cursor in the sherpas section
+    hooks/                   browser work: crowd canvas, singularity canvas, Sherpie's walk beside you, the radio transmission
+    sherpie/                 Sherpie, the mascot: drawSherpie (poses as SVG) and <Sherpie>; character sheet in design/
+    state/                   the visitor's chosen load (what's heaviest this week), shared by every personalised section
     utils/                   pure logic: crowd and singularity simulations (unit-tested), sprite-sheet helpers, altitude formatting
   components/layout/Nav.tsx  shared nav: logo, Go to Studio and the full-screen section menu (sections, Documentation, Studio, email)
   components/layout/Footer.tsx  contact section + site footer

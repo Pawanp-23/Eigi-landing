@@ -2,6 +2,7 @@ import { motion, useInView, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { reveal } from '../../../styles/motion.ts'
 import { cx } from '../../../utils/cx.ts'
+import { useLoad } from '../state/useLoad.ts'
 import { fieldTestMessage, whatsappLink } from '../utils/amit.ts'
 import styles from './FieldTest.module.css'
 
@@ -29,7 +30,9 @@ export function FieldTest() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { amount: 0.4, once: true })
   const still = useReducedMotion()
-  const [tab, setTab] = useState(0)
+  const { load } = useLoad()
+  // open on the kind of work the visitor said is heaviest
+  const [tab, setTab] = useState(load?.fieldTest ?? 0)
   const [run, setRun] = useState(0)
   const [step, setStep] = useState(0) // 0 start · 1-3 checkpoints reached · 4 flag planted
   const test = TESTS[tab]

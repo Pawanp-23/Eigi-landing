@@ -24,6 +24,12 @@ describe('amit', () => {
     expect(msg).toMatch(/ref: site$/)
   })
 
+  it('adds what the visitor told Sherpie is heaviest', () => {
+    const msg = messageFor('Camp I', '1,200 m', 'The heaviest thing this week is my support inbox.')
+    expect(msg).toContain('fits in my business. The heaviest thing this week is my support inbox.')
+    expect(msg).toMatch(/ref: camp-i$/)
+  })
+
   it('names the field test the visitor watched', () => {
     const msg = fieldTestMessage('Sales & growth')
     expect(msg).toContain('the sales & growth field test')

@@ -1,0 +1,12 @@
+.band { position: relative; margin-top: 90px; }
+.line { max-width: 22ch; font-size: clamp(28px, 3.6vw, 52px); }
+.line i { font-weight: 350; color: var(--muted); }
+
+/* the crowd walks along the bottom edge of the page; on the black footer it is inverted to white line art */
+.crowd { position: relative; height: clamp(210px, 28vh, 300px); margin: 20px calc(-1 * var(--gutter)) -40px; display: flex; flex-direction: column; justify-content: flex-start; padding: 0 var(--gutter); }
+.crowd canvas { filter: invert(1); }
+
+@media (max-width: 820px) {
+  .band { margin-top: 64px; }
+  .crowd { height: 210px; }
+}

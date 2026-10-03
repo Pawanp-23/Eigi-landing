@@ -1,11 +1,14 @@
 import { motion, useInView } from 'motion/react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { STUDIO_URL } from '../../../components/layout/Nav.tsx'
 import { reveal } from '../../../styles/motion.ts'
 import { cx } from '../../../utils/cx.ts'
 import { useTransmission } from '../hooks/useTransmission.ts'
+import { useLoad } from '../state/useLoad.ts'
 import { CREW, MISSIONS, type CrewId } from '../utils/crew.ts'
 import { Belay } from './Belay.tsx'
+import { OPEN_RADIO } from './Radio.tsx'
+import { SherpiePeek, type PeekState } from './SherpiePeek.tsx'
 import styles from './Computer.module.css'
 
 /** Five bars that pulse while a crew member is working or talking. */
@@ -21,14 +24,34 @@ function Wave({ on }: { on: boolean }) {
 export function Computer() {
   const consoleRef = useRef<HTMLDivElement>(null)
   const inView = useInView(consoleRef, { amount: 0.35, once: true })
-  const [crew, setCrew] = useState<CrewId>('staff')
+  const { load } = useLoad()
+  // start with the crew member who handles what the visitor said is heaviest
+  const [crew, setCrew] = useState<CrewId>(load?.crew ?? 'staff')
   const [run, setRun] = useState(0)
   const member = CREW.find((c) => c.id === crew)!
   const t = MISSIONS[crew]
   const { stage, typed, done } = useTransmission(t, inView, run)
   const working = stage >= 2 && !done
 
-  const pick = (id: CrewId) => { setCrew(id); setRun((n) => n + 1) }
+  const nextMember = CREW[(CREW.findIndex((c) => c.id === crew) + 1) % CREW.length]
+  const [shown, setShown] = useState(false) // tapped Sherpie out early
+
+  // Sherpie peeks over the console once it's on screen, and comes out to talk when the transmission ends
+  const [peekReady, setPeekReady] = useState(false)
+  useEffect(() => {
+    if (!inView) return
+    const id = window.setTimeout(() => setPeekReady(true), 700)
+    return () => window.clearTimeout(id)
+  }, [inView])
+  const [outReady, setOutReady] = useState(false)
+  useEffect(() => {
+    if (!done) return
+    const id = window.setTimeout(() => setOutReady(true), 900)
+    return () => window.clearTimeout(id)
+  }, [done, run])
+  const peek: PeekState = shown || (done && outReady) ? 'out' : peekReady ? 'peek' : 'hidden'
+
+  const pick = (id: CrewId) => { setCrew(id); setRun((n) => n + 1); setShown(false); setOutReady(false) }
 
   return (
     <section id="computer" className={styles.computer} data-stage="Eigi Computer">
@@ -47,6 +70,16 @@ export function Computer() {
         </motion.p>
       </header>
 
+      <div className={styles.stage}>
+      <SherpiePeek
+        state={peek}
+        role={member.role}
+        nextRole={nextMember.role}
+        load={load}
+        onShow={() => setShown(true)}
+        onNext={() => pick(nextMember.id)}
+        onAmit={() => window.dispatchEvent(new Event(OPEN_RADIO))}
+      />
       <motion.div ref={consoleRef} className={styles.console} {...reveal}>
         <div className={cx(styles.bar, 'mono')}>
           <span>Eigi Computer · crew channel</span>
@@ -117,6 +150,7 @@ export function Computer() {
           </div>
         </div>
       </motion.div>
+      </div>
 
       <motion.p className={cx(styles.where, 'mono')} {...reveal}>
         Brief them in Slack, Teams or email · They work in your browser · One shared memory of your business

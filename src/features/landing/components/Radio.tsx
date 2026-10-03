@@ -3,7 +3,9 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { easeOut } from '../../../styles/motion.ts'
 import { cx } from '../../../utils/cx.ts'
 import { AMIT_DISPLAY, messageFor, whatsappLink } from '../utils/amit.ts'
+import { useLoad } from '../state/useLoad.ts'
 import { readAltitude, readStage } from '../utils/climb.ts'
+import { loadLine, type Load } from '../utils/loads.ts'
 import styles from './Radio.module.css'
 
 type Call = { message: string; link: string }
@@ -11,8 +13,8 @@ type Call = { message: string; link: string }
 /** Dispatch this on window (e.g. from the FAQ) to open the radio from anywhere on the page. */
 export const OPEN_RADIO = 'eigi:open-radio'
 
-const newCall = (): Call => {
-  const message = messageFor(readStage(), readAltitude())
+const newCall = (load: Load | null): Call => {
+  const message = messageFor(readStage(), readAltitude(), loadLine(load))
   return { message, link: whatsappLink(message) }
 }
 
@@ -29,13 +31,14 @@ export function Radio() {
   const cardId = useId()
   const open = call !== null
 
-  const toggle = () => setCall(open ? null : newCall())
+  const { load } = useLoad()
+  const toggle = () => setCall(open ? null : newCall(load))
 
   useEffect(() => {
-    const onOpen = () => setCall((c) => c ?? newCall())
+    const onOpen = () => setCall((c) => c ?? newCall(load))
     addEventListener(OPEN_RADIO, onOpen)
     return () => removeEventListener(OPEN_RADIO, onOpen)
-  }, [])
+  }, [load])
 
   // the QR library only loads once someone actually opens the radio
   useEffect(() => {

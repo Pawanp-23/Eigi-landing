@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import type { FormEvent } from 'react'
+import type { FormEvent, ReactNode } from 'react'
 import { reveal } from '../../styles/motion.ts'
 import { cx } from '../../utils/cx.ts'
 import { DOCS_URL } from './Nav.tsx'
@@ -28,7 +28,8 @@ function sendViaMail(e: FormEvent<HTMLFormElement>) {
 }
 
 /** Contact (base of the summit) plus the site footer. Sits after the climb, so it stays on the black sky. */
-export function Footer() {
+/** `children` render at the very bottom, under the legal line (the page puts the base-camp crowd there). */
+export function Footer({ children }: { children?: ReactNode }) {
   return (
     <footer id="contact" className={styles.footer}>
       <div className={styles.contact}>
@@ -64,6 +65,7 @@ export function Footer() {
           © {YEAR} Eigi AI · All rights reserved, India
         </p>
       </div>
+      {children}
     </footer>
   )
 }

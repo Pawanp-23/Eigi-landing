@@ -16,7 +16,7 @@ export function Sherpas({ ref }: { ref?: Ref<HTMLElement> }) {
       <motion.p className="eyebrow mono" {...reveal}>A taste of sherpas</motion.p>
       <motion.h2 {...reveal}>You never climb alone.</motion.h2>
       <motion.p className="lead" {...reveal}>
-        Notice the little figure next to your cursor? That’s the point. Our forward-deployed engineers stay
+        Notice Sherpie, walking beside you this whole time? That’s the point. Our forward-deployed engineers stay
         roped to you, moving at AI speed on a solopreneur’s budget.
       </motion.p>
       <motion.ol className={styles.grid} {...reveal}>

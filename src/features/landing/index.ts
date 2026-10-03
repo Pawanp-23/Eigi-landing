@@ -1,6 +1,10 @@
 // Public surface of the landing feature: the page chrome and its sections, top to bottom.
 export { Atmosphere } from './components/Atmosphere.tsx'
-export { SherpaCompanion } from './components/SherpaCompanion.tsx'
+export { Companion } from './components/Companion.tsx'
+export { CrowdBand } from './components/CrowdBand.tsx'
+export { SherpieDefs } from './sherpie/Sherpie.tsx'
+export { LoadProvider } from './state/load.tsx'
+export { useLoad } from './state/useLoad.ts'
 export { Radio } from './components/Radio.tsx'
 export { Minds } from './components/Minds.tsx'
 export { Altimeter } from './components/Altimeter.tsx'

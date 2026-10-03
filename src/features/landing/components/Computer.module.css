@@ -28,8 +28,10 @@
 .head :global(.lead) { max-width: 56ch; }
 
 /* ---------- the console ---------- */
+/* the stage holds the console and Sherpie hiding behind it */
+.stage { position: relative; max-width: 1080px; margin: 200px auto 0; }
 .console {
-  position: relative; max-width: 1080px; margin: 64px auto 0;
+  position: relative; z-index: 1;
   border: 1px solid rgba(255, 255, 255, .16); border-radius: 28px;
   background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015) 30%), #050505;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, .03) inset, 0 50px 120px -40px rgba(255, 255, 255, .14);

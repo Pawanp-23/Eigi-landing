@@ -23,6 +23,7 @@ const INTENT: Record<string, string> = {
   'Eigi Computer': 'I would like to hire an AI crew for my team.',
   'Field test': 'I would like a workflow like the ones in your field test.',
   'Questions': 'I have a few questions before we start.',
+  'Back at base camp': 'I would like a sherpa for my team.',
 }
 const FALLBACK = 'I would like to talk to Eigi about bringing AI into my business.'
 
@@ -36,10 +37,10 @@ const PLACES: Record<string, string> = {
 export const tagFor = (stage: string) => stage.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 /** The visitor's first message to Amit, written from where they are. */
-export function messageFor(stage: string, altitude: string) {
+export function messageFor(stage: string, altitude: string, extra = '') {
   const intent = INTENT[stage] ?? FALLBACK
   const where = PLACES[stage] ? `I'm at ${PLACES[stage]} (${altitude}) on eigi.ai. ` : ''
-  return `Hi Amit, ${where}${intent}\n\nref: ${tagFor(stage) || 'site'}`
+  return `Hi Amit, ${where}${intent}${extra ? ` ${extra}` : ''}\n\nref: ${tagFor(stage) || 'site'}`
 }
 
 /** The first message from a field-test card: names the workflow the visitor just watched. */

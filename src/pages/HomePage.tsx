@@ -1,9 +1,9 @@
-import { useInView } from 'motion/react'
 import { useRef } from 'react'
 import { Footer } from '../components/layout/Footer.tsx'
 import { Nav } from '../components/layout/Nav.tsx'
 import {
-  altitude, Altimeter, Atmosphere, BaseCamp, Computer, Faq, FieldTest, Gateway, Minds, Problem, Radio, Route, SherpaCompanion, Sherpas, Stand, Stories, Summit,
+  altitude, Altimeter, Atmosphere, BaseCamp, Companion, Computer, CrowdBand, Faq, FieldTest, Gateway, LoadProvider,
+  Minds, Problem, Radio, Route, SherpieDefs, Sherpas, Stand, Stories, Summit, useLoad,
 } from '../features/landing/index.ts'
 
 /** The menu's links, in page order. */
@@ -25,26 +25,36 @@ const SECTIONS = [
 
 /** "/": The Ascent, one scroll from base camp (0 m) to the summit (8,848 m), then contact and footer. */
 export function HomePage() {
+  return (
+    <LoadProvider>
+      <Climb />
+    </LoadProvider>
+  )
+}
+
+function Climb() {
   // the climb (sky colour, altimeter) is measured over <main> only, so the footer never shifts it
   const climbRef = useRef<HTMLElement>(null)
   const sherpasRef = useRef<HTMLElement>(null)
-  const sherpaTalks = useInView(sherpasRef, { margin: '-40% 0px -40% 0px' })
+  // when the visitor tells Sherpie what's heaviest, these sections restart around it
+  const { load } = useLoad()
 
   return (
     <>
+      <SherpieDefs />
       <Atmosphere climb={climbRef} flipAt={sherpasRef} />
-      <SherpaCompanion shown={sherpaTalks} />
       <Nav links={SECTIONS} formatProgress={altitude} />
       <Altimeter climb={climbRef} />
       <Radio />
+      <Companion />
       <main id="top" ref={climbRef}>
         <BaseCamp />
         <Problem />
         <Stand />
         <Stories />
         <Gateway />
-        <Computer />
-        <FieldTest />
+        <Computer key={`computer-${load?.id ?? 'none'}`} />
+        <FieldTest key={`field-${load?.id ?? 'none'}`} />
         <Route />
         <Sherpas ref={sherpasRef} />
         <Summit />
@@ -52,7 +62,9 @@ export function HomePage() {
       {/* after the climb: outside <main>, so it never shifts the altitudes */}
       <Minds />
       <Faq />
-      <Footer />
+      <Footer>
+        <CrowdBand />
+      </Footer>
     </>
   )
 }
