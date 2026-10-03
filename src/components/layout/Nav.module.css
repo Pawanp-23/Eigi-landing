@@ -100,8 +100,8 @@
 }
 .list {
   list-style: none; margin-block: auto;
-  /* nine stops have to fit one screen, so the size follows the height as well as the width */
-  --label-size: clamp(30px, min(7vw, 6.4vh), 88px);
+  /* thirteen stops have to fit one screen, so the size follows the height as well as the width */
+  --label-size: clamp(24px, min(6vw, 5vh), 76px);
 }
 .list a {
   display: grid; grid-template-columns: 130px auto 1fr; align-items: center; column-gap: 2vw;

@@ -8,6 +8,14 @@ import styles from './Radio.module.css'
 
 type Call = { message: string; link: string }
 
+/** Dispatch this on window (e.g. from the FAQ) to open the radio from anywhere on the page. */
+export const OPEN_RADIO = 'eigi:open-radio'
+
+const newCall = (): Call => {
+  const message = messageFor(readStage(), readAltitude())
+  return { message, link: whatsappLink(message) }
+}
+
 /**
  * "Radio base camp": the way to reach Amit, Eigi's AI onboarding agent on WhatsApp.
  * Opening it reads where you are on the climb and pre-writes your first message from that.
@@ -21,11 +29,13 @@ export function Radio() {
   const cardId = useId()
   const open = call !== null
 
-  const toggle = () => {
-    if (open) return setCall(null)
-    const message = messageFor(readStage(), readAltitude())
-    setCall({ message, link: whatsappLink(message) })
-  }
+  const toggle = () => setCall(open ? null : newCall())
+
+  useEffect(() => {
+    const onOpen = () => setCall((c) => c ?? newCall())
+    addEventListener(OPEN_RADIO, onOpen)
+    return () => removeEventListener(OPEN_RADIO, onOpen)
+  }, [])
 
   // the QR library only loads once someone actually opens the radio
   useEffect(() => {

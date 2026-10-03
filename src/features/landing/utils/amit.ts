@@ -20,6 +20,9 @@ const INTENT: Record<string, string> = {
   'Camp IV': 'I would like to scale what we have automated.',
   'With your sherpa': 'I would like a sherpa roped to my team.',
   'Summit': 'I want to make my team AI-first.',
+  'Eigi Computer': 'I would like to hire an AI crew for my team.',
+  'Field test': 'I would like a workflow like the ones in your field test.',
+  'Questions': 'I have a few questions before we start.',
 }
 const FALLBACK = 'I would like to talk to Eigi about bringing AI into my business.'
 
@@ -38,6 +41,12 @@ export function messageFor(stage: string, altitude: string) {
   const where = PLACES[stage] ? `I'm at ${PLACES[stage]} (${altitude}) on eigi.ai. ` : ''
   return `Hi Amit, ${where}${intent}\n\nref: ${tagFor(stage) || 'site'}`
 }
+
+/** The first message from a field-test card: names the workflow the visitor just watched. */
+export const fieldTestMessage = (useCase: string) =>
+  `Hi Amit, I watched the ${useCase.toLowerCase()} field test on eigi.ai. I would like something like that for my business.
+
+ref: field-test-${tagFor(useCase)}`
 
 /** A wa.me link that opens a chat with Amit, message already typed. */
 export const whatsappLink = (text: string) => `https://wa.me/${AMIT_NUMBER}?text=${encodeURIComponent(text)}`

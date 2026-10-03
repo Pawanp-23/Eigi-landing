@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { AMIT_NUMBER, messageFor, tagFor, whatsappLink } from './amit.ts'
+import { AMIT_NUMBER, fieldTestMessage, messageFor, tagFor, whatsappLink } from './amit.ts'
 
 describe('amit', () => {
   it('writes the first message from where the visitor is', () => {
@@ -22,6 +22,12 @@ describe('amit', () => {
     expect(msg).toContain('talk to Eigi')
     expect(msg).not.toContain("I'm at")
     expect(msg).toMatch(/ref: site$/)
+  })
+
+  it('names the field test the visitor watched', () => {
+    const msg = fieldTestMessage('Sales & growth')
+    expect(msg).toContain('the sales & growth field test')
+    expect(msg).toMatch(/ref: field-test-sales-growth$/)
   })
 
   it('makes short ref tags', () => {

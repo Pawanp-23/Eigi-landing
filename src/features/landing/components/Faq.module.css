@@ -1,0 +1,50 @@
+/* After the climb, on the black sky, just above the contact footer. */
+.faq {
+  min-height: auto; padding: 120px var(--gutter) 100px;
+  display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 6vw; align-items: start;
+}
+.head { position: sticky; top: 120px; }
+
+.list { list-style: none; border-top: 1px solid var(--line); }
+.item { position: relative; border-bottom: 1px solid var(--line); }
+/* a line draws down the left edge of the open answer, like a rope paying out */
+.item::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--fg);
+  transform: scaleY(0); transform-origin: top; transition: transform .6s var(--ease-out);
+}
+.open::before { transform: scaleY(1); }
+
+.q {
+  width: 100%; display: grid; grid-template-columns: 54px minmax(0, 1fr) 22px; align-items: center; gap: 12px;
+  padding: 24px 0 24px 18px; background: none; border: 0; color: var(--fg); font: inherit; text-align: left;
+  cursor: var(--cursor-link);
+}
+.n { font-size: 11px; letter-spacing: .14em; color: var(--muted); }
+.text { font-size: clamp(18px, 2vw, 24px); letter-spacing: -.02em; font-weight: 600; line-height: 1.25; }
+.q:hover .text { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+
+/* plus that turns into a minus */
+.sign { position: relative; width: 14px; height: 14px; }
+.sign::before, .sign::after {
+  content: ""; position: absolute; left: 0; top: 50%; width: 100%; height: 1.5px; margin-top: -.75px;
+  background: currentColor; transition: transform .4s var(--ease-out);
+}
+.sign::after { transform: rotate(90deg); }
+.open .sign::after { transform: rotate(0deg); }
+
+.a { overflow: hidden; }
+.a p { padding: 0 34px 26px calc(18px + 54px + 12px); color: var(--muted); font-size: 16px; line-height: 1.65; font-weight: 300; max-width: 64ch; }
+
+.more { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 26px 0 0 18px; }
+.more > span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.more button {
+  background: none; border: 0; border-bottom: 1px solid var(--fg); padding: 0 0 2px; color: var(--fg);
+  font: inherit; font-size: 16px; font-weight: 600; cursor: var(--cursor-link);
+}
+
+@media (max-width: 900px) {
+  .faq { grid-template-columns: 1fr; gap: 36px; padding: 90px var(--gutter) 70px; }
+  .head { position: static; }
+  .q { grid-template-columns: 40px minmax(0, 1fr) 18px; padding-left: 14px; }
+  .a p { padding: 0 8px 22px calc(14px + 40px + 12px); font-size: 15px; }
+}

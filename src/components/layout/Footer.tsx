@@ -34,9 +34,9 @@ export function Footer() {
       <div className={styles.contact}>
         <div>
           <motion.p className="eyebrow mono" {...reveal}>Contact</motion.p>
-          <motion.h2 {...reveal}>Let’s build something together.</motion.h2>
+          <motion.h2 {...reveal}>Keep the ambition.<br />Lose the busywork.</motion.h2>
           <motion.p className="lead" {...reveal}>
-            Have a question, want a demo, or ready to get started? We’d love to hear from you.
+            Tell us what’s taking up your day. Let’s see what we can give back. Prefer to talk now? Radio Amit, our AI guide.
           </motion.p>
           <motion.dl className={styles.details} {...reveal}>
             <div><dt className="mono">Email us</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>

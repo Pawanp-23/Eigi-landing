@@ -40,10 +40,11 @@ export function Problem() {
   return (
     <section id="problem" data-stage="The problem">
       <motion.p className="eyebrow mono" {...reveal}>The problem · adoption</motion.p>
-      <motion.h2 {...reveal}>Everyone can see the summit. Almost no one knows the route.</motion.h2>
+      <motion.h2 {...reveal}>AI is everywhere. Making it work? That takes people.</motion.h2>
       <motion.p className="lead" {...reveal}>
-        Claude, GPT, Fable, Gemini: the most powerful tools ever built are one login away. Yet most
-        businesses stall at the foot of the mountain: where does it fit, what do we automate first, who sets it up?
+        Claude, GPT, Fable, Gemini: the most powerful tools ever built are one login away, and everyone can see the
+        summit. Almost no one knows the route. Another subscription won’t connect the dots. You need people who
+        learn your business, build the right workflows, and help your team use them.
       </motion.p>
       <div ref={ridgeRef} className={styles.ridgeWrap}>
         <svg

@@ -2,7 +2,7 @@
 
 Marketing site for [eigi.ai](https://eigi.ai), built with React 19, Vite 8 and TypeScript.
 
-The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), the four camps of an Eigi engagement, the creative eigi_ai minds behind the work, and finally contact.
+The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), Eigi Computer itself (an AI C-suite briefed like a crew on the radio, with belay rules for what it may do alone), a field test of real workflows, the four camps of an Eigi engagement, the creative eigi_ai minds behind the work, questions at base camp, and finally contact.
 
 ## Run it locally
 
