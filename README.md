@@ -21,6 +21,27 @@ npm run check      # lint, tests, production build
 
 `npm run build` writes a static site to `dist/`.
 
+## Docker
+
+The Docker and Nginx setup follows Agent360's `frontend/landing_page`: a Node build stage compiles the frontend, then Nginx serves `dist/` on container port **82**. The builder uses Node 22, matching CI, and installs the locked dependencies with `npm ci`.
+
+Run these commands from the `Eigi-landing` directory:
+
+```sh
+docker build --platform linux/amd64 -t eigi-landing .
+docker run --rm -p 8080:82 eigi-landing
+```
+
+Open http://localhost:8080. Nginx serves the static assets, compresses text responses with gzip, and falls back to `index.html` for frontend routes. Missing files under `/assets/` return 404.
+
+Analytics stays off by default. To include a GA4 measurement ID, pass it when building:
+
+```sh
+docker build --platform linux/amd64 --build-arg VITE_GA_ID=G-XXXXXXXXXX -t eigi-landing .
+```
+
+Vite embeds this value during the build, so changing it requires rebuilding the image. `.dockerignore` excludes local dependencies, build output, Git metadata and `.env` files from the build context.
+
 ## The page
 
 | # | Section | File | What the visitor does |

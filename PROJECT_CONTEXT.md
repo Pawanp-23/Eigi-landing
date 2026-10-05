@@ -24,6 +24,7 @@ A new marketing site for **eigi.ai**.
 | Stack | React 19 + Vite 8 + TypeScript, CSS Modules, CSS animations (no animation library), Vitest, oxlint |
 | Run | `npm install` then `npm run dev`, open http://localhost:5173 |
 | Checks | `npm run check` (lint, tests, build); GitHub Actions runs the same on every push and PR |
+| Docker | Node 22 Alpine build with `npm ci`, then Nginx Alpine serving `dist/` on port 82. Build with `docker build --platform linux/amd64 -t eigi-landing .`; run with `docker run --rm -p 8080:82 eigi-landing`. Optional analytics: `--build-arg VITE_GA_ID=G-XXXXXXXXXX`. See README. |
 | Layout | Follows Agent360's `frontend/landing_page`: `App.tsx`, `main.tsx` and `index.css` at the `src/` root; `pages/LandingPage/` owns `Header/`, `Footer/`, `sections/*Section/` and `content/`; shared code lives in `components/common/`, `hooks/`, `utils/`, `assets/Images/` and `theme/`. Component folders use `index.tsx` with CSS Modules beside them. See README for the full tree. |
 
 ## 3. The design: Eigi Play (final, approved 5 Oct 2026)
