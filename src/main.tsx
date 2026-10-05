@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '../styles/global.css'
-import { App } from './App.tsx'
-import { initAnalytics } from '../lib/analytics.ts'
+import './index.css'
+import App from './App.tsx'
+import { initAnalytics } from './utils/analytics.ts'
 
 initAnalytics()
 

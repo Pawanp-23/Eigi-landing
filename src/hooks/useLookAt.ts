@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 /**
- * Every Sherpie on the page watches the pointer. Mount once (in App): one listener, one frame
+ * Every Sherpie on the page watches the pointer. Mount once (in LandingPage): one listener, one frame
  * per move, and it nudges each `[data-eyes]` group a few pixels toward the pointer.
  */
 export function useLookAt() {

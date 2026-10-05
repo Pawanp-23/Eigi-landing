@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import logo from '../assets/brand/logo.png'
-import { COMPUTER, type AppKind } from '../content/computer.ts'
+import logo from '../../../../assets/Images/logo.png'
+import { COMPUTER, type AppKind } from '../../content/computer.ts'
 import styles from './Computer.module.css'
-import { track } from '../lib/analytics.ts'
-import { prefersReducedMotion } from '../lib/motion.ts'
+import { track } from '../../../../utils/analytics.ts'
+import { prefersReducedMotion } from '../../../../utils/motion.ts'
 
 /** Simple line icons, drawn white on each app's coloured tile. Generic shapes, not brand logos. */
 const ICONS: Record<AppKind, string> = {
@@ -97,7 +97,7 @@ function Window({ kind, items }: { kind: AppKind; items: string[] }) {
 }
 
 /** A desktop the Eigi drives on its own. It cycles through apps while in view; tapping an app takes over. */
-export function Computer() {
+export default function ComputerSection() {
   const [active, setActive] = useState(0)
   /** bumps on every tap, so tapping the open app replays it */
   const [run, setRun] = useState(0)

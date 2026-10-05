@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState, type CSSProperties, type FormEvent } from 'react'
-import mark from '../assets/brand/eigi-mark.jpg'
-import { Sherpie } from '../components/brand/Sherpie.tsx'
-import { BEATS, HERO, MEMORIES, roleFor, SCRIPTS, scriptFor, type Script } from '../content/hero.ts'
-import { amit, ROLES } from '../content/site.ts'
+import mark from '../../../../assets/Images/eigi-mark.jpg'
+import Sherpie from '../../../../components/common/Sherpie/index.tsx'
+import { BEATS, HERO, MEMORIES, roleFor, SCRIPTS, scriptFor, type Script } from '../../content/hero.ts'
+import { amit, ROLES } from '../../content/site.ts'
 import styles from './Hero.module.css'
-import { track } from '../lib/analytics.ts'
+import { track } from '../../../../utils/analytics.ts'
 
 type Tab = 'Browser' | 'Memory' | 'Files'
 const TABS: Tab[] = ['Browser', 'Memory', 'Files']
@@ -13,7 +13,7 @@ const STEP_MS = 650
 const SHERPIE_SAYS = ['Hand me something boring.', 'I set them up. They do the work.', 'Psst. Try the invoices one.', 'I don’t send anything without you.']
 
 /** The hero is the demo: type a job, watch an Eigi do it on its computer, then approve it yourself. */
-export function Hero() {
+export default function HeroSection() {
   const [draft, setDraft] = useState('')
   const [script, setScript] = useState<Script | null>(null)
   const [tick, setTick] = useState(0)

@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { expect, it } from 'vitest'
-import { App } from './App.tsx'
+import App from './App.tsx'
 
 const html = renderToStaticMarkup(<App />)
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1])

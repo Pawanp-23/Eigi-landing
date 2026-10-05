@@ -1,7 +1,7 @@
 import { useState, type CSSProperties } from 'react'
-import { track } from '../lib/analytics.ts'
-import { amit } from '../content/site.ts'
-import { CUSTOMER_STOPS as CUSTOMERS, CUSTOMERS_PER_EIGI, eigisFor, hiresFor, WHY } from '../content/why.ts'
+import { track } from '../../../../utils/analytics.ts'
+import { amit } from '../../content/site.ts'
+import { CUSTOMER_STOPS as CUSTOMERS, CUSTOMERS_PER_EIGI, eigisFor, hiresFor, WHY } from '../../content/why.ts'
 import styles from './Trap.module.css'
 
 const EIGI_COLOURS = ['var(--green)', 'var(--blue)', 'var(--red)', 'var(--yellow)']
@@ -10,7 +10,7 @@ const EIGI_COLOURS = ['var(--green)', 'var(--blue)', 'var(--red)', 'var(--yellow
 const Person = () => <svg viewBox="0 0 20 24" className={styles.person} aria-hidden="true"><circle cx="10" cy="6" r="5" /><path d="M1 24c0-6 4-10 9-10s9 4 9 10Z" /></svg>
 
 /** the trap of growing by headcount, then the promise. */
-export function Trap() {
+export default function TrapSection() {
   const [step, setStep] = useState(0)
 
   // Illustrative only: hiring adds a person for every few customers; one Eigi covers ten.

@@ -1,6 +1,6 @@
 import { useState, type PointerEvent as RPointerEvent } from 'react'
-import { NOTES } from '../content/people.ts'
-import { amit } from '../content/site.ts'
+import { NOTES } from '../../content/people.ts'
+import { amit } from '../../content/site.ts'
 import styles from './Notes.module.css'
 
 /** Cards lean toward the pointer, a little. */
@@ -13,7 +13,7 @@ const tilt = (e: RPointerEvent<HTMLElement>) => {
 const untilt = (e: RPointerEvent<HTMLElement>) => { e.currentTarget.style.transform = '' }
 
 /** Proof: two real stories of Eigi at work. */
-export function Notes() {
+export default function NotesSection() {
   const [chat, setChat] = useState(0)
 
   return (

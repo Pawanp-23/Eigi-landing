@@ -1,8 +1,8 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import mark from '../assets/brand/eigi-mark.jpg'
-import { GATEWAY } from '../content/gateway.ts'
+import mark from '../../../../assets/Images/eigi-mark.jpg'
+import { GATEWAY } from '../../content/gateway.ts'
 import styles from './Gateway.module.css'
-import { track } from '../lib/analytics.ts'
+import { track } from '../../../../utils/analytics.ts'
 
 type Part = 'you' | 'sherpa' | 'eigi'
 
@@ -17,7 +17,7 @@ function Icon({ id }: { id: Part }) {
 }
 
 /** You + forward-deployed engineers + your Eigis = a gateway. Each part you switch on opens the doors a third. */
-export function Gateway() {
+export default function GatewaySection() {
   const [on, setOn] = useState<Record<Part, boolean>>({ you: false, sherpa: false, eigi: false })
   const parts = GATEWAY.parts.map(p => p.id as Part)
   const key = parts.filter(p => on[p]).join('+')

@@ -25,43 +25,67 @@ npm run check      # lint, tests, production build
 
 | # | Section | File | What the visitor does |
 |---|---|---|---|
-| 1 | Hero | `sections/Hero.tsx` | Types or picks a job, watches the Eigi work through Ask, Computer, Memory, Approval, then approves or edits it |
-| 2 | Why Eigi | `sections/Why.tsx` | Taps the founder's five questions; each flips to how Eigi takes it |
-| 3 | The trap | `sections/Trap.tsx` | Slides customers 10 to 40 and compares hiring with Eigis (1 Eigi per 10 customers) |
-| 4 | Eigi computer | `sections/Computer.tsx` | Watches an Eigi drive 8 apps; taps one to take over |
-| 5 | Your plate | `sections/Plate.tsx` | Drags 12 first jobs to the right Eigi (or taps a job, then an Eigi) |
-| 6 | Gateway | `sections/Gateway.tsx` | Switches on You, Sherpas, Eigis to open the portal |
-| 7 | Sherpas | `sections/Climb.tsx` | Drags Sherpie up the four camps |
-| 8 | Field notes | `sections/Notes.tsx` | Reads two real stories; plays how a chat with Amit starts |
-| 9 | Founders | `sections/Founders.tsx` | Meets Aman and Mrunmay |
-| | Nav, footer | `components/layout/` | Talks to Amit |
+| 1 | Hero | `sections/HeroSection/index.tsx` | Types or picks a job, watches the Eigi work through Ask, Computer, Memory, Approval, then approves or edits it |
+| 2 | Why Eigi | `sections/WhySection/index.tsx` | Taps the founder's five questions; each flips to how Eigi takes it |
+| 3 | The trap | `sections/TrapSection/index.tsx` | Slides customers 10 to 40 and compares hiring with Eigis (1 Eigi per 10 customers) |
+| 4 | Eigi computer | `sections/ComputerSection/index.tsx` | Watches an Eigi drive 8 apps; taps one to take over |
+| 5 | Your plate | `sections/PlateSection/index.tsx` | Drags 12 first jobs to the right Eigi (or taps a job, then an Eigi) |
+| 6 | Gateway | `sections/GatewaySection/index.tsx` | Switches on You, Sherpas, Eigis to open the portal |
+| 7 | Sherpas | `sections/ClimbSection/index.tsx` | Drags Sherpie up the four camps |
+| 8 | Field notes | `sections/NotesSection/index.tsx` | Reads two real stories; plays how a chat with Amit starts |
+| 9 | Founders | `sections/FoundersSection/index.tsx` | Meets Aman and Mrunmay |
+| | Header, footer | `Header/index.tsx`, `Footer/index.tsx` | Talks to Amit |
+
+Files in this table are relative to `src/pages/LandingPage/`.
 
 ## Project structure
 
-```
+The layout follows Agent360's `frontend/landing_page` conventions: app entry files at the source root, page-owned header, footer and sections under `pages/LandingPage`, and shared components with an `index.tsx` entry. Each section keeps its CSS Module beside its component.
+
+```text
 src/
-  app/                 App.tsx (section order), main.tsx (entry), App.test.tsx
-  sections/            one file per section, each with its own CSS Module
+  App.tsx                            renders LandingPage
+  App.test.tsx                       page order, anchors and links
+  main.tsx                           React entry and analytics setup
+  index.css                          base styles, buttons, shared classes
+  pages/
+    LandingPage/
+      index.tsx                      header, section order and footer
+      Header/
+        index.tsx
+        Header.module.css
+      Footer/
+        index.tsx
+        Footer.module.css
+      sections/
+        HeroSection/                 index.tsx + Hero.module.css
+        WhySection/                  index.tsx + Why.module.css
+        TrapSection/                 index.tsx + Trap.module.css
+        ComputerSection/             index.tsx + Computer.module.css
+        PlateSection/                index.tsx + Plate.module.css
+        GatewaySection/              index.tsx + Gateway.module.css
+        ClimbSection/                index.tsx + Climb.module.css
+        NotesSection/                index.tsx + Notes.module.css
+        FoundersSection/             index.tsx + Founders.module.css
+      content/                       page copy, examples and copy tests
+        site.ts                      roles, colours, links and Amit's WhatsApp URL
   components/
-    brand/             Sherpie, the mascot
-    layout/            Nav and Footer
-  content/             every word on the page, one file per section
-    site.ts            roles and colours, outside links, the WhatsApp link to Amit
-    content.test.ts    copy rules, job routing, the Eigi ratio
-  lib/
-    analytics.ts       Google Analytics events
-    route.ts           the rope up the mountain (tested in route.test.ts)
-    motion.ts          the reduced-motion check
-    useLookAt.ts       Sherpie's eyes follow the pointer
+    common/
+      Sherpie/                       index.tsx + Sherpie.module.css
+  hooks/
+    useLookAt.ts                     Sherpie's eyes follow the pointer
+  utils/
+    analytics.ts                     Google Analytics events
+    motion.ts                        reduced-motion check
+    route.ts                         mountain rope geometry
+    route.test.ts                    mountain geometry tests
   assets/
-    brand/             logo and Eigi mark
-    founders/          founder portraits
-  styles/
-    tokens.css         colours, type, spacing
-    global.css         base styles, buttons, shared classes
+    Images/                          logos and founder portraits
+  theme/
+    tokens.css                       colours, type and spacing
 ```
 
-To change wording, edit the matching file in `src/content/`; no component needs to change.
+To change wording, edit the matching file in `src/pages/LandingPage/content/`; no component needs to change.
 
 ## Analytics
 

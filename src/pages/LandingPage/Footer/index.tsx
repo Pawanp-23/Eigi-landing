@@ -1,11 +1,11 @@
-import { amit, LINKS } from '../../content/site.ts'
-import { Sherpie } from '../brand/Sherpie.tsx'
+import { amit, LINKS } from '../content/site.ts'
+import Sherpie from '../../../components/common/Sherpie/index.tsx'
 import styles from './Footer.module.css'
 
 const YEAR = new Date().getFullYear()
 
 /** One last ask. */
-export function Footer() {
+export default function Footer() {
   return (
     <footer className={styles.end}>
       <Sherpie hands className={styles.peek} lines={['Ready when you are.', 'One workflow is a good place to begin.', 'Amit’s really nice. I promise.']} />

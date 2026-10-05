@@ -24,7 +24,7 @@ A new marketing site for **eigi.ai**.
 | Stack | React 19 + Vite 8 + TypeScript, CSS Modules, CSS animations (no animation library), Vitest, oxlint |
 | Run | `npm install` then `npm run dev`, open http://localhost:5173 |
 | Checks | `npm run check` (lint, tests, build); GitHub Actions runs the same on every push and PR |
-| Layout | See README: `app/`, `sections/` (one file per section), `components/{brand,layout}/`, `content/` (all copy, one file per section), `lib/`, `assets/`, `styles/` |
+| Layout | Follows Agent360's `frontend/landing_page`: `App.tsx`, `main.tsx` and `index.css` at the `src/` root; `pages/LandingPage/` owns `Header/`, `Footer/`, `sections/*Section/` and `content/`; shared code lives in `components/common/`, `hooks/`, `utils/`, `assets/Images/` and `theme/`. Component folders use `index.tsx` with CSS Modules beside them. See README for the full tree. |
 
 ## 3. The design: Eigi Play (final, approved 5 Oct 2026)
 
@@ -53,6 +53,7 @@ A new marketing site for **eigi.ai**.
 
 - 5 Oct 2026: the repo was rebuilt from scratch on `feature/summit`. Every component of the old designs was removed.
 - 5 Oct 2026: Eigi Play became the final site on `feature/eigi-play`; the Summit page was archived as `archive/summit`.
+- 5 Oct 2026: reorganised the source to follow Agent360's landing-page folder conventions, preserving the TypeScript/CSS Modules stack, page content and behaviour.
 - Old designs are archived as tags, not branches: `archive/ascent` (old `main`, "The Ascent"), `archive/eigi-computer`, `archive/sherpie`, `archive/summit`. Check one out with `git checkout archive/summit` if you ever need it.
 
 ## 5. Key facts and links

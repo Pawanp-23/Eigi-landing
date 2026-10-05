@@ -1,13 +1,13 @@
-import aman from '../assets/founders/aman-khandelwal.webp'
-import mrunmay from '../assets/founders/mrunmay-chichkhede.webp'
-import { FOUNDERS } from '../content/people.ts'
-import { LINKS } from '../content/site.ts'
+import aman from '../../../../assets/Images/aman-khandelwal.webp'
+import mrunmay from '../../../../assets/Images/mrunmay-chichkhede.webp'
+import { FOUNDERS } from '../../content/people.ts'
+import { LINKS } from '../../content/site.ts'
 import styles from './Founders.module.css'
 
 const PHOTOS = [aman, mrunmay]
 
 /** The founders, on their own: a short intro and two clean portrait cards. */
-export function Founders() {
+export default function FoundersSection() {
   return (
     <section id="people" className={`section ${styles.people}`} aria-labelledby="people-title">
       <div className={`wrap ${styles.peopleGrid}`}>

@@ -1,6 +1,6 @@
-import logo from '../../assets/brand/logo.png'
-import { amit, LINKS } from '../../content/site.ts'
-import styles from './Nav.module.css'
+import logo from '../../../assets/Images/logo.png'
+import { amit, LINKS } from '../content/site.ts'
+import styles from './Header.module.css'
 
 const SECTIONS = [
   { href: '#why', label: 'Why Eigi' },
@@ -11,7 +11,7 @@ const SECTIONS = [
   { href: '#people', label: 'People' },
 ]
 
-export function Nav() {
+export default function Header() {
   return (
     <header className={styles.nav}>
       <a className={styles.brand} href="#top" aria-label="eigi.ai home" style={{ ['--logo' as string]: `url(${logo})` }} />

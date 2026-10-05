@@ -14,7 +14,7 @@ interface SherpieProps {
 }
 
 /** Sherpie, our soft-toy sherpa: eyes follow the pointer (useLookAt), and a poke gets a word. */
-export function Sherpie({ hands = false, cheek = '#e2a630', className, lines }: SherpieProps) {
+export default function Sherpie({ hands = false, cheek = '#e2a630', className, lines }: SherpieProps) {
   const [said, setSaid] = useState<string | null>(null)
   const [n, setN] = useState(0)
 

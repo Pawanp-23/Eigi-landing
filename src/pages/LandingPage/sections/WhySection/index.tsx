@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { track } from '../lib/analytics.ts'
-import { amit } from '../content/site.ts'
-import { WHY } from '../content/why.ts'
+import { track } from '../../../../utils/analytics.ts'
+import { amit } from '../../content/site.ts'
+import { WHY } from '../../content/why.ts'
 import styles from './Why.module.css'
 
 /** Why Eigi, part 1: the questions founders already ask themselves, each flipping to how Eigi takes it. */
-export function Why() {
+export default function WhySection() {
   const [mine, setMine] = useState<ReadonlySet<number>>(new Set())
   const toggle = (i: number) => {
     if (!mine.has(i)) track('why_question', { area: WHY.questions[i].area })

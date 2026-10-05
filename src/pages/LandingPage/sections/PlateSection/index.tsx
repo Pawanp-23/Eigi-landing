@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent } from 'react'
-import { JOBS, PAINS, PLATE } from '../content/plate.ts'
-import { ROLE_ORDER, ROLES, type Role } from '../content/site.ts'
+import { JOBS, PAINS, PLATE } from '../../content/plate.ts'
+import { ROLE_ORDER, ROLES, type Role } from '../../content/site.ts'
 import styles from './Plate.module.css'
-import { track } from '../lib/analytics.ts'
+import { track } from '../../../../utils/analytics.ts'
 
 interface Drag { i: number; x: number; y: number; dx: number; dy: number; moved: boolean }
 
@@ -14,7 +14,7 @@ const dockAt = (x: number, y: number) =>
  * Sound familiar? + First jobs, as a game: the founder's plate is piled with jobs.
  * Drag each one to the Eigi who should own it (or tap a job, then tap an Eigi).
  */
-export function Plate() {
+export default function PlateSection() {
   const [placed, setPlaced] = useState<Record<number, Role>>({})
   const [selected, setSelected] = useState<number | null>(null)
   const [drag, setDrag] = useState<Drag | null>(null)

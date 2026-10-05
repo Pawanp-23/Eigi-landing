@@ -1,13 +1,13 @@
 import { useState, type CSSProperties } from 'react'
-import { Sherpie } from '../components/brand/Sherpie.tsx'
-import { CLIMB } from '../content/climb.ts'
-import { amit } from '../content/site.ts'
-import { AT, CAMP_AT, H, line, pointAt, ROUTE, W } from '../lib/route.ts'
+import Sherpie from '../../../../components/common/Sherpie/index.tsx'
+import { CLIMB } from '../../content/climb.ts'
+import { amit } from '../../content/site.ts'
+import { AT, CAMP_AT, H, line, pointAt, ROUTE, W } from '../../../../utils/route.ts'
 import styles from './Climb.module.css'
-import { track } from '../lib/analytics.ts'
+import { track } from '../../../../utils/analytics.ts'
 
 /** Meet your AI sherpas: drag Sherpie up the rope, and each camp tells you what happens there. */
-export function Climb() {
+export default function ClimbSection() {
   const [v, setRaw] = useState(0)
   const setV = (next: number) => { if (next >= 99.5 && v < 99.5) track('climb_summit'); setRaw(next) }
   const reached = CAMP_AT.filter(i => v >= AT[i] - 0.5).length
