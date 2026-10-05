@@ -21,27 +21,39 @@ A new marketing site for **eigi.ai**.
 | | |
 |---|---|
 | Repo | https://github.com/Pawanp-23/Eigi-landing- |
-| Stack | React 19 + Vite 8 + TypeScript, CSS Modules, `motion` (animations), Vitest, oxlint |
+| Stack | React 19 + Vite 8 + TypeScript, CSS Modules, CSS animations (no animation library), Vitest, oxlint |
 | Run | `npm install` then `npm run dev`, open http://localhost:5173 |
 | Checks | `npm run lint && npm test && npm run build` |
-| Layout | See README: `sections/`, `features/`, `components/`, `content/` (all copy), `lib/`, `styles/` |
+| Layout | See README: `sections/` (one file per section), `components/`, `content.ts` (all copy), `lib/`, `styles/` |
 
-## 3. The design (final, approved 5 Oct 2026)
+## 3. The design: Eigi Play (final, approved 5 Oct 2026)
 
-Called **Summit** while it was being designed. The approved static design is kept at `design/summit-reference.html`.
+**Rashmin's story, our Summit look, and every section something you can play with.** It was built in a separate playground and replaced the Summit page on `feature/eigi-play`.
 
-- **Story and copy** come from the live content on https://eigi-landing.vercel.app (Rashmin's site): hero, Sound familiar, the problem, the gateway, Meet your Eigi, Small team. Full C-suite, AI pace. Your call, Before you hire for it, Meet your AI sherpas, Field notes, Our people, FAQ, Your next chapter.
-- **Eigi Computer leads**: right under the hero, a live Slack window where the AI team (Chief of Staff, Sales, Marketing, Operations) and your sherpa work, with a trust row underneath.
-- **Look and feel**: calm and trustworthy. Soft paper ground, ink text, Bricolage Grotesque headlines with one Instrument Serif italic phrase, Geist body, Geist Mono labels.
-- **Colour means role**: blue Chief of Staff, red Sales, yellow Marketing, green Operations, ink/white for the sherpa. (This replaced the old black-and-white-only rule.)
-- **Sherpie** (white soft-toy mascot with a black beanie) peeks over the hero headline, climbs onto the Slack window and peeks up at the end. Its eyes follow the pointer.
-- **House rules**: no em dashes anywhere (a test enforces it in `src/content/`); respect reduced motion; nothing hidden waiting on an animation; no horizontal scrolling.
-- **Links**: Studio opens in the same tab; Documentation and WhatsApp open in a new tab.
+| # | Section | What the visitor does |
+|---|---|---|
+| 1 | Hero, "Everyone sold you AI. Nobody showed you how." | Types or picks a job; watches the Eigi go through Ask, Computer, Memory, Approval; approves or edits the draft |
+| 2 | Why Eigi, "Sound familiar?" | Taps the founder's five questions; each flips to how Eigi takes it |
+| 3 | The trap, "Growing by hiring? So is everyone else." | Slides customers 10 to 40: hiring grows the team, Eigi adds 1 Eigi per 10 customers; then the promise ("You build the company. Eigi runs it.") |
+| 4 | Eigi computer, "A computer that works anywhere, everywhere. The platform to build / ship / sell / work / scale." | Watches an Eigi drive 8 apps (Browser, Sheets, Mail, Slack, WhatsApp, Voice, CRM, Files); taps one to take over |
+| 5 | Your plate, "Before you hire for it, hand it to an Eigi." | Drags 12 first jobs to the right Eigi |
+| 6 | Gateway, "Your gateway to singularity." | Switches on You, Sherpas, Eigis to open the portal |
+| 7 | Sherpas, "Meet your AI sherpas." | Drags Sherpie up through Camp I to IV |
+| 8 | Field notes | Two real stories: a financial learning founder, and Amit in Gondia |
+| 9 | Founders | Aman Khandelwal and Mrunmay Chichkhede |
+
+- **Look and feel**: soft paper ground, ink text, Bricolage Grotesque headlines with one Instrument Serif italic phrase, Geist body, Geist Mono labels. Each section is about one screen tall on desktop; the hero fills the first screen and is centred.
+- **Colour means role**: green Operations, blue Support, red Sales, yellow Finance & admin.
+- **Sherpie** peeks over the hero card and the footer; its eyes follow the pointer; poke it for a line.
+- **Honesty**: every demo is labelled illustrative; nothing pretends to be a live agent. No "100x" claim until we can back one.
+- **House rules**: no em dashes (a test enforces it); respect reduced motion; no horizontal scrolling.
+- **Analytics**: Google Analytics 4, off until `VITE_GA_ID` is set. Events: `talk_to_amit` (key event, tagged with the section), `hand_over_job`, `approve_draft`, `why_question`, `trap_slider`, `computer_app`, `plate_cleared`, `gateway_opened`, `climb_summit`. Nothing a visitor types is sent.
 
 ## 4. Repository history
 
 - 5 Oct 2026: the repo was rebuilt from scratch on `feature/summit`. Every component of the old designs was removed.
-- Old designs are archived as tags, not branches: `archive/ascent` (old `main`, "The Ascent"), `archive/eigi-computer`, `archive/sherpie`. Check one out with `git checkout archive/sherpie` if you ever need it.
+- 5 Oct 2026: Eigi Play became the final site on `feature/eigi-play`; the Summit page was archived as `archive/summit`.
+- Old designs are archived as tags, not branches: `archive/ascent` (old `main`, "The Ascent"), `archive/eigi-computer`, `archive/sherpie`, `archive/summit`. Check one out with `git checkout archive/summit` if you ever need it.
 
 ## 5. Key facts and links
 
@@ -55,11 +67,12 @@ Called **Summit** while it was being designed. The approved static design is kep
 
 ## 6. Open items before launch
 
-- [ ] Merge `feature/summit` into `main` and deploy.
+- [ ] Review and merge `feature/eigi-play` into `main`, then deploy.
+- [ ] Create the GA4 property under a company Google account and set `VITE_GA_ID` in the host.
 - [ ] Prerender the page at build time so search engines and link previews see content without JavaScript.
 - [ ] A proper social sharing image (1200×630) instead of the favicon.
 - [ ] Real customer stories beyond the two field notes; the Slack and job examples are illustrative.
 - [ ] Exact report URLs for the Census and MIT statistics.
 - [ ] Confirm the Studio URL; test every Amit WhatsApp link from a real phone.
 - [ ] Privacy, Terms and Data deletion pages (footer links point to the top for now).
-- [ ] Analytics, an accessibility pass, a Lighthouse check.
+- [ ] An accessibility pass and a Lighthouse check.

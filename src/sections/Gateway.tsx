@@ -1,56 +1,72 @@
-import { motion, useReducedMotion } from 'motion/react'
-import { Fragment, useState } from 'react'
-import { Mascot } from '../components/brand/Mascot.tsx'
-import { Heading } from '../components/ui/Heading.tsx'
-import { GATEWAY } from '../content/story.ts'
-import { AI_TEAM } from '../lib/crew.ts'
+import { useEffect, useState, type CSSProperties } from 'react'
+import mark from '../assets/eigi-mark.jpg'
+import { GATEWAY } from '../content.ts'
 import styles from './Gateway.module.css'
+import { track } from '../lib/analytics.ts'
 
-const OPS = ['+', '+', '=']
+type Part = 'you' | 'sherpa' | 'eigi'
 
-/** You + engineers + your Eigis = the gateway. The parts click into place once, or again on replay. */
+/** A tiny icon per part: a person, a rope team, and the Eigi mark. */
+function Icon({ id }: { id: Part }) {
+  if (id === 'eigi') return <img src={mark} alt="" width="44" height="44" />
+  return <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+    {id === 'you'
+      ? <><circle cx="24" cy="16" r="7" /><path d="M10 40c2-9 8-13 14-13s12 4 14 13" /></>
+      : <><circle cx="15" cy="17" r="5.5" /><circle cx="33" cy="17" r="5.5" /><path d="M5 38c1.5-7 5.5-10 10-10s8.5 3 10 10M23 38c1.5-7 5.5-10 10-10s8.5 3 10 10" /><path d="M20 22c3 3 5 3 8 0" strokeDasharray="2 3" /></>}
+  </svg>
+}
+
+/** You + forward-deployed engineers + your Eigis = a gateway. Each part you switch on opens the doors a third. */
 export function Gateway() {
-  const reduced = useReducedMotion()
-  const [take, setTake] = useState(0)
-
-  const tile = (id: string) => {
-    if (id === 'you') return <span className={`${styles.tile} ${styles.you}`}>You</span>
-    if (id === 'engineers') return <span className={styles.tile}><Mascot id="sherpa" /></span>
-    if (id === 'eigis') return <span className={`${styles.tile} ${styles.eigis}`}>{AI_TEAM.map((c) => <Mascot key={c} id={c} head />)}</span>
-    return <span className={`${styles.tile} ${styles.end}`}>∞</span>
-  }
+  const [on, setOn] = useState<Record<Part, boolean>>({ you: false, sherpa: false, eigi: false })
+  const parts = GATEWAY.parts.map(p => p.id as Part)
+  const key = parts.filter(p => on[p]).join('+')
+  const count = parts.filter(p => on[p]).length
+  const open = count === 3
+  useEffect(() => { if (open) track('gateway_opened') }, [open])
 
   return (
-    <section className={`section ${styles.section}`} id="gateway" aria-labelledby="gateway-title">
+    <section id="gateway" className={`section ${styles.gateway}`} aria-labelledby="gateway-title">
       <div className="wrap">
-        <Heading eyebrow={GATEWAY.eyebrow} title={GATEWAY.title} serif={GATEWAY.titleSerif} id="gateway-title" center />
-        <p className="lede" style={{ margin: '22px auto 0' }}>{GATEWAY.lede}</p>
-        <motion.div
-          key={take} className={styles.gate}
-          initial={reduced ? false : 'apart'} whileInView="together" viewport={{ once: true, amount: 0.6 }}
-          transition={{ staggerChildren: 0.16 }}
-        >
-          {GATEWAY.parts.map((p, i) => (
-            <Fragment key={p.id}>
-              <motion.div className={styles.part} variants={step}>
-                {tile(p.id)}
-                <b>{p.name}</b>
-                <small>{p.text}</small>
-              </motion.div>
-              {i < OPS.length && <motion.span className={styles.op} variants={step}>{OPS[i]}</motion.span>}
-            </Fragment>
-          ))}
-        </motion.div>
+        <div className={styles.head}>
+          <p className="eyebrow dot">{GATEWAY.eyebrow}</p>
+          <h2 id="gateway-title">Your gateway <span className="serif">to singularity.</span></h2>
+          <p className="lede">{GATEWAY.lede}</p>
+        </div>
+
+        <div className={styles.equation}>
+          <div className={styles.parts} role="group" aria-label="The three parts of Eigi">
+            {GATEWAY.parts.map((p, i) => <div key={p.id} className={styles.slot}>
+              {i > 0 && <span className={styles.op} aria-hidden="true">+</span>}
+              <button type="button" className={styles.part} aria-pressed={on[p.id as Part]} onClick={() => setOn(o => ({ ...o, [p.id]: !o[p.id as Part] }))}>
+                <span className={styles.icon}><Icon id={p.id as Part} /></span>
+                <span className={styles.title}>{p.title}</span>
+                <span className={styles.note}>{p.note}</span>
+                <span className={styles.switch} aria-hidden="true"><i /></span>
+              </button>
+            </div>)}
+          </div>
+
+          <span className={styles.op} aria-hidden="true">=</span>
+
+          <div className={styles.portal} data-open={open} style={{ '--open': count / 3 } as CSSProperties}>
+            <div className={styles.frame} aria-hidden="true">
+              <svg className={styles.rings} viewBox="0 0 100 100">{[46, 38, 30, 22, 14].map(r => <circle key={r} cx="50" cy="50" r={r} />)}</svg>
+              <span className={styles.infinity}>∞</span>
+              <span className={styles.doorL} />
+              <span className={styles.doorR} />
+            </div>
+            <p className={styles.outcome} aria-live="polite">{GATEWAY.outcomes[key]}</p>
+          </div>
+        </div>
+
         <div className={styles.foot}>
-          <p>{GATEWAY.vision}</p>
-          <button type="button" className="btn ghost" onClick={() => setTake((t) => t + 1)}>↻ {GATEWAY.replay}</button>
+          <p className={styles.vision} data-open={open}>{GATEWAY.vision}</p>
+          <ul className={styles.stats}>
+            {GATEWAY.stats.map(s => <li key={s.figure}><b>{s.figure}</b><span>{s.claim} <a href={s.href} target="_blank" rel="noopener noreferrer">{s.source} ↗</a></span></li>)}
+          </ul>
         </div>
       </div>
     </section>
   )
 }
-
-const step = {
-  apart: { y: 18, scale: 0.94 },
-  together: { y: 0, scale: 1, transition: { type: 'spring', bounce: 0.3, visualDuration: 0.55 } },
-} as const

@@ -1,0 +1,86 @@
+.section { background: var(--snow); border-top: 1px solid var(--line); }
+.section :global(.fine) { margin-top: 18px; }
+
+.head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; margin-bottom: 40px; }
+.head > div { display: grid; gap: 18px; }
+@media (max-width: 900px) { .head { grid-template-columns: 1fr; } }
+
+.meter { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 12px; font-size: 14px; color: var(--ink-2); }
+.meter b { font: 600 32px/1 var(--font-display); color: var(--ink); }
+.meter i { grid-column: 1 / -1; height: 8px; border-radius: 99px; background: var(--snow); border: 1px solid var(--line); position: relative; overflow: hidden; }
+.meter i::after { content: ''; position: absolute; inset: 0; width: var(--fill); background: var(--red); border-radius: inherit; transition: width 0.5s cubic-bezier(.2,.8,.2,1); }
+
+.board { user-select: none; -webkit-user-select: none; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; align-items: stretch; }
+@media (max-width: 900px) { .board { grid-template-columns: minmax(0, 1fr); } }
+
+/* the plate: a big round dish piled with jobs */
+.plate {
+  position: relative; min-height: 420px; padding: 64px clamp(12px, 3vw, 28px) 40px;
+  border-radius: 40px; background: var(--paper);
+  background-image: radial-gradient(circle at 50% 50%, transparent 58%, rgba(23,33,31,.04) 59%, transparent 61%);
+  border: 1px solid var(--line); display: grid; place-items: center; touch-action: none;
+}
+.plate[data-done='true'] { background: var(--green-t); border-color: color-mix(in srgb, var(--green) 30%, transparent); }
+
+.thought {
+  position: absolute; top: 18px; left: 28px; right: 28px;
+  font: 400 italic 19px/1.3 var(--font-serif); color: var(--ink-2); text-align: center;
+}
+
+.pile { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 8px; max-width: 560px; }
+.pile li { transform: rotate(var(--r)); z-index: var(--z); position: relative; }
+
+.job {
+  cursor: grab; user-select: none; touch-action: none;
+  padding: 11px 15px; border-radius: 12px;
+  background: var(--paper); border: 1px solid var(--line-2);
+  font: 500 14.5px/1.25 var(--font-body);
+  box-shadow: 0 10px 18px -14px rgba(23,33,31,.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+}
+.job:hover { transform: translateY(-3px) rotate(-1deg); }
+.job[data-dragging='true'] { cursor: grabbing; transition: none; box-shadow: 0 24px 40px -18px rgba(23,33,31,.6); position: relative; z-index: 20; }
+.job[data-selected='true'] { border-color: var(--ink); box-shadow: 0 0 0 3px var(--ink); }
+.job[data-shake='true'] { animation: shake 0.45s ease; border-color: var(--red); }
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+.nudge {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--snow); font-size: 13.5px; padding: 7px 14px; border-radius: 999px; white-space: nowrap;
+}
+
+.clear { display: grid; gap: 20px; justify-items: center; text-align: center; max-width: 30ch; animation: rise 0.5s ease; }
+.clear p { font: 600 clamp(22px, 2.4vw, 30px)/1.2 var(--font-display); letter-spacing: -0.02em; }
+
+/* the docks: four Eigis waiting for work */
+.docks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.dock {
+  width: 100%; height: 100%; min-height: 150px; text-align: left; cursor: default;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto 1fr; gap: 10px; align-content: start;
+  padding: 16px; border-radius: var(--radius); background: var(--t); border: 2px dashed transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.dock[data-ready='true'] { cursor: pointer; border-color: color-mix(in srgb, var(--c) 45%, transparent); }
+.dock[data-over='true'], .dock[data-ready='true']:hover { border-color: var(--c); transform: scale(1.03); }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 700 16px var(--font-display); }
+.name { font: 600 15px/1.2 var(--font-display); align-self: center; }
+.count { font: 500 12px var(--font-mono); color: var(--ink-2); align-self: center; }
+.taken { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; }
+.taken em { font-style: normal; font-size: 12.5px; background: var(--paper); border-radius: 8px; padding: 4px 8px; animation: rise 0.3s ease; }
+.taken em::before { content: '✓ '; color: var(--c); font-weight: 700; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+
+@media (max-width: 520px) {
+  .dock { padding: 12px; gap: 8px; min-height: 120px; }
+  .avatar { width: 30px; height: 30px; font-size: 14px; }
+  .name { font-size: 13.5px; }
+  .job { font-size: 13.5px; padding: 9px 12px; }
+}
+
+@media (max-width: 560px) {
+  .head { margin-bottom: 28px; gap: 20px; }
+  .plate { min-height: 0; padding: 56px 10px 30px; border-radius: 28px; }
+  .thought { font-size: 16px; top: 14px; }
+  .dock { min-height: 96px; }
+}

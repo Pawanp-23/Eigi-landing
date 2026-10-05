@@ -1,12 +1,43 @@
-@import './tokens.css';
+/*
+ * Summit tokens (our design) carrying Rashmin's story. Soft paper ground, ink text,
+ * and one colour per Eigi role, used only to say who is doing the work.
+ */
+:root {
+  color-scheme: light;
+
+  --snow: #f7f6f2;
+  --paper: #ffffff;
+  --ink: #17211f;
+  --ink-2: #4e5956;
+  --ink-3: #848c89;
+  --line: #e3e2dc;
+  --line-2: #cbcbc3;
+
+  --blue: #3a62c2;
+  --blue-t: #e8edf9;
+  --red: #d45b42;
+  --red-t: #fae8e2;
+  --green: #2e855c;
+  --green-t: #e3f1e8;
+  --yellow: #e2a630;
+  --yellow-t: #fbf0d6;
+
+  --font-display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Geist', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --radius: 18px;
+  --radius-lg: 28px;
+  --shadow-card: 0 30px 60px -44px rgba(23, 33, 31, 0.5);
+  --nav-h: 66px;
+}
 
 *, *::before, *::after { box-sizing: border-box; }
-
 html { scroll-padding-top: var(--nav-h); }
-
-@media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
-}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 body {
   margin: 0;
@@ -20,21 +51,17 @@ body {
 a { color: inherit; }
 button, input { font: inherit; color: inherit; }
 img { max-width: 100%; display: block; }
-p, figure, h1, h2, h3, blockquote { margin: 0; }
+p, figure, h1, h2, h3, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
 
 :focus-visible { outline: 2.5px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
 
-/* ---------- layout ---------- */
 .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
-.section { padding-block: clamp(76px, 9vw, 130px); }
-.section.flushTop { padding-top: 0; }
+.section { padding-block: clamp(72px, 8vw, 120px); }
 
-/* ---------- type ---------- */
 h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
-h2 { font-size: clamp(40px, 5.6vw, 80px); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; }
-h3 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; }
-
-/* the one word a headline leans on */
+h2 { font-size: clamp(38px, 5.2vw, 72px); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; }
+h3 { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; }
 .serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
 
 .eyebrow {
@@ -43,37 +70,31 @@ h3 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15; letter-spacing: -0.
   color: var(--ink-2);
 }
 .eyebrow.dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
-.eyebrow img { width: 22px; height: 22px; border-radius: 6px; }
-
-.lede { font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); max-width: 56ch; }
+.lede { font-size: clamp(16px, 1.4vw, 19px); color: var(--ink-2); max-width: 54ch; }
 .fine { font-size: 13px; color: var(--ink-3); }
-.tlink { font-weight: 500; text-underline-offset: 4px; }
 
-/* ---------- buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
-  border-radius: 999px; padding: 14px 24px;
-  font-weight: 500; font-size: 15.5px; text-decoration: none;
+  border-radius: 999px; padding: 13px 22px;
+  font-weight: 500; font-size: 15px; text-decoration: none;
   border: 1.5px solid var(--ink); background: none; cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 .btn:hover { transform: translateY(-1px); }
 .btn.ink { background: var(--ink); color: var(--snow); }
-.btn.ghost { background: var(--paper); color: var(--ink); border-color: var(--line-2); }
+.btn.ghost { background: var(--paper); border-color: var(--line-2); }
 
-/* small buttons inside product UI (approve, edit) */
-.sbtn {
-  border-radius: 8px; padding: 7px 14px;
-  font: 600 13.5px var(--font-body);
-  cursor: pointer; border: 1px solid var(--line-2); background: var(--paper);
+/* a play hint: tells visitors a thing is touchable */
+.hint {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-2); background: var(--paper); border: 1px dashed var(--line-2);
+  padding: 8px 12px; border-radius: 999px;
 }
-.sbtn.primary { background: var(--green); border-color: var(--green); color: #fff; }
-.sbtn:disabled { opacity: 0.5; cursor: default; }
+.hint::before { content: '✦'; color: var(--red); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
-
-/* keyboard users can jump past the nav */
-.skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--ink); color: var(--snow); padding: 10px 14px; border-radius: 10px; text-decoration: none; }
-.skip:focus { top: 12px; }

@@ -1,8 +1,0 @@
-.logo {
-  display: block;
-  width: 100px;
-  height: 28px;
-  background: var(--ink);
-  -webkit-mask: var(--logo) left center / contain no-repeat;
-  mask: var(--logo) left center / contain no-repeat;
-}

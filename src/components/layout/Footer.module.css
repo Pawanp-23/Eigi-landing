@@ -1,5 +1,0 @@
-.footer { background: var(--ink); color: color-mix(in srgb, var(--snow) 60%, transparent); font-size: 14px; border-top: 1px solid color-mix(in srgb, var(--snow) 12%, transparent); }
-.row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding-block: 28px; }
-.links { display: flex; gap: 22px; flex-wrap: wrap; }
-.links a { text-decoration: none; }
-.links a:hover { color: var(--snow); }
