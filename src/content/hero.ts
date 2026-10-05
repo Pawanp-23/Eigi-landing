@@ -4,7 +4,8 @@ export const HERO = {
   eyebrow: 'For founders doing ten jobs at once',
   title: ['Everyone sold you AI.', 'Nobody', 'showed you how.'],
   sub: 'AI teammates that do the real work, and a real engineer who sets them up and stays.',
-  proof: 'Amit is our Eigi.',
+  proof: 'Buddy is our Eigi.',
+  note: 'Your real Eigi checks with you before anything goes out in your name.',
 }
 
 /** The four beats of how an Eigi works (Meet your Eigi). The hero card lights them up in order. */
@@ -23,7 +24,7 @@ export interface Script {
   draft: string
 }
 
-/** Ready-made jobs for the hero. Illustrative, and labelled as such on the page. */
+/** Ready-made jobs for the hero walkthrough; real jobs go to Buddy. */
 export const SCRIPTS: Script[] = [
   {
     ask: 'Find 20 dental clinics in Austin with no online booking. Draft a short intro for each.',
@@ -57,7 +58,7 @@ export const SCRIPTS: Script[] = [
 
 export const MEMORIES = ['Tone: warm, short, no jargon', 'Never promise a start date', 'Offer the free 30-minute audit']
 
-/** Free-text tasks get a role by keyword, then a generic, clearly illustrative script. */
+/** Free-text tasks get a role by keyword, then a generic walkthrough script. */
 const KEYWORDS: Record<Role, RegExp> = {
   sales: /lead|sales|prospect|crm|deal|proposal|outreach|intro|pitch|client list/i,
   finance: /invoice|pay|bill|finance|expense|tax|receipt|account|budget|refund/i,

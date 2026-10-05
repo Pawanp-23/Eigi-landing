@@ -6,14 +6,14 @@ import { Computer } from '../sections/Computer.tsx'
 import { Founders } from '../sections/Founders.tsx'
 import { Gateway } from '../sections/Gateway.tsx'
 import { Hero } from '../sections/Hero.tsx'
-import { Notes } from '../sections/Notes.tsx'
 import { Plate } from '../sections/Plate.tsx'
 import { Trap } from '../sections/Trap.tsx'
 import { Why } from '../sections/Why.tsx'
 
 /**
- * The page, top to bottom: hand a job over, the story (why, the trap, the Eigi computer),
- * then play (your plate, the gateway, the climb), then proof and people.
+ * The landing page, top to bottom: hand a job over, the story (why, the trap, the Eigi computer),
+ * then play (your plate, the gateway, the climb), then the people.
+ * Success stories live on their own page (/stories/).
  */
 export function App() {
   useLookAt()
@@ -27,7 +27,6 @@ export function App() {
       <Plate />
       <Gateway />
       <Climb />
-      <Notes />
       <Founders />
     </main>
     <Footer />
