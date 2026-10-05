@@ -1,0 +1,11 @@
+.section { background: var(--ink); color: var(--snow); text-align: center; overflow: hidden; padding-bottom: 0; }
+.eyebrow { justify-content: center; color: color-mix(in srgb, var(--snow) 60%, transparent); margin-bottom: 22px; }
+.title { max-width: 13ch; margin-inline: auto; }
+.lede { color: color-mix(in srgb, var(--snow) 72%, transparent); margin: 24px auto 0; }
+.ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+.ctas :global(.btn.ink) { background: var(--snow); color: var(--ink); border-color: var(--snow); }
+.ctas :global(.btn.ghost) { background: transparent; color: var(--snow); border-color: color-mix(in srgb, var(--snow) 40%, transparent); }
+.mail { margin-top: 18px; font-size: 14px; color: color-mix(in srgb, var(--snow) 60%, transparent); }
+.mail a { color: var(--snow); }
+.peek { width: 150px; height: 96px; margin: clamp(60px, 8vw, 100px) auto 0; position: relative; overflow: hidden; }
+.peek svg { width: 150px; height: auto; display: block; }

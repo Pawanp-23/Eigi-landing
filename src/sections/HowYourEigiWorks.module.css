@@ -1,0 +1,52 @@
+.chap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(36px, 7vw, 110px); align-items: center; }
+.chap + .chap { margin-top: clamp(72px, 9vw, 120px); }
+.flip .copy { order: 2; }
+.copy :global(.eyebrow) { margin-bottom: 16px; }
+.copy h2 { font-size: clamp(36px, 4.6vw, 62px); }
+.copy :global(.lede) { margin-top: 20px; }
+.cap { margin-top: 24px; font: 500 12px var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
+.demo { border-radius: var(--radius-lg); background: var(--ct); padding: clamp(18px, 3.5vw, 44px); min-height: 400px; display: grid; place-items: center; }
+.demo > * { width: 100%; }
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; }
+.cardHead { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 13px 18px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.cardHead b { font-weight: 600; }
+.cardHead span { font: 500 11px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+
+.chans { display: flex; gap: 6px; padding: 14px 18px 0; }
+.chans button { border: 1px solid var(--line-2); background: var(--paper); border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+.chans button[aria-pressed='true'] { background: var(--ink); color: var(--snow); border-color: var(--ink); }
+.bubble { margin: 14px 18px 14px auto; background: var(--snow); border-radius: 14px 14px 4px 14px; padding: 12px 14px; font-size: 15px; max-width: 86%; }
+.bubbleMeta { display: flex; gap: 10px; align-items: center; padding: 0 18px 16px; font-size: 13.5px; color: var(--ink-2); }
+.h { width: 28px; height: 28px; border-radius: 8px; overflow: hidden; background: #fff; border: 1.5px solid var(--blue); display: grid; place-items: center; }
+.h svg { width: 30px; height: 30px; }
+
+.browser { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--snow); }
+.browser i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
+.browser span { flex: 1; min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 7px; font: 500 12px var(--font-mono); color: var(--ink-3); padding: 4px 10px; margin-left: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bstep { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.bstep:last-child { border-bottom: 0; }
+.bstep small { font: 500 12px var(--font-mono); color: var(--ink-3); }
+.ck { width: 18px; height: 18px; border-radius: 50%; background: var(--green); display: grid; place-items: center; }
+.ck svg { width: 10px; height: 10px; }
+
+.mem { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 13px 18px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.mem:last-child { border-bottom: 0; }
+.mem span:first-child { font: 500 11.5px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding-top: 2px; }
+
+.ok { background: var(--paper); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 10px; box-shadow: var(--shadow-card); }
+.okTag { justify-self: start; font: 500 11px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; background: var(--yellow-t); color: var(--amber-ink); border-radius: 5px; padding: 3px 7px; }
+.ok p { font-size: 15px; }
+.ok blockquote { padding: 8px 12px; border-left: 3px solid var(--line-2); background: var(--snow); color: var(--ink-2); font-size: 14px; border-radius: 0 8px 8px 0; }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.okDone { color: var(--green); font-weight: 600; font-size: 14px; }
+.muted { color: var(--ink-2); }
+.trail { margin-top: 12px; display: grid; gap: 6px; font-size: 13.5px; color: var(--ink-2); }
+.trail div { display: flex; gap: 10px; align-items: center; }
+.trail i { width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+
+@media (max-width: 900px) {
+  .chap { grid-template-columns: 1fr; }
+  .flip .copy { order: 0; }
+  .demo { min-height: 0; }
+}

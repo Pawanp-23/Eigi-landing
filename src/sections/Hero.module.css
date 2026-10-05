@@ -1,0 +1,50 @@
+.hero { position: relative; text-align: center; padding-block: clamp(64px, 9vw, 120px) clamp(56px, 7vw, 90px); overflow: hidden; }
+.hero::after {
+  content: ''; position: absolute; left: 50%; top: 38%; z-index: 0; pointer-events: none;
+  width: min(900px, 90vw); height: 520px; transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--yellow) 18%, transparent), transparent);
+}
+.topo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+.inner > :first-child { margin-bottom: 26px; }
+
+/* Sherpie peeks over the top of the headline: only what's above the line shows */
+.peek { width: 128px; height: 104px; position: relative; clip-path: inset(-80px -80px 0 -80px); margin-bottom: -4px; }
+.peekInner { position: absolute; left: 0; top: 0; width: 128px; }
+.peekInner svg { width: 128px; height: auto; display: block; overflow: visible; }
+
+.title { font-size: clamp(40px, 6.6vw, 100px); line-height: 0.98; letter-spacing: -0.05em; font-weight: 600; position: relative; }
+.title::before { content: ''; position: absolute; left: 50%; top: -2px; width: 170px; height: 3px; border-radius: 3px; background: var(--ink); transform: translateX(-50%); }
+.line { display: block; }
+.title :global(.serif) { font-size: 1.04em; }
+.inner :global(.lede) { margin: 28px auto 0; }
+
+.ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 34px; }
+.amit { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px 6px 8px; }
+.amit i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px var(--green-t); }
+
+.where { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 18px; margin-top: 38px; font-size: 13.5px; }
+.where b { font: 500 11px var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.where span { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-2); font-weight: 500; }
+.where svg { width: 16px; height: 16px; }
+
+/* finished work floating around the headline */
+.floats { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.card {
+  position: absolute; width: 214px; text-align: left;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px 14px;
+  box-shadow: 0 24px 40px -32px rgba(23, 33, 31, 0.45);
+  animation: drift 9s ease-in-out infinite;
+}
+.card b { display: block; font: 600 16px/1.25 var(--font-display); letter-spacing: -0.01em; margin-top: 6px; }
+.card small { display: block; color: var(--ink-3); font-size: 12.5px; margin-top: 3px; }
+.tag { display: flex; align-items: center; gap: 7px; font: 500 10.5px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); }
+.tag i { width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
+.who { position: absolute; right: 12px; top: -30px; width: 34px; height: 40px; }
+.who svg { width: 34px; height: 40px; }
+.sq { position: absolute; width: 14px; height: 14px; border-radius: 3px; opacity: 0.6; animation: drift 11s ease-in-out infinite; }
+@keyframes drift { 50% { translate: 0 -10px; } }
+
+@media (max-width: 1180px) { .card { width: 180px; } .card:nth-child(n + 5) { display: none; } }
+@media (max-width: 960px) { .floats { display: none; } }
+@media (max-width: 640px) { .line { display: inline; } }

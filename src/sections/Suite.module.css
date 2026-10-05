@@ -1,0 +1,28 @@
+.grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; }
+
+.main { background: var(--ink); color: var(--snow); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 22px; }
+.main :global(.eyebrow) { color: color-mix(in srgb, var(--snow) 65%, transparent); }
+.main :global(.lede) { color: color-mix(in srgb, var(--snow) 75%, transparent); }
+.roster { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.roster div { background: color-mix(in srgb, var(--snow) 7%, transparent); border: 1px solid color-mix(in srgb, var(--snow) 14%, transparent); border-radius: 16px; padding: 14px 10px; display: grid; justify-items: center; gap: 6px; text-align: center; }
+.roster svg { width: 54px; height: auto; }
+.roster small { font: 500 10.5px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--snow) 55%, transparent); }
+.roster b { font: 600 16px var(--font-display); }
+.row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+.row :global(.btn.ink) { background: var(--snow); color: var(--ink); border-color: var(--snow); }
+.row :global(.btn.ghost) { background: transparent; color: var(--snow); border-color: color-mix(in srgb, var(--snow) 35%, transparent); }
+
+.control { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(22px, 3.5vw, 40px); display: flex; flex-direction: column; gap: 16px; }
+.control h3 { font-size: clamp(30px, 3.4vw, 44px); letter-spacing: -0.035em; line-height: 1; }
+.control :global(.lede) { font-size: 16px; }
+.rules { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 4px; }
+.rules div { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.rules div:last-child { border-bottom: 0; }
+.ic { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+.rules strong { font: 500 11.5px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+.allow .ic { background: var(--green-t); color: var(--green); }
+.allow strong { color: var(--green); }
+.ask .ic { background: var(--yellow-t); color: var(--amber-ink); }
+.ask strong { color: var(--amber-ink); }
+
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .roster { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

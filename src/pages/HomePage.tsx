@@ -1,51 +1,43 @@
-import { useInView } from 'motion/react'
-import { useRef } from 'react'
 import { Footer } from '../components/layout/Footer.tsx'
 import { Nav } from '../components/layout/Nav.tsx'
-import {
-  altitude, Altimeter, Atmosphere, BaseCamp, Gateway, Minds, Problem, Radio, Route, SherpaCompanion, Sherpas, Stand, Stories, Summit,
-} from '../features/landing/index.ts'
+import { EigiComputer } from '../sections/EigiComputer.tsx'
+import { Faq } from '../sections/Faq.tsx'
+import { FieldNotes } from '../sections/FieldNotes.tsx'
+import { FirstJobs } from '../sections/FirstJobs.tsx'
+import { Gateway } from '../sections/Gateway.tsx'
+import { Hero } from '../sections/Hero.tsx'
+import { HowYourEigiWorks } from '../sections/HowYourEigiWorks.tsx'
+import { NextChapter } from '../sections/NextChapter.tsx'
+import { People } from '../sections/People.tsx'
+import { Problem } from '../sections/Problem.tsx'
+import { Sherpas } from '../sections/Sherpas.tsx'
+import { SoundFamiliar } from '../sections/SoundFamiliar.tsx'
+import { Suite } from '../sections/Suite.tsx'
 
-/** The menu's links, in page order. */
-const SECTIONS = [
-  { href: '#base-camp', label: 'Base camp' },
-  { href: '#problem', label: 'The problem' },
-  { href: '#stand', label: 'Where we stand' },
-  { href: '#stories', label: 'Eigi stories' },
-  { href: '#gateway', label: 'The gateway' },
-  { href: '#route', label: 'The route' },
-  { href: '#sherpas', label: 'Sherpas' },
-  { href: '#summit', label: 'Summit' },
-  { href: '#minds', label: 'Eigi minds' },
-  { href: '#contact', label: 'Contact' },
-] as const
-
-/** "/": The Ascent, one scroll from base camp (0 m) to the summit (8,848 m), then contact and footer. */
+/**
+ * "/": the story in order. Eigi Computer comes straight after the hero because it is the product;
+ * then empathy (sound familiar, the problem), what Eigi is, how it works, the people, and the close.
+ */
 export function HomePage() {
-  // the climb (sky colour, altimeter) is measured over <main> only, so the footer never shifts it
-  const climbRef = useRef<HTMLElement>(null)
-  const sherpasRef = useRef<HTMLElement>(null)
-  const sherpaTalks = useInView(sherpasRef, { margin: '-40% 0px -40% 0px' })
-
   return (
     <>
-      <Atmosphere climb={climbRef} flipAt={sherpasRef} />
-      <SherpaCompanion shown={sherpaTalks} />
-      <Nav links={SECTIONS} formatProgress={altitude} />
-      <Altimeter climb={climbRef} />
-      <Radio />
-      <main id="top" ref={climbRef}>
-        <BaseCamp />
+      <a className="skip" href="#computer">Skip to content</a>
+      <Nav />
+      <main id="top">
+        <Hero />
+        <EigiComputer />
+        <SoundFamiliar />
         <Problem />
-        <Stand />
-        <Stories />
         <Gateway />
-        <Route />
-        <Sherpas ref={sherpasRef} />
-        <Summit />
+        <HowYourEigiWorks />
+        <Suite />
+        <FirstJobs />
+        <Sherpas />
+        <FieldNotes />
+        <People />
+        <Faq />
+        <NextChapter />
       </main>
-      {/* after the climb: outside <main>, so it never shifts the altitudes */}
-      <Minds />
       <Footer />
     </>
   )
