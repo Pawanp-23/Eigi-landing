@@ -4,6 +4,7 @@
 .principles { display: flex; flex-wrap: wrap; gap: 8px; }
 .principles li { font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--paper); }
 
+.mountain, .slider, .jumps { max-width: 980px; margin-inline: auto; }
 .mountain {
   position: relative; border-radius: var(--radius-lg); overflow: hidden;
   background: linear-gradient(#eef1ef, var(--snow) 70%); border: 1px solid var(--line);
@@ -16,7 +17,7 @@
 .climbed { fill: none; stroke: var(--red); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke-dasharray 0.35s ease; }
 .flag line { stroke: var(--ink-3); stroke-width: 2; }
 .flag path { fill: var(--line-2); transition: fill 0.3s; }
-.flag text { font: 600 12px var(--font-mono); fill: var(--ink-3); letter-spacing: 0.04em; }
+.flag text { font: 600 12px var(--font-mono); fill: var(--ink-3); letter-spacing: 0.04em; paint-order: stroke; stroke: #e4e9e6; stroke-width: 5px; stroke-linejoin: round; }
 .flag[data-on='true'] path { fill: var(--red); }
 .flag[data-on='true'] text { fill: var(--ink); }
 

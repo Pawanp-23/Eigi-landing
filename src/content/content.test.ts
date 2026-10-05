@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import * as content from './content.ts'
-import { amit, CUSTOMER_STOPS, eigisFor, hiresFor, JOBS, roleFor, SCRIPTS, scriptFor } from './content.ts'
+import * as climb from './climb.ts'
+import * as computer from './computer.ts'
+import * as gateway from './gateway.ts'
+import * as hero from './hero.ts'
+import * as people from './people.ts'
+import * as plate from './plate.ts'
+import * as site from './site.ts'
+import * as why from './why.ts'
+import { roleFor, SCRIPTS, scriptFor } from './hero.ts'
+import { JOBS } from './plate.ts'
+import { amit } from './site.ts'
+import { CUSTOMER_STOPS, eigisFor, hiresFor } from './why.ts'
 
 /** Every string in the page copy, wherever it's nested. */
 function strings(value: unknown): string[] {
@@ -10,7 +20,7 @@ function strings(value: unknown): string[] {
   return []
 }
 
-const copy = strings(Object.values(content))
+const copy = [climb, computer, gateway, hero, people, plate, site, why].flatMap(m => strings(Object.values(m)))
 
 describe('page copy', () => {
   it('has copy to check', () => expect(copy.length).toBeGreaterThan(150))

@@ -1,33 +1,10 @@
 import { useState, type CSSProperties } from 'react'
-import { Sherpie } from '../components/Sherpie.tsx'
-import { amit, CLIMB } from '../content.ts'
+import { Sherpie } from '../components/brand/Sherpie.tsx'
+import { CLIMB } from '../content/climb.ts'
+import { amit } from '../content/site.ts'
+import { AT, CAMP_AT, H, line, pointAt, ROUTE, W } from '../lib/route.ts'
 import styles from './Climb.module.css'
 import { track } from '../lib/analytics.ts'
-
-const W = 800
-const H = 420
-/** The route up, as vertices. Camps sit on vertices 1, 3, 5 and 7; the summit is the last one. */
-const ROUTE: [number, number][] = [[30, 400], [150, 352], [235, 372], [335, 282], [405, 300], [505, 200], [565, 222], [655, 112], [722, 46]]
-const CAMP_AT = [1, 3, 5, 7]
-
-const SEG = ROUTE.slice(1).map((p, i) => Math.hypot(p[0] - ROUTE[i][0], p[1] - ROUTE[i][1]))
-const LEN = SEG.reduce((a, b) => a + b, 0)
-/** How far along the route (0 to 100) each vertex sits. */
-const AT = ROUTE.map((_, i) => (SEG.slice(0, i).reduce((a, b) => a + b, 0) / LEN) * 100)
-
-function pointAt(v: number): [number, number] {
-  let d = (v / 100) * LEN
-  for (let i = 0; i < SEG.length; i++) {
-    if (d <= SEG[i] || i === SEG.length - 1) {
-      const t = Math.min(1, d / SEG[i])
-      return [ROUTE[i][0] + (ROUTE[i + 1][0] - ROUTE[i][0]) * t, ROUTE[i][1] + (ROUTE[i + 1][1] - ROUTE[i][1]) * t]
-    }
-    d -= SEG[i]
-  }
-  return ROUTE[ROUTE.length - 1]
-}
-
-const line = ROUTE.map(p => p.join(',')).join(' ')
 
 /** Meet your AI sherpas: drag Sherpie up the rope, and each camp tells you what happens there. */
 export function Climb() {

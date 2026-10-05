@@ -1,0 +1,11 @@
+.end { position: relative; background: var(--ink); color: var(--snow); padding: clamp(80px, 9vw, 120px) 0 36px; }
+.peek { position: absolute; top: 0; left: 50%; width: 96px; transform: translate(-50%, -84%); }
+.endInner { display: grid; gap: 22px; justify-items: center; text-align: center; }
+.end :global(.eyebrow) { color: #b9c0bd; }
+.endLede { color: #b9c0bd; font-size: 18px; max-width: 46ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: center; }
+.ctas :global(.btn) { background: var(--snow); color: var(--ink); border-color: var(--snow); }
+.alt { color: var(--snow); text-underline-offset: 4px; }
+.links { margin-top: 48px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); width: 100%; display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: center; font-size: 14px; color: #8f9895; }
+.links a { color: #b9c0bd; text-decoration: none; }
+.links a:hover { color: var(--snow); }

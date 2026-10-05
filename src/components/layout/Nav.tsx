@@ -1,5 +1,5 @@
-import logo from '../assets/logo.png'
-import { amit, LINKS } from '../content.ts'
+import logo from '../../assets/brand/logo.png'
+import { amit, LINKS } from '../../content/site.ts'
 import styles from './Nav.module.css'
 
 const SECTIONS = [

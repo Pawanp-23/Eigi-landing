@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent } from 'react'
-import { JOBS, PAINS, PLATE, ROLE_ORDER, ROLES, type Role } from '../content.ts'
+import { JOBS, PAINS, PLATE } from '../content/plate.ts'
+import { ROLE_ORDER, ROLES, type Role } from '../content/site.ts'
 import styles from './Plate.module.css'
 import { track } from '../lib/analytics.ts'
 

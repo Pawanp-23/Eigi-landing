@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import mark from '../assets/eigi-mark.jpg'
-import { GATEWAY } from '../content.ts'
+import mark from '../assets/brand/eigi-mark.jpg'
+import { GATEWAY } from '../content/gateway.ts'
 import styles from './Gateway.module.css'
 import { track } from '../lib/analytics.ts'
 

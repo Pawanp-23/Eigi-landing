@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import logo from '../assets/logo.png'
-import { COMPUTER, type AppKind } from '../content.ts'
-import styles from './EigiComputer.module.css'
+import logo from '../assets/brand/logo.png'
+import { COMPUTER, type AppKind } from '../content/computer.ts'
+import styles from './Computer.module.css'
 import { track } from '../lib/analytics.ts'
+import { prefersReducedMotion } from '../lib/motion.ts'
 
 /** Simple line icons, drawn white on each app's coloured tile. Generic shapes, not brand logos. */
 const ICONS: Record<AppKind, string> = {
@@ -20,13 +21,11 @@ const OPEN_MS = 700
 const DWELL_MS = 3800
 const VERB_COLOURS = ['var(--blue)', 'var(--red)', 'var(--green)', 'var(--yellow)', 'var(--ink)']
 
-const reducedMotion = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
-
 /** "The platform to ___." The last word rolls through the verbs. */
 function Platform() {
   const [i, setI] = useState(0)
   useEffect(() => {
-    if (reducedMotion()) return
+    if (prefersReducedMotion()) return
     const t = setInterval(() => setI(v => (v + 1) % COMPUTER.verbs.length), 1900)
     return () => clearInterval(t)
   }, [])
@@ -98,7 +97,7 @@ function Window({ kind, items }: { kind: AppKind; items: string[] }) {
 }
 
 /** A desktop the Eigi drives on its own. It cycles through apps while in view; tapping an app takes over. */
-export function EigiComputer() {
+export function Computer() {
   const [active, setActive] = useState(0)
   /** bumps on every tap, so tapping the open app replays it */
   const [run, setRun] = useState(0)
@@ -108,7 +107,7 @@ export function EigiComputer() {
   const [cursor, setCursor] = useState({ x: 50, y: 50 })
   const screen = useRef<HTMLDivElement>(null)
   const dock = useRef<(HTMLButtonElement | null)[]>([])
-  const reduced = reducedMotion()
+  const reduced = prefersReducedMotion()
   const app = COMPUTER.apps[active]
 
   // Start only once the computer is on screen.

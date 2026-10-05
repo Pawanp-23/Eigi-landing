@@ -23,8 +23,8 @@ A new marketing site for **eigi.ai**.
 | Repo | https://github.com/Pawanp-23/Eigi-landing- |
 | Stack | React 19 + Vite 8 + TypeScript, CSS Modules, CSS animations (no animation library), Vitest, oxlint |
 | Run | `npm install` then `npm run dev`, open http://localhost:5173 |
-| Checks | `npm run lint && npm test && npm run build` |
-| Layout | See README: `sections/` (one file per section), `components/`, `content.ts` (all copy), `lib/`, `styles/` |
+| Checks | `npm run check` (lint, tests, build); GitHub Actions runs the same on every push and PR |
+| Layout | See README: `app/`, `sections/` (one file per section), `components/{brand,layout}/`, `content/` (all copy, one file per section), `lib/`, `assets/`, `styles/` |
 
 ## 3. The design: Eigi Play (final, approved 5 Oct 2026)
 

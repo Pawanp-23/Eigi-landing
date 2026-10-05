@@ -13,10 +13,10 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-Before you push:
+Before you push, run every check (GitHub runs the same ones on each push and pull request):
 
 ```sh
-npm run lint && npm test && npm run build
+npm run check      # lint, tests, production build
 ```
 
 `npm run build` writes a static site to `dist/`.
@@ -25,31 +25,43 @@ npm run lint && npm test && npm run build
 
 | # | Section | File | What the visitor does |
 |---|---|---|---|
-| 1 | Hero | `sections/HandOver.tsx` | Types or picks a job, watches the Eigi work through Ask, Computer, Memory, Approval, then approves or edits it |
-| 2 | Why Eigi | `sections/Why.tsx` (`Why`) | Taps the founder's five questions; each flips to how Eigi takes it |
-| 3 | The trap | `sections/Why.tsx` (`Trap`) | Slides customers 10 to 40 and compares hiring with Eigis (1 Eigi per 10 customers) |
-| 4 | Eigi computer | `sections/EigiComputer.tsx` | Watches an Eigi drive 8 apps; taps one to take over |
+| 1 | Hero | `sections/Hero.tsx` | Types or picks a job, watches the Eigi work through Ask, Computer, Memory, Approval, then approves or edits it |
+| 2 | Why Eigi | `sections/Why.tsx` | Taps the founder's five questions; each flips to how Eigi takes it |
+| 3 | The trap | `sections/Trap.tsx` | Slides customers 10 to 40 and compares hiring with Eigis (1 Eigi per 10 customers) |
+| 4 | Eigi computer | `sections/Computer.tsx` | Watches an Eigi drive 8 apps; taps one to take over |
 | 5 | Your plate | `sections/Plate.tsx` | Drags 12 first jobs to the right Eigi (or taps a job, then an Eigi) |
 | 6 | Gateway | `sections/Gateway.tsx` | Switches on You, Sherpas, Eigis to open the portal |
 | 7 | Sherpas | `sections/Climb.tsx` | Drags Sherpie up the four camps |
-| 8 | Field notes | `sections/NextChapter.tsx` (`Notes`) | Reads two real stories; plays how a chat with Amit starts |
-| 9 | Founders | `sections/NextChapter.tsx` (`Founders`) | Meets Aman and Mrunmay |
-| | Footer | `sections/NextChapter.tsx` (`Footer`) | Talks to Amit |
+| 8 | Field notes | `sections/Notes.tsx` | Reads two real stories; plays how a chat with Amit starts |
+| 9 | Founders | `sections/Founders.tsx` | Meets Aman and Mrunmay |
+| | Nav, footer | `components/layout/` | Talks to Amit |
 
-## Where things live
+## Project structure
 
 ```
 src/
-  content.ts          every word on the page, plus the small rules (job routing, 1 Eigi per 10 customers)
-  App.tsx             the order of sections
-  sections/           one file per section, each with its own CSS Module
-  components/         Nav and Sherpie (the mascot)
-  lib/analytics.ts    Google Analytics events
-  lib/useLookAt.ts    Sherpie's eyes follow the pointer
-  styles/global.css   colour, type and button tokens
+  app/                 App.tsx (section order), main.tsx (entry), App.test.tsx
+  sections/            one file per section, each with its own CSS Module
+  components/
+    brand/             Sherpie, the mascot
+    layout/            Nav and Footer
+  content/             every word on the page, one file per section
+    site.ts            roles and colours, outside links, the WhatsApp link to Amit
+    content.test.ts    copy rules, job routing, the Eigi ratio
+  lib/
+    analytics.ts       Google Analytics events
+    route.ts           the rope up the mountain (tested in route.test.ts)
+    motion.ts          the reduced-motion check
+    useLookAt.ts       Sherpie's eyes follow the pointer
+  assets/
+    brand/             logo and Eigi mark
+    founders/          founder portraits
+  styles/
+    tokens.css         colours, type, spacing
+    global.css         base styles, buttons, shared classes
 ```
 
-To change wording, edit `src/content.ts`; no component needs to change.
+To change wording, edit the matching file in `src/content/`; no component needs to change.
 
 ## Analytics
 
