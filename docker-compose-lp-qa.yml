@@ -1,0 +1,16 @@
+services:
+  vaani-lp:
+    build:
+      context: ./frontend/landing_page
+      dockerfile: Dockerfile
+    container_name: vaani-lp
+    image: cliniq360/vaani-lp-qa:${IMAGE_TAG}
+    environment:
+      - VITE_APP_BASE_URL=${VITE_APP_BASE_URL}
+      - VITE_APP_STUDIO_BASE_URL=${VITE_APP_STUDIO_BASE_URL}
+      - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
+    ports:
+      - "3000:82"
+    volumes:
+      - ./frontend/landing_page:/app/src
+    restart: "on-failure"
