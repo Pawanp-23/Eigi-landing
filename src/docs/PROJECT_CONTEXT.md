@@ -24,7 +24,8 @@ A new marketing site for **eigi.ai**.
 | Stack | React 19 + Vite 8 + TypeScript, CSS Modules, CSS animations (no animation library), Vitest, oxlint |
 | Run | `npm install` then `npm run dev`, open http://localhost:5173 |
 | Checks | `npm run check` (lint, tests, build); GitHub Actions runs the same on every push and PR |
-| Docker | Node 22 Alpine build with `npm ci`, then Nginx Alpine serving `dist/` on port 82. Build with `docker build --platform linux/amd64 -t eigi-landing .`; run with `docker run --rm -p 8080:82 eigi-landing`. Optional analytics: `--build-arg VITE_GA_ID=G-XXXXXXXXXX`. See README. |
+| Docker | Matches Agent360: `node:20-alpine` on `linux/amd64`, `npm install`, then `nginx` serving `dist/` on port 82. Standalone: `docker build --platform linux/amd64 -t eigi-landing .`; `docker run --rm -p 3000:82 eigi-landing`. Analytics is read from the build-time `.env` file. See README. |
+| Compose / integration | `docker-compose-lp.yml` and `docker-compose-lp-qa.yml` match Agent360's root files: context `./frontend/landing_page`, `vaani-lp` service/container, `3000:82`, `cliniq360/vaani-lp:${IMAGE_TAG}` or `cliniq360/vaani-lp-qa:${IMAGE_TAG}`, existing environment variables/volume and `on-failure` restart. Move the frontend into Agent360's `frontend/landing_page/` and keep Compose files at the Agent360 root. |
 | Layout | Follows Agent360's `frontend/landing_page`: `App.tsx`, `main.tsx` and `index.css` at the `src/` root; `pages/LandingPage/` owns `Header/`, `Footer/`, `sections/*Section/` and `content/`; shared code lives in `components/common/`, `hooks/`, `utils/`, `assets/Images/` and `theme/`. Component folders use `index.tsx` with CSS Modules beside them. See README for the full tree. |
 
 ## 3. The design: Eigi Play (final, approved 5 Oct 2026)

@@ -11,6 +11,7 @@ playwright-report
 test-results
 *.log
 *.tsbuildinfo
-.env
+# Agent360 creates .env in the landing-page folder before the Vite build.
+# Include that file so its public frontend settings are compiled into dist/.
 .env.*
 !.env.example

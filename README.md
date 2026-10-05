@@ -23,24 +23,51 @@ npm run check      # lint, tests, production build
 
 ## Docker
 
-The Docker and Nginx setup follows Agent360's `frontend/landing_page`: a Node build stage compiles the frontend, then Nginx serves `dist/` on container port **82**. The builder uses Node 22, matching CI, and installs the locked dependencies with `npm ci`.
+The Dockerfile, Nginx config and production/QA Compose files match Agent360's landing-page deployment files. The Dockerfile uses `node:20-alpine` on `linux/amd64`, runs `npm install` and `npm run build`, then serves `dist/` with `nginx` on container port **82**.
 
-Run these commands from the `Eigi-landing` directory:
+For a standalone preview, run these commands from the `Eigi-landing` directory:
 
 ```sh
 docker build --platform linux/amd64 -t eigi-landing .
-docker run --rm -p 8080:82 eigi-landing
+docker run --rm -p 3000:82 eigi-landing
 ```
 
-Open http://localhost:8080. Nginx serves the static assets, compresses text responses with gzip, and falls back to `index.html` for frontend routes. Missing files under `/assets/` return 404.
+Open http://localhost:3000. Nginx serves static assets, compresses text responses with gzip, and falls back to `index.html` for frontend routes, using Agent360's existing configuration.
 
-Analytics stays off by default. To include a GA4 measurement ID, pass it when building:
+### Merge into Agent360
+
+Place the frontend files, including `Dockerfile`, `nginx.conf` and `.dockerignore`, under `agent-360/frontend/landing_page/`. Keep `docker-compose-lp.yml` and `docker-compose-lp-qa.yml` at the Agent360 repository root; the copies here match those existing root files.
+
+```text
+agent-360/
+  docker-compose-lp.yml
+  docker-compose-lp-qa.yml
+  frontend/
+    landing_page/
+      Dockerfile
+      nginx.conf
+      .dockerignore
+      package.json
+      package-lock.json
+      index.html
+      src/
+      public/
+      ...
+```
+
+Run Compose from the Agent360 root after the frontend is in that location. Set `IMAGE_TAG` in the shell or the Agent360 root `.env` file first, for example `IMAGE_TAG=local`. Agent360's deployment workflows already supply this tag and the existing `VITE_APP_BASE_URL`, `VITE_APP_STUDIO_BASE_URL` and `VITE_GOOGLE_CLIENT_ID` variables.
 
 ```sh
-docker build --platform linux/amd64 --build-arg VITE_GA_ID=G-XXXXXXXXXX -t eigi-landing .
+# Production
+docker compose -f docker-compose-lp.yml up --build -d
+
+# QA
+docker compose -f docker-compose-lp-qa.yml up --build -d
 ```
 
-Vite embeds this value during the build, so changing it requires rebuilding the image. `.dockerignore` excludes local dependencies, build output, Git metadata and `.env` files from the build context.
+Both configurations use the `vaani-lp` service/container name, publish `3000:82`, mount `./frontend/landing_page:/app/src` and use `restart: on-failure`. Production tags `cliniq360/vaani-lp:${IMAGE_TAG}`; QA tags `cliniq360/vaani-lp-qa:${IMAGE_TAG}`. Run one environment per host because they share the container name and host port. Agent360's general `docker-compose.yml` starts its backend and is separate from the landing-page deployment.
+
+For this frontend, analytics is the only current environment setting. To enable it, set `VITE_GA_ID=G-XXXXXXXXXX` in `frontend/landing_page/.env` before building; for a standalone build, use `.env` in this repository root. `.dockerignore` allows that file to follow Agent360's build-time environment workflow, while excluding local dependencies, build output, Git metadata and other local `.env.*` files. Vite embeds frontend settings during the build, so changing them requires rebuilding the image. The legacy runtime variables in Compose remain for compatibility with Agent360's workflows.
 
 ## The page
 
