@@ -1,6 +1,13 @@
 import type { CrewId } from '../lib/crew.ts'
 
-/** How your Eigi works: four chapters, each with a small live example. */
+/** How your Eigi works: one job, start to finish, told in four steps as you scroll. */
+export const HOW = {
+  eyebrow: 'How your Eigi works',
+  title: 'One job,',
+  titleSerif: 'start to finish.',
+  window: 'Your Eigi',
+} as const
+
 export const CHAPTERS = [
   { n: '01', color: 'blue', title: 'Ask where you', titleSerif: 'already talk.', lede: 'Send a message in WhatsApp, Slack or the web app. No prompts to perfect.', caption: 'A message to start.' },
   { n: '02', color: 'green', title: 'It works on its', titleSerif: 'own computer.', lede: 'Your Eigi opens a browser, does the research and fills a sheet. Watch it, or get on with your day.', caption: 'Room to do the work.' },
@@ -13,6 +20,13 @@ export const EXAMPLE = {
   ack: 'On it. A clear starting point.',
   channels: ['WhatsApp', 'Slack', 'Web app'],
   browserBar: 'maps · clinic websites · intro-drafts.sheet',
+  sheet: [
+    { name: 'Lone Star Dental', booking: 'Phone only' },
+    { name: 'Barton Creek Smiles', booking: 'Phone only' },
+    { name: 'Eastside Family Dental', booking: 'Email form' },
+    { name: 'Mueller Dental Studio', booking: 'Phone only' },
+  ],
+  sheetMore: '+16 more',
   steps: [
     { text: 'Searched maps', detail: 'Austin, TX' },
     { text: 'Checked 34 websites', detail: 'for online booking' },
@@ -55,19 +69,55 @@ export const SUITE = {
 } as const
 
 export const CONTROL = {
-  eyebrow: 'You’re in charge.',
   title: 'AI pace.',
   titleSerif: 'Your call.',
-  lede: 'Your AI team doesn’t wait for a standup. They look things up and write drafts on their own. Anything that goes out in your name waits for your OK.',
-  rules: [
-    { text: 'Look things up in memory', allowed: true },
-    { text: 'Write a draft', allowed: true },
-    { text: 'Submit a form in the browser', allowed: false },
-    { text: 'Email a customer', allowed: false },
-  ],
-  note: 'Example rules. You choose what needs approval.',
+  you: 'You',
+  youRole: 'Founder · the final say',
+  owns: 'What they own',
+  rules: 'Their rules',
+  allowed: 'On its own',
+  ask: 'Ask me first',
+  note: 'Example rules. Tap one to change it.',
   docs: 'Explore the documentation',
 } as const
+
+/** A rule is a verb phrase, so it reads in a sentence: "will log calls in the CRM on its own". */
+export interface Rule { action: string; allowed: boolean }
+
+export const ORG: Record<'cos' | 'sales' | 'mkt' | 'ops', { owns: string[]; rules: Rule[] }> = {
+  cos: {
+    owns: ['Your inbox and calendar', 'The Monday brief', 'Investor updates'],
+    rules: [
+      { action: 'sort and label your inbox', allowed: true },
+      { action: 'accept a meeting invite', allowed: false },
+      { action: 'send your investor update', allowed: false },
+    ],
+  },
+  sales: {
+    owns: ['Follow-ups after every call', 'Replies to new leads', 'A tidy CRM'],
+    rules: [
+      { action: 'log calls in the CRM', allowed: true },
+      { action: 'reply to a new lead', allowed: false },
+      { action: 'send a quote', allowed: false },
+    ],
+  },
+  mkt: {
+    owns: ['Launch kits', 'Posts in your voice', 'Review requests'],
+    rules: [
+      { action: 'write drafts', allowed: true },
+      { action: 'schedule a post', allowed: false },
+      { action: 'email your customer list', allowed: false },
+    ],
+  },
+  ops: {
+    owns: ['Bookings and reminders', 'Invoice chasing', 'Supplier follow-ups'],
+    rules: [
+      { action: 'text booking reminders', allowed: true },
+      { action: 'chase an unpaid invoice', allowed: false },
+      { action: 'issue a refund', allowed: false },
+    ],
+  },
+}
 
 /* ---------- before you hire for it ---------- */
 
@@ -77,6 +127,11 @@ export const FIRST_JOBS = {
   titleSerif: 'hand it to an Eigi.',
   lede: 'A first ops or support hire usually starts as a pile of repeat work. Start with the pile.',
   rolesLabel: 'The hire you’re putting off',
+  hiring: 'Now hiring',
+  duties: 'The job, really',
+  instead: 'Hand it to an Eigi instead',
+  stamp: 'Not needed yet',
+  payNote: 'Typical US pay, estimate.',
   startLabel: 'How we’d start',
   start: ['Map how this job runs today, on a 30-minute call.', 'Connect the tools it touches.', 'Check the first results with you.'],
   noApproval: 'Not needed. Drafts only, so your rules allow it.',
@@ -102,12 +157,15 @@ export interface HireRole {
   id: string
   label: string
   crew: CrewId
+  /** the job ad the founder was about to post */
+  posting: { title: string; pay: string; time: string }
   jobs: Job[]
 }
 
 export const HIRE_ROLES: HireRole[] = [
   {
     id: 'sales', label: 'Sales', crew: 'sales',
+    posting: { title: 'Sales development rep', pay: '$68k + commission', time: '6 to 8 weeks to hire' },
     jobs: [
       {
         title: 'Follow up after demo calls',
@@ -140,6 +198,7 @@ export const HIRE_ROLES: HireRole[] = [
   },
   {
     id: 'ops', label: 'Operations', crew: 'ops',
+    posting: { title: 'Operations manager', pay: '$85k + benefits', time: '8 to 10 weeks to hire' },
     jobs: [
       {
         title: 'Confirm tomorrow’s bookings',
@@ -172,6 +231,7 @@ export const HIRE_ROLES: HireRole[] = [
   },
   {
     id: 'support', label: 'Customer support', crew: 'cos',
+    posting: { title: 'Customer support lead', pay: '$62k + benefits', time: '6 to 8 weeks to hire' },
     jobs: [
       {
         title: 'Answer repeat questions',

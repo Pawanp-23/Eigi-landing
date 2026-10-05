@@ -6,8 +6,32 @@
 .roles button { border: 1.5px solid var(--line); background: var(--paper); border-radius: 999px; padding: 8px 16px; font-size: 15px; cursor: pointer; }
 .roles button[aria-pressed='true'] { background: var(--ink); color: var(--snow); border-color: var(--ink); }
 
-.jobs { display: grid; gap: 10px; }
-.job { display: grid; grid-template-columns: 36px minmax(0, 1fr) 20px; gap: 14px; align-items: center; text-align: left; width: 100%; border: 1.5px solid var(--line); background: var(--paper); border-radius: 16px; padding: 12px 16px 12px 12px; cursor: pointer; line-height: 1.35; transition: border-color 0.25s, background 0.25s; }
+.posting {
+  position: relative; margin-top: 4px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: clamp(20px, 3vw, 30px); display: grid; gap: 10px;
+  box-shadow: var(--shadow-card);
+}
+.postHead { display: flex; justify-content: space-between; gap: 10px; font: 500 12px var(--font-mono); letter-spacing: 0.06em; color: var(--ink-2); }
+.hiring { text-transform: uppercase; letter-spacing: 0.1em; color: var(--c); display: inline-flex; align-items: center; gap: 7px; }
+.hiring::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c); animation: pulse 1.8s infinite; }
+@keyframes pulse { 50% { opacity: 0.3; } }
+.posting h3 { font-size: clamp(26px, 2.8vw, 34px); letter-spacing: -0.035em; }
+.time { font-size: 14px; color: var(--ink-3); margin-top: -6px; }
+.posting :global(.eyebrow) { margin-top: 8px; }
+.postFoot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+
+/* the rubber stamp that lands once an Eigi has done the job */
+.stamp {
+  position: absolute; right: 18px; top: 58px; pointer-events: none;
+  font: 700 15px var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red); border: 3px solid var(--red); border-radius: 10px; padding: 8px 12px;
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+  mix-blend-mode: multiply;
+}
+
+.jobs { display: grid; gap: 8px; }
+.job { display: grid; grid-template-columns: 36px minmax(0, 1fr) 20px; gap: 14px; align-items: center; text-align: left; width: 100%; border: 1.5px solid var(--line); background: var(--paper); border-radius: 14px; padding: 10px 14px 10px 10px; cursor: pointer; line-height: 1.35; transition: border-color 0.25s, background 0.25s; }
 .job b { display: block; font-weight: 600; font-size: 16px; }
 .job small { display: block; font-size: 13.5px; color: var(--ink-2); margin-top: 2px; }
 .h { width: 36px; height: 36px; border-radius: 10px; border: 1.5px solid var(--c); background: #fff; display: grid; place-items: center; overflow: hidden; }

@@ -16,8 +16,8 @@ import { Suite } from '../sections/Suite.tsx'
 import { useBrief } from '../lib/useBrief.ts'
 
 /**
- * "/": the story in order. Eigi Computer comes straight after the hero because it is the product;
- * then empathy (sound familiar, the problem), what Eigi is, how it works, the people, and the close.
+ * "/": the story in order. The visitor recognises their week (sound familiar), then meets the answer,
+ * Eigi Computer, the product. Then the problem, what Eigi is, how it works, the people, and the close.
  */
 export function HomePage() {
   // what the visitor tells us on the way down, carried to the sections that answer it
@@ -28,8 +28,8 @@ export function HomePage() {
       <Nav />
       <main id="top">
         <Hero task={brief.task} onTask={setTask} />
-        <EigiComputer />
         <SoundFamiliar mine={brief.pains} onToggle={togglePain} />
+        <EigiComputer />
         <Problem />
         <Gateway />
         <HowYourEigiWorks />

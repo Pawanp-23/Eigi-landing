@@ -1,21 +1,14 @@
 import { motion, useAnimation, useReducedMotion } from 'motion/react'
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { Mascot } from '../components/brand/Mascot.tsx'
 import { Sherpie } from '../components/brand/Sherpie.tsx'
-import { CHANNELS, FLOATS, HERO, type Channel } from '../content/hero.ts'
+import { FLOATS, HERO } from '../content/hero.ts'
 import { briefMessage, whatsappLink } from '../lib/amit.ts'
 import { CREW } from '../lib/crew.ts'
 import { calm } from '../lib/motion.ts'
 import { Topo } from './HeroTopo.tsx'
 import styles from './Hero.module.css'
 
-const ICONS: Record<Channel, ReactNode> = {
-  slack: <path d="M6 2.5v11M10 2.5v11M2.5 6h11M2.5 10h11" />,
-  teams: <><rect x="2" y="4" width="8" height="8" rx="2" /><circle cx="12.5" cy="5" r="1.8" /><path d="M11 8h3v3a2 2 0 01-2 2" /></>,
-  email: <><rect x="2" y="3.5" width="12" height="9" rx="2" /><path d="M2.5 4.5L8 9l5.5-4.5" /></>,
-  whatsapp: <path d="M3 13l.8-2.6A5.5 5.5 0 118 13.5a5.4 5.4 0 01-2.4-.6z" />,
-  assistants: <path d="M8 2v12M2 8h12M3.8 3.8l8.4 8.4M12.2 3.8l-8.4 8.4" />,
-}
 
 const SQUARES = [
   { x: 20, y: 8, c: 'var(--green)' }, { x: 72, y: 30, c: 'var(--yellow)' }, { x: 26, y: 46, c: 'var(--red)' },
@@ -105,15 +98,6 @@ export function Hero({ task, onTask }: HeroProps) {
           <span className={styles.amit}><i />{HERO.amitNote}</span>
           <a className="tlink" href="#computer">{HERO.secondary} ↓</a>
         </motion.div>
-        <div className={styles.where}>
-          <b>{HERO.whereLabel}</b>
-          {CHANNELS.map((c) => (
-            <span key={c.id}>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">{ICONS[c.id]}</svg>
-              {c.label}
-            </span>
-          ))}
-        </div>
       </div>
     </header>
   )

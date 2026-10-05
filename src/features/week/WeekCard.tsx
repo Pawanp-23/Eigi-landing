@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { useState } from 'react'
 import { Mascot } from '../../components/brand/Mascot.tsx'
 import { Sherpie } from '../../components/brand/Sherpie.tsx'
@@ -39,13 +39,11 @@ export function WeekCard({ picked }: { picked: readonly string[] }) {
 
       <div className="eyebrow">{WEEK.eyebrow}</div>
       <div className={styles.total}>
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.b
-            key={big} className={cx(handed && styles.gain)}
-            initial={reduced ? false : { y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -18, opacity: 0 }}
-            transition={calm}
-          >{big}</motion.b>
-        </AnimatePresence>
+        <motion.b
+          key={big} className={cx(handed && styles.gain)}
+          initial={reduced ? false : { y: 14, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+          transition={calm}
+        >{big}</motion.b>
         <span>{label}</span>
       </div>
 

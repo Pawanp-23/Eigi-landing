@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Mascot } from '../../components/brand/Mascot.tsx'
 import { RichText } from '../../components/ui/RichText.tsx'
@@ -29,6 +29,8 @@ export function JobRunner({ pain }: { pain?: string }) {
   const jobIndex = picked?.job ?? opening.job
   const [progress, setProgress] = useState<Progress>(FINISHED)
   const run = useRef(0)
+  // postings the Eigi has made unnecessary: stamped once a job for that role finishes
+  const [handed, setHanded] = useState<string[]>([])
   const started = useRef(false)
   const answer = useRef<(approved: boolean) => void>(() => {})
 
@@ -61,7 +63,10 @@ export function JobRunner({ pain }: { pain?: string }) {
         await wait(1100)
       }
     }
-    if (me === run.current) setProgress(FINISHED)
+    if (me === run.current) {
+      setProgress(FINISHED)
+      setHanded((h) => (h.includes(nextRole) ? h : [...h, nextRole]))
+    }
   }, [reduced])
 
   useEffect(() => () => { run.current += 1 }, [])
@@ -76,18 +81,35 @@ export function JobRunner({ pain }: { pain?: string }) {
             <button key={r.id} type="button" aria-pressed={r.id === roleId} onClick={() => start(r.id, 0)}>{r.label}</button>
           ))}
         </div>
-        <div className={styles.jobs} role="group" aria-label="First jobs">
-          {role.jobs.map((j, i) => (
-            <button
-              key={j.title} type="button" className={styles.job} aria-pressed={i === jobIndex}
-              style={{ ['--c' as string]: crew.color, ['--ct' as string]: crew.tint }}
-              onClick={() => start(role.id, i)}
-            >
-              <span className={styles.h}><Mascot id={role.crew} head /></span>
-              <span><b>{j.title}</b><small>{j.detail}</small></span>
-              <span className={styles.ar} aria-hidden="true">→</span>
-            </button>
-          ))}
+        <div className={styles.posting} style={{ ['--c' as string]: crew.color, ['--ct' as string]: crew.tint }}>
+          <div className={styles.postHead}><span className={styles.hiring}>{FIRST_JOBS.hiring}</span><span>{role.posting.pay}</span></div>
+          <h3>{role.posting.title}</h3>
+          <p className={styles.time}>{role.posting.time}</p>
+          <div className="eyebrow">{FIRST_JOBS.duties}</div>
+          <div className={styles.jobs} role="group" aria-label="First jobs">
+            {role.jobs.map((j, i) => (
+              <button key={j.title} type="button" className={styles.job} aria-pressed={i === jobIndex} onClick={() => start(role.id, i)}>
+                <span className={styles.h}><Mascot id={role.crew} head /></span>
+                <span><b>{j.title}</b><small>{j.detail}</small></span>
+                <span className={styles.ar} aria-hidden="true">→</span>
+              </button>
+            ))}
+          </div>
+          <div className={styles.postFoot}>
+            <button type="button" className="btn ink" onClick={() => start(role.id, jobIndex)}>{FIRST_JOBS.instead} →</button>
+            <span className="fine">{FIRST_JOBS.payNote}</span>
+          </div>
+          <AnimatePresence>
+            {handed.includes(role.id) && (
+              <motion.span
+                key={role.id} className={styles.stamp} aria-label={FIRST_JOBS.stamp}
+                initial={reduced ? false : { opacity: 0, scale: 1.8, rotate: -4 }}
+                animate={{ opacity: 1, scale: 1, rotate: -9 }}
+                exit={{ opacity: 0 }}
+                transition={{ type: 'spring', bounce: 0.35, visualDuration: 0.45 }}
+              >{FIRST_JOBS.stamp}</motion.span>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
