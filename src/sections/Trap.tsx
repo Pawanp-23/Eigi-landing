@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from 'react'
 import { track } from '../lib/analytics.ts'
-import { amit } from '../content/site.ts'
+import { buddy } from '../content/site.ts'
 import { CUSTOMER_STOPS as CUSTOMERS, CUSTOMERS_PER_EIGI, eigisFor, hiresFor, WHY } from '../content/why.ts'
 import styles from './Trap.module.css'
 
@@ -13,7 +13,7 @@ const Person = () => <svg viewBox="0 0 20 24" className={styles.person} aria-hid
 export function Trap() {
   const [step, setStep] = useState(0)
 
-  // Illustrative only: hiring adds a person for every few customers; one Eigi covers ten.
+  // A simple model: hiring adds a person for every few customers; one Eigi covers ten.
   const customers = CUSTOMERS[step]
   const hired = hiresFor(customers)
   const eigis = eigisFor(customers)
@@ -72,7 +72,7 @@ export function Trap() {
           </ul>
           <div className={styles.close}>
             <p>{WHY.promise.close}</p>
-            <a className="btn ink" href={amit('I’m ambitious and want to move faster. Where should Eigi start?', 'promise')} target="_blank" rel="noopener noreferrer">Talk to Eigi ↗</a>
+            <a className="btn ink" href={buddy('I’m ambitious and want to move faster. Where should Eigi start?', 'promise')} target="_blank" rel="noopener noreferrer">Talk to Buddy ↗</a>
           </div>
         </div>
       </div>

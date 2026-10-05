@@ -1,7 +1,7 @@
 import { useState, type CSSProperties } from 'react'
 import { Sherpie } from '../components/brand/Sherpie.tsx'
 import { CLIMB } from '../content/climb.ts'
-import { amit } from '../content/site.ts'
+import { buddy } from '../content/site.ts'
 import { AT, CAMP_AT, H, line, pointAt, ROUTE, W } from '../lib/route.ts'
 import styles from './Climb.module.css'
 import { track } from '../lib/analytics.ts'
@@ -58,7 +58,7 @@ export function Climb() {
 
           {summit && <div className={styles.summit}>
             <p>“How did we work without this?”</p>
-            <a className="btn ink" href={amit('I would like help finding the first AI workflow for my business.', 'summit')} target="_blank" rel="noopener noreferrer">Let’s find your first workflow ↗</a>
+            <a className="btn ink" href={buddy('I would like help finding the first AI workflow for my business.', 'summit')} target="_blank" rel="noopener noreferrer">Let’s find your first workflow ↗</a>
           </div>}
         </div>
 

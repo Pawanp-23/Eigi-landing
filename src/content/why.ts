@@ -41,7 +41,7 @@ export const WHY = {
   },
 }
 
-/** The trap's numbers (illustrative): hiring adds a person every few customers; one Eigi covers ten. */
+/** The trap's numbers, a simple model: hiring adds a person every few customers; one Eigi covers ten. */
 export const CUSTOMER_STOPS = [10, 20, 30, 40]
 export const CUSTOMERS_PER_EIGI = 10
 export const eigisFor = (customers: number) => Math.ceil(customers / CUSTOMERS_PER_EIGI)

@@ -32,21 +32,24 @@ npm run check      # lint, tests, production build
 | 5 | Your plate | `sections/Plate.tsx` | Drags 12 first jobs to the right Eigi (or taps a job, then an Eigi) |
 | 6 | Gateway | `sections/Gateway.tsx` | Switches on You, Sherpas, Eigis to open the portal |
 | 7 | Sherpas | `sections/Climb.tsx` | Drags Sherpie up the four camps |
-| 8 | Field notes | `sections/Notes.tsx` | Reads two real stories; plays how a chat with Amit starts |
-| 9 | Founders | `sections/Founders.tsx` | Meets Aman and Mrunmay |
-| | Nav, footer | `components/layout/` | Talks to Amit |
+| 8 | Founders | `sections/Founders.tsx` | Meets Aman and Mrunmay |
+| | Nav, footer | `components/layout/` | Talks to Buddy |
+
+### Success stories page (`/stories/`)
+
+`stories/index.html` → `app/StoriesPage.tsx` → `sections/Stories.tsx`. Real client and community stories only, in the landing page's design: each story in a window card beside a panel of the work the Eigi took over. Content lives in `content/stories.ts`; add a story only once the client has cleared it for publishing.
 
 ## Project structure
 
 ```
 src/
-  app/                 App.tsx (section order), main.tsx (entry), App.test.tsx
+  app/                 App.tsx + main.tsx (landing), StoriesPage.tsx + stories.tsx (/stories/), tests
   sections/            one file per section, each with its own CSS Module
   components/
     brand/             Sherpie, the mascot
     layout/            Nav and Footer
   content/             every word on the page, one file per section
-    site.ts            roles and colours, outside links, the WhatsApp link to Amit
+    site.ts            roles and colours, outside links, the WhatsApp link to Buddy
     content.test.ts    copy rules, job routing, the Eigi ratio
   lib/
     analytics.ts       Google Analytics events
@@ -69,7 +72,7 @@ Google Analytics 4 is built in and **off by default**. To switch it on, set `VIT
 
 | Event | When |
 |---|---|
-| `talk_to_amit` | Any WhatsApp link to Amit is clicked; sends which section it came from. Mark it as a key event in GA. |
+| `talk_to_buddy` | Any WhatsApp link to Buddy is clicked; sends which section it came from. Mark it as a key event in GA. |
 | `hand_over_job`, `approve_draft` | The hero demo is used and finished |
 | `why_question`, `trap_slider`, `computer_app` | Which pains, growth levels and apps visitors explore |
 | `plate_cleared`, `gateway_opened`, `climb_summit` | A visitor completes a section |

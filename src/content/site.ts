@@ -1,5 +1,5 @@
 /*
- * Site-wide facts: the Eigi roles and their colours, outside links, and the WhatsApp link to Amit.
+ * Site-wide facts: the Eigi roles and their colours, outside links, and the WhatsApp link to Buddy.
  * All copy comes from Rashmin's Eigi landing (rashcasm/Eigi-landing). No em dashes, by house rule.
  */
 
@@ -20,7 +20,7 @@ export const LINKS = {
   email: 'mailto:buddy@eigi.ai',
 }
 
-const AMIT_NUMBER = '919225299611'
-/** A wa.me link that opens a chat with Amit, first message already typed. */
-export const amit = (text: string, ref = 'play') =>
-  `https://wa.me/${AMIT_NUMBER}?text=${encodeURIComponent(`Hi Amit, ${text}\n\nref: ${ref}`)}`
+const BUDDY_NUMBER = '919225299611'
+/** A wa.me link that opens a chat with Buddy, first message already typed. */
+export const buddy = (text: string, ref = 'play') =>
+  `https://wa.me/${BUDDY_NUMBER}?text=${encodeURIComponent(`Hi Buddy, ${text}\n\nref: ${ref}`)}`

@@ -1,0 +1,95 @@
+/*
+ * Success stories in the landing page's own language: paper and snow grounds, contour lines,
+ * window cards like the hero, job cards like "Your plate", and one colour per story,
+ * used only to say whose work it is. Real stories only.
+ */
+
+/* ---------- hero ---------- */
+/* one spacing rhythm: every block has the same space above and below */
+.hero { position: relative; overflow: hidden; padding-block: clamp(48px, 7vw, 96px); }
+.contours { position: absolute; inset: 0; width: 100%; height: 100%; stroke: var(--line-2); stroke-width: 1.2; opacity: 0.55; pointer-events: none; }
+.heroInner { position: relative; display: grid; gap: 22px; justify-items: start; }
+.heroInner h1 { font-size: clamp(40px, 5.2vw, 78px); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; }
+/* two lines: the statement, then the answer in serif italic */
+.heroInner h1 :global(.serif) { display: block; }
+/* ---------- real stories ---------- */
+.real { background: var(--paper); border-block: 1px solid var(--line); padding-block: clamp(48px, 7vw, 96px); }
+.rows { display: grid; gap: clamp(48px, 7vw, 96px); }
+.row {
+  --t: color-mix(in srgb, var(--c) 11%, var(--paper));
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(24px, 3vw, 40px); align-items: stretch;
+}
+.row[data-flip='true'] { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); }
+.row[data-flip='true'] .stage { order: 2; }
+@media (max-width: 900px) { .row, .row[data-flip='true'] { grid-template-columns: minmax(0, 1fr); } .row[data-flip='true'] .stage { order: 0; } }
+
+.stage { position: relative; }
+.row[data-peek='true'] .stage { padding-top: 64px; }
+.peek { position: absolute; top: 0; left: 46%; width: 84px; z-index: 3; }
+
+/* the window: same chrome as the hero's "Your Eigi's computer" */
+.window {
+  position: relative; z-index: 2; height: 100%;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card); overflow: hidden;
+}
+.chrome {
+  display: flex; align-items: center; gap: 12px; padding: 12px 18px;
+  border-bottom: 1px solid var(--line); background: var(--snow);
+  font: 500 12px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);
+}
+.lights { display: flex; gap: 6px; }
+.lights i { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+.lights i:nth-child(2) { background: var(--yellow); }
+.lights i:nth-child(3) { background: var(--green); }
+.status { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; text-transform: none; letter-spacing: 0; font: 600 13px var(--font-body); color: var(--green); white-space: nowrap; }
+.status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.3; } }
+
+.body { display: grid; gap: 22px; justify-items: start; padding: clamp(22px, 3vw, 34px); }
+.body h3 { font-size: clamp(26px, 2.8vw, 38px); line-height: 1.04; letter-spacing: -0.035em; }
+.story { margin: 0; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 640px) { .story { grid-template-columns: minmax(0, 1fr); } }
+.story div { display: grid; gap: 6px; align-content: start; padding-top: 14px; border-top: 1px solid var(--line); }
+.story dt { font: 500 11.5px var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.story dd { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-2); }
+.story div + div { border-top-color: var(--c); }
+.story div + div dt { color: var(--c); }
+.story div + div dd { color: var(--ink); }
+.small { font-size: 12.5px; color: var(--ink-3); }
+
+/* the work the Eigi took over, in the story's colour, dropping in like jobs on a plate */
+.work {
+  display: flex; flex-direction: column; justify-content: center; gap: 16px;
+  padding: clamp(22px, 3vw, 32px); border-radius: var(--radius-lg); background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 18%, transparent); align-self: center;
+}
+.row[data-peek='true'] .work { margin-top: 64px; }
+@media (max-width: 900px) { .row[data-peek='true'] .work { margin-top: 0; } .work { align-self: stretch; } }
+.who { display: flex; align-items: center; gap: 12px; font: 600 15px var(--font-display); letter-spacing: -0.01em; }
+.avatar { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--c); display: grid; place-items: center; }
+.avatar .icon { width: 20px; height: 20px; stroke: #fff; }
+.jobs { display: grid; gap: 8px; }
+.jobs li {
+  display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px;
+  background: var(--paper); border: 1px solid var(--line); font: 500 14.5px var(--font-body);
+  box-shadow: 0 10px 18px -16px rgba(23, 33, 31, 0.5);
+  opacity: 0; transform: translateY(14px) rotate(-1.5deg);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(.3,1.4,.5,1);
+  transition-delay: calc(var(--i) * 120ms + 150ms);
+}
+.jobs li:nth-child(even) { transform: translateY(14px) rotate(1.5deg); }
+.jobs li span { color: var(--c); font-weight: 700; }
+.row[data-arrived='true'] .jobs li { opacity: 1; transform: none; }
+.jobs li:hover { transform: translateX(4px); }
+
+.icon { display: block; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- your story ---------- */
+.next { background: var(--paper); padding-block: clamp(48px, 7vw, 96px); }
+.nextInner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.nextLine { font: 600 clamp(30px, 3.6vw, 52px)/1 var(--font-display); letter-spacing: -0.04em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .jobs li { opacity: 1; transform: none; }
+}

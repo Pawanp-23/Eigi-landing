@@ -1,4 +1,4 @@
-/** The Eigi computer: one punchline, and a desktop the Eigi drives by itself. Illustrative. */
+/** The Eigi computer: one punchline, and a desktop the Eigi drives by itself. */
 export type AppKind = 'browser' | 'sheet' | 'mail' | 'slack' | 'whatsapp' | 'voice' | 'board' | 'files'
 export const COMPUTER = {
   eyebrow: 'The Eigi computer',

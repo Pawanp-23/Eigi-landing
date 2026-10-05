@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { track } from '../lib/analytics.ts'
-import { amit } from '../content/site.ts'
+import { buddy } from '../content/site.ts'
 import { WHY } from '../content/why.ts'
 import styles from './Why.module.css'
 
@@ -43,7 +43,7 @@ export function Why() {
         </ol>
         <div className={styles.tallyRow}>
           <p className={styles.tally} aria-live="polite" data-all={mine.size === total}>{tally}</p>
-          {mine.size > 0 && <a className="btn ink" href={amit(`Here’s what’s slowing my business down: ${slowing}.`, 'why')} target="_blank" rel="noopener noreferrer">Tell Amit what’s slowing you down ↗</a>}
+          {mine.size > 0 && <a className="btn ink" href={buddy(`Here’s what’s slowing my business down: ${slowing}.`, 'why')} target="_blank" rel="noopener noreferrer">Tell Buddy what’s slowing you down ↗</a>}
         </div>
       </div>
     </section>
