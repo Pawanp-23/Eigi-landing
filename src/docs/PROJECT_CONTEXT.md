@@ -26,7 +26,7 @@ A new marketing site for **eigi.ai**.
 | Checks | `npm run check` (lint, tests, build); GitHub Actions runs the same on every push and PR |
 | Docker | Matches Agent360: `node:20-alpine` on `linux/amd64`, `npm install`, then `nginx` serving `dist/` on port 82. Standalone: `docker build --platform linux/amd64 -t eigi-landing .`; `docker run --rm -p 3000:82 eigi-landing`. Analytics is read from the build-time `.env` file. See README. |
 | Compose / integration | `docker-compose-lp.yml` and `docker-compose-lp-qa.yml` match Agent360's root files: context `./frontend/landing_page`, `vaani-lp` service/container, `3000:82`, `cliniq360/vaani-lp:${IMAGE_TAG}` or `cliniq360/vaani-lp-qa:${IMAGE_TAG}`, existing environment variables/volume and `on-failure` restart. Move the frontend into Agent360's `frontend/landing_page/` and keep Compose files at the Agent360 root. |
-| Layout | Follows Agent360's `frontend/landing_page`: `App.tsx`, `main.tsx` and `index.css` at the `src/` root; `pages/LandingPage/` owns `Header/`, `Footer/`, `sections/*Section/` and `content/`; shared code lives in `components/common/`, `hooks/`, `utils/`, `assets/Images/` and `theme/`. Component folders use `index.tsx` with CSS Modules beside them. See README for the full tree. |
+| Layout | Follows Agent360's `frontend/landing_page`: `App.tsx`, `main.tsx`, `stories.tsx` and `index.css` at the `src/` root; `pages/LandingPage/` owns `Header/`, `Footer/`, `sections/*Section/` and `content/`; `pages/StoriesPage/` owns its page, section and story copy, and reuses the landing header and footer. Shared code lives in `components/common/`, `hooks/`, `utils/`, `assets/Images/` and `theme/`. Component folders use `index.tsx` with CSS Modules beside them. See README for the full tree. |
 
 ## 3. The design: Eigi Play (final, approved 5 Oct 2026)
 
@@ -41,15 +41,16 @@ A new marketing site for **eigi.ai**.
 | 5 | Your plate, "Before you hire for it, hand it to an Eigi." | Drags 12 first jobs to the right Eigi |
 | 6 | Gateway, "Your gateway to singularity." | Switches on You, Sherpas, Eigis to open the portal |
 | 7 | Sherpas, "Meet your AI sherpas." | Drags Sherpie up through Camp I to IV |
-| 8 | Field notes | Two real stories: a financial learning founder, and Amit in Gondia |
-| 9 | Founders | Aman Khandelwal and Mrunmay Chichkhede |
+| 8 | Founders | Aman Khandelwal and Mrunmay Chichkhede |
+
+**Success stories page (`/stories/`)**: real stories only (a financial learning founder; Buddy in Gondia), in the landing page's design: each story in a window card beside a panel of the work the Eigi took over. Add a story only once the client has cleared it.
 
 - **Look and feel**: soft paper ground, ink text, Bricolage Grotesque headlines with one Instrument Serif italic phrase, Geist body, Geist Mono labels. Each section is about one screen tall on desktop; the hero fills the first screen and is centred.
 - **Colour means role**: green Operations, blue Support, red Sales, yellow Finance & admin.
 - **Sherpie** peeks over the hero card and the footer; its eyes follow the pointer; poke it for a line.
 - **Honesty**: every demo is labelled illustrative; nothing pretends to be a live agent. No "100x" claim until we can back one.
 - **House rules**: no em dashes (a test enforces it); respect reduced motion; no horizontal scrolling.
-- **Analytics**: Google Analytics 4, off until `VITE_GA_ID` is set. Events: `talk_to_amit` (key event, tagged with the section), `hand_over_job`, `approve_draft`, `why_question`, `trap_slider`, `computer_app`, `plate_cleared`, `gateway_opened`, `climb_summit`. Nothing a visitor types is sent.
+- **Analytics**: Google Analytics 4, off until `VITE_GA_ID` is set. Events: `talk_to_buddy` (key event, tagged with the section), `hand_over_job`, `approve_draft`, `why_question`, `trap_slider`, `computer_app`, `plate_cleared`, `gateway_opened`, `climb_summit`. Nothing a visitor types is sent.
 
 ## 4. Repository history
 
@@ -65,7 +66,7 @@ A new marketing site for **eigi.ai**.
 | Documentation | https://docs.eigi.ai/ |
 | Studio | https://studio.eigi.ai/ (**confirm**) |
 | Contact | buddy@eigi.ai |
-| Amit (AI onboarding agent on WhatsApp) | +91 92252 99611 |
+| Buddy (AI onboarding agent on WhatsApp) | +91 92252 99611 |
 | Content source | https://eigi-landing.vercel.app |
 
 ## 6. Open items before launch
@@ -76,6 +77,6 @@ A new marketing site for **eigi.ai**.
 - [ ] A proper social sharing image (1200×630) instead of the favicon.
 - [ ] Real customer stories beyond the two field notes; the Slack and job examples are illustrative.
 - [ ] Exact report URLs for the Census and MIT statistics.
-- [ ] Confirm the Studio URL; test every Amit WhatsApp link from a real phone.
+- [ ] Confirm the Studio URL; test every Buddy WhatsApp link from a real phone.
 - [ ] Privacy, Terms and Data deletion pages (footer links point to the top for now).
 - [ ] An accessibility pass and a Lighthouse check.

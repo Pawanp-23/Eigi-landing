@@ -50,6 +50,8 @@ agent-360/
       package.json
       package-lock.json
       index.html
+      stories/
+        index.html
       src/
       public/
       ...
@@ -80,21 +82,26 @@ For this frontend, analytics is the only current environment setting. To enable 
 | 5 | Your plate | `sections/PlateSection/index.tsx` | Drags 12 first jobs to the right Eigi (or taps a job, then an Eigi) |
 | 6 | Gateway | `sections/GatewaySection/index.tsx` | Switches on You, Sherpas, Eigis to open the portal |
 | 7 | Sherpas | `sections/ClimbSection/index.tsx` | Drags Sherpie up the four camps |
-| 8 | Field notes | `sections/NotesSection/index.tsx` | Reads two real stories; plays how a chat with Amit starts |
-| 9 | Founders | `sections/FoundersSection/index.tsx` | Meets Aman and Mrunmay |
-| | Header, footer | `Header/index.tsx`, `Footer/index.tsx` | Talks to Amit |
+| 8 | Founders | `sections/FoundersSection/index.tsx` | Meets Aman and Mrunmay |
+| | Header, footer | `Header/index.tsx`, `Footer/index.tsx` | Talks to Buddy |
 
 Files in this table are relative to `src/pages/LandingPage/`.
 
+### Success stories page (`/stories/`)
+
+`stories/index.html` → `src/stories.tsx` → `src/pages/StoriesPage/index.tsx`. Real client and community stories only, in the landing page's design: each story in a window card beside a panel of the work the Eigi took over. The page shares the landing header and footer; its section and copy live under `src/pages/StoriesPage/`. Add a story only once the client has cleared it for publishing.
+
 ## Project structure
 
-The layout follows Agent360's `frontend/landing_page` conventions: app entry files at the source root, page-owned header, footer and sections under `pages/LandingPage`, and shared components with an `index.tsx` entry. Each section keeps its CSS Module beside its component.
+The layout follows Agent360's `frontend/landing_page` conventions: app entry files at the source root, pages under `pages/LandingPage` and `pages/StoriesPage`, with the landing header and footer shared between them, and shared components with an `index.tsx` entry. Each section keeps its CSS Module beside its component.
 
 ```text
 src/
   App.tsx                            renders LandingPage
   App.test.tsx                       page order, anchors and links
-  main.tsx                           React entry and analytics setup
+  main.tsx                           landing entry and analytics setup
+  stories.tsx                        Success stories entry and analytics setup
+  StoriesPage.test.tsx                story content and cross-page navigation
   index.css                          base styles, buttons, shared classes
   pages/
     LandingPage/
@@ -113,10 +120,15 @@ src/
         PlateSection/                index.tsx + Plate.module.css
         GatewaySection/              index.tsx + Gateway.module.css
         ClimbSection/                index.tsx + Climb.module.css
-        NotesSection/                index.tsx + Notes.module.css
         FoundersSection/             index.tsx + Founders.module.css
       content/                       page copy, examples and copy tests
-        site.ts                      roles, colours, links and Amit's WhatsApp URL
+        site.ts                      roles, colours, links and Buddy's WhatsApp URL
+    StoriesPage/
+      index.tsx                      shared header, stories and footer
+      sections/
+        StoriesSection/              index.tsx + Stories.module.css
+      content/
+        stories.ts                   approved client and community stories
   components/
     common/
       Sherpie/                       index.tsx + Sherpie.module.css
@@ -133,7 +145,7 @@ src/
     tokens.css                       colours, type and spacing
 ```
 
-To change wording, edit the matching file in `src/pages/LandingPage/content/`; no component needs to change.
+To change wording, edit the matching file in `src/pages/LandingPage/content/` or `src/pages/StoriesPage/content/`; no component needs to change.
 
 ## Analytics
 
@@ -141,7 +153,7 @@ Google Analytics 4 is built in and **off by default**. To switch it on, set `VIT
 
 | Event | When |
 |---|---|
-| `talk_to_amit` | Any WhatsApp link to Amit is clicked; sends which section it came from. Mark it as a key event in GA. |
+| `talk_to_buddy` | Any WhatsApp link to Buddy is clicked; sends which section it came from. Mark it as a key event in GA. |
 | `hand_over_job`, `approve_draft` | The hero demo is used and finished |
 | `why_question`, `trap_slider`, `computer_app` | Which pains, growth levels and apps visitors explore |
 | `plate_cleared`, `gateway_opened`, `climb_summit` | A visitor completes a section |

@@ -6,10 +6,11 @@ import * as hero from './hero.ts'
 import * as people from './people.ts'
 import * as plate from './plate.ts'
 import * as site from './site.ts'
+import * as stories from '../../StoriesPage/content/stories.ts'
 import * as why from './why.ts'
 import { roleFor, SCRIPTS, scriptFor } from './hero.ts'
 import { JOBS } from './plate.ts'
-import { amit } from './site.ts'
+import { buddy } from './site.ts'
 import { CUSTOMER_STOPS, eigisFor, hiresFor } from './why.ts'
 
 /** Every string in the page copy, wherever it's nested. */
@@ -20,7 +21,7 @@ function strings(value: unknown): string[] {
   return []
 }
 
-const copy = [climb, computer, gateway, hero, people, plate, site, why].flatMap(m => strings(Object.values(m)))
+const copy = [climb, computer, gateway, hero, people, plate, site, stories, why].flatMap(m => strings(Object.values(m)))
 
 describe('page copy', () => {
   it('has copy to check', () => expect(copy.length).toBeGreaterThan(150))
@@ -71,10 +72,10 @@ describe('handing a job to an Eigi', () => {
   })
 })
 
-describe('Amit links', () => {
+describe('Buddy links', () => {
   it('open WhatsApp with the message and a section tag already written', () => {
-    const url = new URL(amit('I want to start.', 'hero'))
+    const url = new URL(buddy('I want to start.', 'hero'))
     expect(url.origin).toBe('https://wa.me')
-    expect(url.searchParams.get('text')).toBe('Hi Amit, I want to start.\n\nref: hero')
+    expect(url.searchParams.get('text')).toBe('Hi Buddy, I want to start.\n\nref: hero')
   })
 })

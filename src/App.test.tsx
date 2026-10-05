@@ -7,7 +7,7 @@ const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1])
 
 it('renders every section in story order', () => {
   const sections = [...html.matchAll(/<section id="([^"]+)"/g)].map(m => m[1])
-  expect(sections).toEqual(['try', 'why', 'trap', 'computer', 'plate', 'gateway', 'climb', 'notes', 'people'])
+  expect(sections).toEqual(['try', 'why', 'trap', 'computer', 'plate', 'gateway', 'climb', 'people'])
   expect(html).toContain('<footer')
 })
 
@@ -21,8 +21,9 @@ it('opens every outside link safely in a new tab', () => {
   for (const [tag] of html.matchAll(/<a [^>]*target="_blank"[^>]*>/g)) expect(tag).toContain('noopener')
 })
 
-it('shows the founders and the Gondia story', () => {
+it('shows the founders, and links to success stories instead of carrying them', () => {
   expect(html).toContain('Aman Khandelwal')
   expect(html).toContain('Mrunmay Chichkhede')
-  expect(html).toContain('Gondia')
+  expect(html).toContain('href="/stories/"')
+  expect(html).not.toContain('Gondia')
 })

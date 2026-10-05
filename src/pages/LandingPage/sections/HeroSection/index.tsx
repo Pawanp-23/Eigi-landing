@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type CSSProperties, type FormEvent } from
 import mark from '../../../../assets/Images/eigi-mark.jpg'
 import Sherpie from '../../../../components/common/Sherpie/index.tsx'
 import { BEATS, HERO, MEMORIES, roleFor, SCRIPTS, scriptFor, type Script } from '../../content/hero.ts'
-import { amit, ROLES } from '../../content/site.ts'
+import { buddy, ROLES } from '../../content/site.ts'
 import styles from './Hero.module.css'
 import { track } from '../../../../utils/analytics.ts'
 
@@ -58,7 +58,7 @@ export default function HeroSection() {
           <p className="lede">{HERO.sub}</p>
           <div className={styles.proof}>
             <p><img src={mark} alt="" width="28" height="28" />{HERO.proof}</p>
-            <a className="btn ink" href={amit('I would like to meet my Eigi and hand over a first job.', 'hero')} target="_blank" rel="noopener noreferrer">Talk to Eigi ↗</a>
+            <a className="btn ink" href={buddy('I would like to meet my Eigi and hand over a first job.', 'hero')} target="_blank" rel="noopener noreferrer">Talk to Buddy ↗</a>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export default function HeroSection() {
                         <button type="button" onClick={reset}>Not now</button>
                       </div> : <div className={styles.buttons}>
                         <button type="button" onClick={reset}>Hand over another</button>
-                        <a href={amit(`I would like an Eigi to do this for real: ${script.ask}`, 'hero-try')} target="_blank" rel="noopener noreferrer">Do this for real with Amit ↗</a>
+                        <a href={buddy(`I would like an Eigi to do this for real: ${script.ask}`, 'hero-try')} target="_blank" rel="noopener noreferrer">Do this for real with Buddy ↗</a>
                       </div>}
                     </div>
                   ))}
@@ -125,7 +125,7 @@ export default function HeroSection() {
                 </div>}
               </div>
             )}
-            <p className={styles.note}>Illustrative preview, not a live agent. Your real Eigi checks with you before anything goes out in your name.</p>
+            <p className={styles.note}>{HERO.note}</p>
           </div>
         </div>
       </div>
