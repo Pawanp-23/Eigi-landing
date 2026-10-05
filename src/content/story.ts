@@ -1,4 +1,5 @@
 /** The empathy half of the page: sound familiar, the problem, and what Eigi is. */
+import type { CrewId } from '../lib/crew.ts'
 
 export const FAMILIAR = {
   eyebrow: 'Sound familiar?',
@@ -8,19 +9,29 @@ export const FAMILIAR = {
   closing: 'None of this means you need more people yet. It means the work needs a system that doesn’t run through',
   closingSerif: 'you.',
   prompt: 'Tap the ones that are true for you',
-  loadEmpty: 'Your load today',
-  loadEmptyNote: 'Tap “That’s us” and watch what you’re carrying.',
-  loadSome: 'An Eigi can take this off your back.',
-  loadHeavy: 'That’s a lot for one person. An Eigi can take these off your back.',
+} as const
+
+/** The week card beside the pains: what each one costs you, and who takes it off your plate. */
+export const WEEK = {
+  eyebrow: 'Your week',
+  days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  hoursPerDay: 8,
+  left: 'left to build your product',
+  back: 'back to build your product',
+  empty: 'Tap “That’s us” and watch where your week goes.',
+  hand: 'Hand it to your Eigis',
+  handed: 'Handed off. Your Eigis do it, you check in.',
+  takeBack: 'Take it back',
+  fine: 'Illustrative hours for a founder of a small team.',
 } as const
 
 export const PAINS = [
-  { area: 'Hiring', text: 'Hiring for growth, or for broken systems?' },
-  { area: 'Follow-ups', text: 'Nothing moves until you chase it.' },
-  { area: 'Your week', text: 'You ran the company this week. You didn’t build it.' },
-  { area: 'Tools', text: 'Five tools to avoid one hire. Now you manage five tools.' },
-  { area: 'Growth', text: 'Customers double. Team doesn’t. What breaks?' },
-] as const
+  { area: 'Hiring', text: 'Hiring for growth, or for broken systems?', hours: 6, crew: 'cos' },
+  { area: 'Follow-ups', text: 'Nothing moves until you chase it.', hours: 8, crew: 'sales' },
+  { area: 'Your week', text: 'You ran the company this week. You didn’t build it.', hours: 9, crew: 'ops' },
+  { area: 'Tools', text: 'Five tools to avoid one hire. Now you manage five tools.', hours: 5, crew: 'ops' },
+  { area: 'Growth', text: 'Customers double. Team doesn’t. What breaks?', hours: 7, crew: 'mkt' },
+] as const satisfies readonly { area: string; text: string; hours: number; crew: CrewId }[]
 
 export const PROBLEM = {
   eyebrow: 'The missing piece is adoption.',
