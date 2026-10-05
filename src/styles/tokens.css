@@ -1,0 +1,36 @@
+/*
+ * Summit tokens (our design) carrying Rashmin's story. Soft paper ground, ink text,
+ * and one colour per Eigi role, used only to say who is doing the work.
+ */
+:root {
+  color-scheme: light;
+
+  --snow: #f7f6f2;
+  --paper: #ffffff;
+  --ink: #17211f;
+  --ink-2: #4e5956;
+  --ink-3: #848c89;
+  --line: #e3e2dc;
+  --line-2: #cbcbc3;
+
+  --blue: #3a62c2;
+  --blue-t: #e8edf9;
+  --red: #d45b42;
+  --red-t: #fae8e2;
+  --green: #2e855c;
+  --green-t: #e3f1e8;
+  --yellow: #e2a630;
+  --yellow-t: #fbf0d6;
+
+  --font-display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Geist', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --radius: 18px;
+  --radius-lg: 28px;
+  --shadow-card: 0 30px 60px -44px rgba(23, 33, 31, 0.5);
+  --nav-h: 66px;
+}

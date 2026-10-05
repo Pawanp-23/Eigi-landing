@@ -1,0 +1,41 @@
+.notes { background: var(--paper); border-top: 1px solid var(--line); }
+.head { display: grid; gap: 18px; margin-bottom: 36px; }
+
+.logs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 720px) { .logs { grid-template-columns: minmax(0, 1fr); } }
+.log {
+  display: grid; gap: 14px; align-content: start; padding: 26px;
+  border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--snow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease; will-change: transform;
+}
+.log:hover { box-shadow: var(--shadow-card); }
+.log > p { color: var(--ink-2); font-size: 15px; }
+.log small { color: var(--ink-3); font-size: 12px; }
+.meta { display: flex; justify-content: space-between; font: 500 12px var(--font-mono) !important; letter-spacing: 0.08em; text-transform: uppercase; }
+.live { color: var(--green); }
+.live::before { content: '● '; animation: pulse 1.6s ease-in-out infinite; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font-size: 12.5px; padding: 4px 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
+
+.chat { display: grid; gap: 10px; justify-items: start; }
+.chat button, .chat a {
+  border: 1.5px solid var(--ink); background: none; border-radius: 999px; padding: 8px 14px;
+  font: 500 14px var(--font-body); cursor: pointer; text-decoration: none;
+}
+.chat a { background: var(--green); border-color: var(--green); color: #fff; }
+.bubble {
+  background: #dcf5d0; border-radius: 14px 14px 4px 14px; padding: 10px 14px; font-size: 14.5px;
+  justify-self: end; max-width: 85%; animation: rise 0.35s ease;
+}
+
+@keyframes pulse { 50% { opacity: 0.3; } }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+
+@media (max-width: 720px) {
+  .logs {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+    margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter) 12px; scrollbar-width: none;
+  }
+  .logs::-webkit-scrollbar { display: none; }
+  .log { flex: 0 0 86%; scroll-snap-align: start; padding: 20px; }
+}

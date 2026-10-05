@@ -1,73 +1,87 @@
 # Eigi landing
 
-Marketing site for [eigi.ai](https://eigi.ai), built with React 19, Vite 8 and TypeScript.
+The marketing site for [eigi.ai](https://eigi.ai): Rashmin's story in our Summit design, where every section is something a founder can play with.
 
-The page is **The Ascent**: one scroll from base camp (0 m) to the summit (8,848 m). Along the way it shows why AI adoption stalls, where Eigi stands against the alternatives, field notes from teams Eigi has roped in (Eigi stories), the gateway to singularity (humans + forward-deployed engineers + Eigi computer), the four camps of an Eigi engagement, the creative eigi_ai minds behind the work, and finally contact.
+Built with React 19, Vite 8, TypeScript and CSS Modules. No animation library; motion is plain CSS.
 
-## Run it locally
+## Run it
 
-You need **Node.js 20.19+ or 22.12+** (Vite 8's minimum).
+Use Node.js 20.19+ or 22.12+.
 
 ```sh
 npm install
-npm run dev
+npm run dev        # http://localhost:5173
 ```
 
-Then open <http://localhost:5173/>. Edits hot-reload.
+Before you push, run every check (GitHub runs the same ones on each push and pull request):
 
-## Scripts
+```sh
+npm run check      # lint, tests, production build
+```
 
-| Command           | What it does                                                         |
-| ----------------- | -------------------------------------------------------------------- |
-| `npm run dev`     | Start the dev server with hot reload                                 |
-| `npm run build`   | Type-check, then build the site into `dist/`                         |
-| `npm run preview` | Serve the built `dist/` locally to check the production build        |
-| `npm test`        | Run the unit tests (Vitest)                                          |
-| `npm run lint`    | Lint with oxlint                                                     |
+`npm run build` writes a static site to `dist/`.
 
-Run `npm run lint && npm test && npm run build` before opening a PR.
+## The page
 
-## Deploy
+| # | Section | File | What the visitor does |
+|---|---|---|---|
+| 1 | Hero | `sections/Hero.tsx` | Types or picks a job, watches the Eigi work through Ask, Computer, Memory, Approval, then approves or edits it |
+| 2 | Why Eigi | `sections/Why.tsx` | Taps the founder's five questions; each flips to how Eigi takes it |
+| 3 | The trap | `sections/Trap.tsx` | Slides customers 10 to 40 and compares hiring with Eigis (1 Eigi per 10 customers) |
+| 4 | Eigi computer | `sections/Computer.tsx` | Watches an Eigi drive 8 apps; taps one to take over |
+| 5 | Your plate | `sections/Plate.tsx` | Drags 12 first jobs to the right Eigi (or taps a job, then an Eigi) |
+| 6 | Gateway | `sections/Gateway.tsx` | Switches on You, Sherpas, Eigis to open the portal |
+| 7 | Sherpas | `sections/Climb.tsx` | Drags Sherpie up the four camps |
+| 8 | Field notes | `sections/Notes.tsx` | Reads two real stories; plays how a chat with Amit starts |
+| 9 | Founders | `sections/Founders.tsx` | Meets Aman and Mrunmay |
+| | Nav, footer | `components/layout/` | Talks to Amit |
 
-`npm run build` writes a fully static site to `dist/`. Any static host works (Vercel, Netlify, S3 + CloudFront, GitHub Pages) and needs no server or rewrites.
+## Project structure
 
-## Project layout
-
-The code follows the Eigi frontend standards: a thin page composes feature components, and shared pieces live outside the feature.
-
-```text
-index.html                   entry HTML → src/main.tsx
-public/favicon.jpg           favicon, served as-is
+```
 src/
-  main.tsx                   mounts the app; app-wide providers (MotionConfig: respect reduced motion)
-  pages/HomePage.tsx         "/": lays out the sections, no logic of its own
-  features/landing/          everything specific to The Ascent
-    index.ts                 the feature's public surface (what pages may import)
-    components/              one component per section, each with a scoped *.module.css
-    hooks/                   browser work: crowd canvas, singularity canvas, the sherpa that joins your cursor in the sherpas section
-    utils/                   pure logic: crowd and singularity simulations (unit-tested), sprite-sheet helpers, altitude formatting
-  components/layout/Nav.tsx  shared nav: logo, Go to Studio and the full-screen section menu (sections, Documentation, Studio, email)
-  components/layout/Footer.tsx  contact section + site footer
-  hooks/                     shared browser behaviour: page lock while the menu is open
-  styles/global.css          design tokens, reset, type scale, shared classes (.eyebrow, .lead, .btn, .mono)
-  styles/motion.ts           motion presets (the scroll-reveal fade-up)
-  utils/                     framework-free helpers (clamp/lerp/colour mix, contour paths, cx)
-  assets/                    logo and the Open Peeps sprite, bundled by Vite
+  app/                 App.tsx (section order), main.tsx (entry), App.test.tsx
+  sections/            one file per section, each with its own CSS Module
+  components/
+    brand/             Sherpie, the mascot
+    layout/            Nav and Footer
+  content/             every word on the page, one file per section
+    site.ts            roles and colours, outside links, the WhatsApp link to Amit
+    content.test.ts    copy rules, job routing, the Eigi ratio
+  lib/
+    analytics.ts       Google Analytics events
+    route.ts           the rope up the mountain (tested in route.test.ts)
+    motion.ts          the reduced-motion check
+    useLookAt.ts       Sherpie's eyes follow the pointer
+  assets/
+    brand/             logo and Eigi mark
+    founders/          founder portraits
+  styles/
+    tokens.css         colours, type, spacing
+    global.css         base styles, buttons, shared classes
 ```
 
-Page colours are CSS variables (`--bg`, `--fg`, `--muted`, `--line`, `--accent`) defined in `src/styles/global.css`. As you scroll, `Atmosphere.tsx` changes them, flipping the page from white to black as you reach the sherpas. Anything coloured with them, including the nav, follows along. Two exceptions: the gateway section repaints the tokens locally (a black portal in the white page), and while the menu is open the nav bar is white and difference-blended so it always inverts whatever is behind it.
+To change wording, edit the matching file in `src/content/`; no component needs to change.
 
-The altimeter's stage label comes from each section's `data-stage` attribute, and the sky flip is tied to the sherpas section itself, so adding or resizing sections needs no retuning.
+## Analytics
 
-Scroll-driven effects use [`motion`](https://motion.dev) (`useScroll`, `useTransform`, `whileInView`).
+Google Analytics 4 is built in and **off by default**. To switch it on, set `VITE_GA_ID` (see `.env.example`) locally or in the host's environment settings, then rebuild.
 
-### Where new code goes
+| Event | When |
+|---|---|
+| `talk_to_amit` | Any WhatsApp link to Amit is clicked; sends which section it came from. Mark it as a key event in GA. |
+| `hand_over_job`, `approve_draft` | The hero demo is used and finished |
+| `why_question`, `trap_slider`, `computer_app` | Which pains, growth levels and apps visitors explore |
+| `plate_cleared`, `gateway_opened`, `climb_summit` | A visitor completes a section |
 
-- **A new section** goes in `features/landing/components/`. Export it from `features/landing/index.ts` and place it in `pages/HomePage.tsx`.
-- **Listeners, timers, canvas or `requestAnimationFrame`** go in a hook under `features/landing/hooks/`, with cleanup, never inline in a component.
-- **Pure logic** goes in `utils/`, with a colocated `*.test.ts`.
-- **Something a second feature needs** moves up to `src/components/` (UI) or `src/utils/` (logic).
+Nothing a visitor types is sent.
 
-## Credits
+## House rules
 
-The base-camp crowd is adapted from Skiper UI "Skiper 39", which requires attribution on the free tier. That was itself inspired by [codepen.io/zadvorsky/pen/xxwbBQV](https://codepen.io/zadvorsky/pen/xxwbBQV). Illustrations are from [Open Peeps](https://openpeeps.com) (CC0).
+- No em dashes in copy; a test enforces it.
+- Every demo is labelled illustrative. Nothing pretends to be a live agent.
+- Respect reduced motion; nothing scrolls sideways.
+
+## History
+
+Earlier designs are kept as tags: `archive/ascent`, `archive/eigi-computer`, `archive/sherpie`, `archive/summit`.

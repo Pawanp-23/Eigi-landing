@@ -1,68 +1,28 @@
-import { motion } from 'motion/react'
-import type { FormEvent } from 'react'
-import { reveal } from '../../styles/motion.ts'
-import { cx } from '../../utils/cx.ts'
-import { DOCS_URL } from './Nav.tsx'
+import { amit, LINKS } from '../../content/site.ts'
+import { Sherpie } from '../brand/Sherpie.tsx'
 import styles from './Footer.module.css'
 
-const EMAIL = 'buddy@eigi.ai'
-const PHONE = '+91 98231 72692'
 const YEAR = new Date().getFullYear()
 
-const LINKS: [label: string, href: string][] = [
-  ['Documentation', DOCS_URL],
-  ['Privacy Policy', 'https://eigi.ai/privacy-policy'],
-  ['Terms of Service', 'https://eigi.ai/terms-of-service'],
-  ['Data Deletion', 'https://eigi.ai/data-deletion'],
-]
-
-/** No backend: the form hands the message to the visitor's own mail app, addressed to Eigi. */
-function sendViaMail(e: FormEvent<HTMLFormElement>) {
-  e.preventDefault()
-  const f = new FormData(e.currentTarget)
-  const get = (k: string) => String(f.get(k) ?? '').trim()
-  const company = get('company')
-  const subject = `Hello from ${get('name')}${company ? ` (${company})` : ''}`
-  const body = `${get('message')}\n\n${get('name')}\n${get('email')}${company ? `\n${company}` : ''}`
-  window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-}
-
-/** Contact (base of the summit) plus the site footer. Sits after the climb, so it stays on the black sky. */
+/** One last ask. */
 export function Footer() {
   return (
-    <footer id="contact" className={styles.footer}>
-      <div className={styles.contact}>
-        <div>
-          <motion.p className="eyebrow mono" {...reveal}>Contact</motion.p>
-          <motion.h2 {...reveal}>Let’s build something together.</motion.h2>
-          <motion.p className="lead" {...reveal}>
-            Have a question, want a demo, or ready to get started? We’d love to hear from you.
-          </motion.p>
-          <motion.dl className={styles.details} {...reveal}>
-            <div><dt className="mono">Email us</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>
-            <div><dt className="mono">Call us</dt><dd><a href={`tel:${PHONE.replace(/\s/g, '')}`}>{PHONE}</a></dd></div>
-            <div><dt className="mono">Location</dt><dd>India</dd></div>
-          </motion.dl>
+    <footer className={styles.end}>
+      <Sherpie hands className={styles.peek} lines={['Ready when you are.', 'One workflow is a good place to begin.', 'Amit’s really nice. I promise.']} />
+      <div className={`wrap ${styles.endInner}`}>
+        <p className="eyebrow">Your next chapter</p>
+        <h2>Keep the ambition. <span className="serif">Lose the busywork.</span></h2>
+        <p className={styles.endLede}>You don’t need an AI roadmap to start. Tell Amit the job you’d hand over first.</p>
+        <div className={styles.ctas}>
+          <a className="btn" href={amit('I want to start using AI in my business.', 'footer')} target="_blank" rel="noopener noreferrer">Talk to Amit on WhatsApp ↗</a>
+          <a className={styles.alt} href={LINKS.email}>buddy@eigi.ai</a>
         </div>
-
-        <motion.form className={styles.form} onSubmit={sendViaMail} {...reveal}>
-          <label><span className="mono">Your name *</span><input name="name" required autoComplete="name" /></label>
-          <label><span className="mono">Email address *</span><input name="email" type="email" required autoComplete="email" /></label>
-          <label className={styles.full}><span className="mono">Company (optional)</span><input name="company" autoComplete="organization" /></label>
-          <label className={styles.full}><span className="mono">Your message *</span><textarea name="message" rows={4} required /></label>
-          <button type="submit" className={cx('btn', styles.send)}>Send message <span aria-hidden="true">→</span></button>
-        </motion.form>
-      </div>
-
-      <div className={styles.bottom}>
-        <nav aria-label="Footer" className={styles.links}>
-          {LINKS.map(([label, href]) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer">{label}</a>
-          ))}
+        <nav className={styles.links} aria-label="More">
+          <a href={LINKS.studio}>Go to Studio</a>
+          <a href={LINKS.docs} target="_blank" rel="noopener noreferrer">Documentation ↗</a>
+          <a href="#top">Back to the top ↑</a>
+          <span>© {YEAR} Eigi</span>
         </nav>
-        <p className={cx(styles.legal, 'mono')}>
-          © {YEAR} Eigi AI · All rights reserved, India
-        </p>
       </div>
     </footer>
   )
