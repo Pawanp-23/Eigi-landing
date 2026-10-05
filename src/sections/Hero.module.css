@@ -19,8 +19,20 @@
 .title :global(.serif) { font-size: 1.04em; }
 .inner :global(.lede) { margin: 28px auto 0; }
 
-.ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 34px; }
-.amit { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px 6px 8px; }
+.ask {
+  margin-top: 34px; width: min(620px, 100%);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--paper); border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 6px 6px 22px;
+  box-shadow: 0 16px 40px -24px rgba(23, 33, 31, 0.45);
+  transition: box-shadow 0.25s ease;
+}
+.ask:focus-within { box-shadow: 0 0 0 4px var(--yellow-t), 0 16px 40px -24px rgba(23, 33, 31, 0.45); }
+.ask label { font: 500 11px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+.ask input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 16px; padding: 10px 4px; }
+.ask input::placeholder { color: var(--ink-3); }
+.ask :global(.btn) { padding: 11px 20px; white-space: nowrap; }
+.subline { display: flex; align-items: center; justify-content: center; gap: 10px 20px; flex-wrap: wrap; margin-top: 18px; font-size: 14px; }
+.amit { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px 6px 8px; }
 .amit i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px var(--green-t); }
 
 .where { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 18px; margin-top: 38px; font-size: 13.5px; }
@@ -47,4 +59,10 @@
 
 @media (max-width: 1180px) { .card { width: 180px; } .card:nth-child(n + 5) { display: none; } }
 @media (max-width: 960px) { .floats { display: none; } }
-@media (max-width: 640px) { .line { display: inline; } }
+@media (max-width: 640px) {
+  .line { display: inline; }
+  .ask { flex-wrap: wrap; border-radius: 22px; padding: 12px; }
+  .ask label { width: 100%; padding-left: 6px; }
+  .ask input { padding-inline: 6px; }
+  .ask :global(.btn) { width: 100%; justify-content: center; }
+}

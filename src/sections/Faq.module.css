@@ -8,4 +8,4 @@
 .item[open] summary::after { transform: rotate(45deg); }
 .item p { margin-top: 12px; color: var(--ink-2); max-width: 62ch; }
 
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }

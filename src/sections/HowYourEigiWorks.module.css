@@ -5,7 +5,7 @@
 .copy h2 { font-size: clamp(36px, 4.6vw, 62px); }
 .copy :global(.lede) { margin-top: 20px; }
 .cap { margin-top: 24px; font: 500 12px var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
-.demo { border-radius: var(--radius-lg); background: var(--ct); padding: clamp(18px, 3.5vw, 44px); min-height: 400px; display: grid; place-items: center; }
+.demo { border-radius: var(--radius-lg); background: var(--ct); padding: clamp(18px, 3.5vw, 44px); min-height: 400px; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; }
 .demo > * { width: 100%; }
 
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; }
@@ -46,7 +46,7 @@
 .trail i { width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
 
 @media (max-width: 900px) {
-  .chap { grid-template-columns: 1fr; }
+  .chap { grid-template-columns: minmax(0, 1fr); }
   .flip .copy { order: 0; }
   .demo { min-height: 0; }
 }

@@ -13,30 +13,33 @@ import { Problem } from '../sections/Problem.tsx'
 import { Sherpas } from '../sections/Sherpas.tsx'
 import { SoundFamiliar } from '../sections/SoundFamiliar.tsx'
 import { Suite } from '../sections/Suite.tsx'
+import { useBrief } from '../lib/useBrief.ts'
 
 /**
  * "/": the story in order. Eigi Computer comes straight after the hero because it is the product;
  * then empathy (sound familiar, the problem), what Eigi is, how it works, the people, and the close.
  */
 export function HomePage() {
+  // what the visitor tells us on the way down, carried to the sections that answer it
+  const { brief, setTask, togglePain } = useBrief()
   return (
     <>
       <a className="skip" href="#computer">Skip to content</a>
       <Nav />
       <main id="top">
-        <Hero />
+        <Hero task={brief.task} onTask={setTask} />
         <EigiComputer />
-        <SoundFamiliar />
+        <SoundFamiliar mine={brief.pains} onToggle={togglePain} />
         <Problem />
         <Gateway />
         <HowYourEigiWorks />
         <Suite />
-        <FirstJobs />
+        <FirstJobs pain={brief.pains[0]} />
         <Sherpas />
         <FieldNotes />
         <People />
         <Faq />
-        <NextChapter />
+        <NextChapter brief={brief} />
       </main>
       <Footer />
     </>

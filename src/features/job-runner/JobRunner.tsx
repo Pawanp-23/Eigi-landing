@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Mascot } from '../../components/brand/Mascot.tsx'
 import { RichText } from '../../components/ui/RichText.tsx'
-import { FIRST_JOBS, HIRE_ROLES } from '../../content/eigi.ts'
+import { FIRST_JOBS, HIRE_ROLES, JOB_FOR_PAIN } from '../../content/eigi.ts'
 import { CREW } from '../../lib/crew.ts'
 import { cx } from '../../lib/cx.ts'
 import { calm, pop } from '../../lib/motion.ts'
@@ -15,11 +15,18 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 interface Progress { stage: number; waitingOk: boolean; finished: boolean; kept?: boolean }
 const FINISHED: Progress = { stage: 4, waitingOk: false, finished: true }
 
-/** Pick the hire you're putting off, pick a job, and watch an Eigi do it, with your OK in the middle. */
-export function JobRunner() {
+/**
+ * Pick the hire you're putting off, pick a job, and watch an Eigi do it, with your OK in the middle.
+ * If the visitor told us their pain in "Sound familiar", it opens on the job that fits it.
+ */
+export function JobRunner({ pain }: { pain?: string }) {
   const reduced = useReducedMotion() ?? false
-  const [roleId, setRoleId] = useState(HIRE_ROLES[0].id)
-  const [jobIndex, setJobIndex] = useState(0)
+  const fit = pain ? JOB_FOR_PAIN[pain] : undefined
+  const opening = fit ?? { role: HIRE_ROLES[0].id, job: 0 }
+  // until the visitor picks something here, follow what they told us further up
+  const [picked, setPicked] = useState<{ role: string; job: number } | null>(null)
+  const roleId = picked?.role ?? opening.role
+  const jobIndex = picked?.job ?? opening.job
   const [progress, setProgress] = useState<Progress>(FINISHED)
   const run = useRef(0)
   const started = useRef(false)
@@ -33,8 +40,7 @@ export function JobRunner() {
   const start = useCallback(async (nextRole: string, nextJob: number) => {
     started.current = true
     const me = ++run.current
-    setRoleId(nextRole)
-    setJobIndex(nextJob)
+    setPicked({ role: nextRole, job: nextJob })
     if (reduced) return setProgress(FINISHED)
     const steps = stagesOf((HIRE_ROLES.find((r) => r.id === nextRole) ?? HIRE_ROLES[0]).jobs[nextJob])
     for (let s = 0; s < steps.length; s++) {
@@ -63,6 +69,7 @@ export function JobRunner() {
   return (
     <div className={styles.grid}>
       <div>
+        {fit && !picked && <p className={styles.yours}>{FIRST_JOBS.yours(pain!)}</p>}
         <div className="eyebrow" id="hire-roles">{FIRST_JOBS.rolesLabel}</div>
         <div className={styles.roles} role="group" aria-labelledby="hire-roles">
           {HIRE_ROLES.map((r) => (
@@ -90,7 +97,7 @@ export function JobRunner() {
         onViewportEnter={() => {
           if (started.current || reduced) return
           started.current = true
-          start(HIRE_ROLES[0].id, 0)
+          start(roleId, jobIndex)
         }}
         style={{ ['--c' as string]: crew.color, ['--ct' as string]: crew.tint }} aria-live="polite">
         <div className={styles.q}><small>{crew.name}</small>“{job.title}”</div>

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Heading } from '../components/ui/Heading.tsx'
 import { FAMILIAR, PAINS } from '../content/story.ts'
 import { WeekCard } from '../features/week/WeekCard.tsx'
@@ -6,10 +5,14 @@ import { amitLink } from '../lib/amit.ts'
 import { cx } from '../lib/cx.ts'
 import styles from './SoundFamiliar.module.css'
 
+interface SoundFamiliarProps {
+  /** pains the visitor has tapped, in tap order (kept by the page so later sections can use them) */
+  mine: readonly string[]
+  onToggle: (area: string) => void
+}
+
 /** Sound familiar? Tap the pains that are yours and watch them eat your week. */
-export function SoundFamiliar() {
-  const [mine, setMine] = useState<string[]>([])
-  const toggle = (area: string) => setMine((m) => (m.includes(area) ? m.filter((a) => a !== area) : [...m, area]))
+export function SoundFamiliar({ mine, onToggle: toggle }: SoundFamiliarProps) {
   const n = mine.length
 
   return (

@@ -18,7 +18,7 @@
 .trust b { font: 600 17px/1.25 var(--font-display); letter-spacing: -0.01em; }
 .trust span { font-size: 14.5px; color: var(--ink-2); }
 
-@media (max-width: 900px) { .trust { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 860px) { .head { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .head { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 760px) { .film { border-radius: 22px; } }
-@media (max-width: 480px) { .trust { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .trust { grid-template-columns: minmax(0, 1fr); } }

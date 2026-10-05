@@ -1,5 +1,7 @@
 .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(30px, 6vw, 90px); align-items: start; margin-top: 52px; }
 
+.yours { margin-bottom: 18px; padding: 12px 16px; border-radius: 14px; background: var(--yellow-t); font-size: 15px; font-weight: 500; }
+
 .roles { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 18px; }
 .roles button { border: 1.5px solid var(--line); background: var(--paper); border-radius: 999px; padding: 8px 16px; font-size: 15px; cursor: pointer; }
 .roles button[aria-pressed='true'] { background: var(--ink); color: var(--snow); border-color: var(--ink); }
@@ -41,6 +43,6 @@
 .start b { font: 500 11.5px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
 
 @media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
   .run { position: static; }
 }

@@ -34,3 +34,25 @@ export const whatsappLink = (text: string) => `https://wa.me/${AMIT_NUMBER}?text
 
 /** Shorthand: the WhatsApp link for a part of the page. */
 export const amitLink = (place: string, extra = '') => whatsappLink(messageFor(place, extra))
+
+/** What the visitor told us on the way down the page. */
+export interface Brief {
+  /** typed into the hero: what's eating their week */
+  task: string
+  /** the pains they recognised in "Sound familiar", in the order they tapped them */
+  pains: readonly string[]
+  /** hours a week those pains take */
+  hours: number
+}
+
+export const hasBrief = (b: Brief) => b.task.trim().length > 0 || b.pains.length > 0
+
+/** The first message to Amit, written from everything the visitor told us. */
+export function briefMessage({ task, pains, hours }: Brief) {
+  const lines = ['Hi Amit, I run a small team.']
+  const t = task.trim().replace(/[.!?]+$/, '')
+  if (t) lines.push(`What’s eating my week: ${t}.`)
+  if (pains.length) lines.push(`These sound familiar: ${pains.join(', ')}${hours ? ` (about ${hours} hours a week)` : ''}.`)
+  lines.push('Where should we start?')
+  return `${lines.join(' ')}\n\nref: brief`
+}

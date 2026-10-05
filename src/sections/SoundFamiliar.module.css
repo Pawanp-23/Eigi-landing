@@ -12,5 +12,5 @@
 .close p { font: 500 clamp(22px, 2.6vw, 32px)/1.25 var(--font-display); letter-spacing: -0.02em; max-width: 26ch; }
 
 
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 640px) { .list li { grid-template-columns: 1fr auto; } .area { grid-column: 1 / -1; } }

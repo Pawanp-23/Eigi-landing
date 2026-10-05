@@ -74,4 +74,10 @@ export const FINAL = {
   primary: 'Talk to Amit on WhatsApp',
   secondary: 'Go to Studio',
   email: 'Or email the team:',
+  brief: {
+    label: 'Your brief for Amit',
+    note: 'Built from what you told us on this page.',
+    hours: (h: number) => `about ${h} hours a week`,
+    send: 'Send my brief to Amit',
+  },
 } as const

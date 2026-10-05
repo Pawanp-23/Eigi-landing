@@ -19,4 +19,4 @@
 .quote small { display: block; font: 500 11px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--snow) 55%, transparent); margin-bottom: 6px; }
 .foot { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
 
-@media (max-width: 900px) { .notes { grid-template-columns: 1fr; } .log { min-height: 0; } }
+@media (max-width: 900px) { .notes { grid-template-columns: minmax(0, 1fr); } .log { min-height: 0; } }

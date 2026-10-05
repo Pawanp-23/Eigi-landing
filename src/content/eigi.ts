@@ -80,6 +80,8 @@ export const FIRST_JOBS = {
   startLabel: 'How we’d start',
   start: ['Map how this job runs today, on a 30-minute call.', 'Connect the tools it touches.', 'Check the first results with you.'],
   noApproval: 'Not needed. Drafts only, so your rules allow it.',
+  /** shown when the visitor told us which pain is theirs */
+  yours: (pain: string) => `You said “${pain}” is eating your week. Here’s where an Eigi would start.`,
   approved: 'Approved by you',
   kept: 'Kept as a draft for you to edit. Nothing was sent.',
 } as const
@@ -104,6 +106,38 @@ export interface HireRole {
 }
 
 export const HIRE_ROLES: HireRole[] = [
+  {
+    id: 'sales', label: 'Sales', crew: 'sales',
+    jobs: [
+      {
+        title: 'Follow up after demo calls',
+        detail: 'Write a follow-up for every call this week, picking up on what each person asked.',
+        understanding: 'Found 5 demo calls in your calendar and call notes',
+        working: 'Wrote 5 follow-ups in your voice and logged them in the CRM',
+        approval: 'Send all five?',
+        done: '5 follow-ups sent',
+        result: '**Two replies already.** One wants a call on Thursday.',
+      },
+      {
+        title: 'Reply to new leads in minutes',
+        detail: 'Answer every enquiry from your site while it’s still warm.',
+        understanding: 'Watching your web form and inbox for new leads',
+        working: 'Replied to 3 new leads and offered times you’re free',
+        approval: 'Send replies like these on their own from now on?',
+        done: 'Lead replies are on',
+        result: '**First reply in 4 minutes**, every time. A summary lands at 6pm.',
+      },
+      {
+        title: 'Chase quotes that went quiet',
+        detail: 'Nudge every quote that hasn’t had an answer in a week.',
+        understanding: 'Found 6 quotes with no reply for 7 days or more',
+        working: 'Drafted a short, friendly nudge for each',
+        approval: 'Send the 6 nudges?',
+        done: '6 nudges sent',
+        result: '**$12,400 back in play.** Two asked for revised quotes.',
+      },
+    ],
+  },
   {
     id: 'ops', label: 'Operations', crew: 'ops',
     jobs: [
@@ -169,3 +203,12 @@ export const HIRE_ROLES: HireRole[] = [
     ],
   },
 ]
+
+/** Which first job to open on, for the pain the visitor recognised first in "Sound familiar". */
+export const JOB_FOR_PAIN: Record<string, { role: string; job: number }> = {
+  'Hiring': { role: 'ops', job: 0 },
+  'Follow-ups': { role: 'sales', job: 0 },
+  'Your week': { role: 'ops', job: 2 },
+  'Tools': { role: 'ops', job: 1 },
+  'Growth': { role: 'support', job: 0 },
+}
