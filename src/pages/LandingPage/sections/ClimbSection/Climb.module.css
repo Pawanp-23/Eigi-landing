@@ -9,6 +9,7 @@
   position: relative; border-radius: var(--radius-lg); overflow: hidden;
   background: linear-gradient(#eef1ef, var(--snow) 70%); border: 1px solid var(--line);
 }
+.scene { position: relative; }
 .svg { display: block; width: 100%; height: auto; }
 .far { fill: #e1e5e2; }
 .near { fill: #d2d8d4; }
