@@ -30,19 +30,23 @@ export default function ClimbSection() {
         </div>
 
         <div className={styles.mountain}>
-          <svg viewBox={`0 0 ${W} ${H}`} className={styles.svg} aria-hidden="true">
-            <path className={styles.far} d="M0 420 L120 250 L210 300 L330 150 L420 230 L540 90 L640 170 L800 60 L800 420 Z" />
-            <polygon className={styles.near} points={`0,420 ${line} 800,140 800,420`} />
-            <path className={styles.snow} d="M655 112 L722 46 L790 120 L760 112 L735 128 L705 105 L680 122 Z" />
-            <polyline className={styles.rope} points={line} />
-            <polyline className={styles.climbed} points={line} pathLength={100} style={{ strokeDasharray: `${v} 100` }} />
-            {CAMP_AT.map((i, n) => <g key={i} className={styles.flag} data-on={n < reached} transform={`translate(${ROUTE[i][0]} ${ROUTE[i][1]})`}>
-              <line y1="0" y2="-34" /><path d="M0 -34 L20 -28 L0 -21 Z" /><text y="18" textAnchor="middle">{CLIMB.camps[n].name}</text>
-            </g>)}
-          </svg>
+          {/* Sherpie is placed in percentages of this box, so it holds only the picture: on phones the
+              camp card sits below inside .mountain, and must not change what those percentages mean. */}
+          <div className={styles.scene}>
+            <svg viewBox={`0 0 ${W} ${H}`} className={styles.svg} aria-hidden="true">
+              <path className={styles.far} d="M0 420 L120 250 L210 300 L330 150 L420 230 L540 90 L640 170 L800 60 L800 420 Z" />
+              <polygon className={styles.near} points={`0,420 ${line} 800,140 800,420`} />
+              <path className={styles.snow} d="M655 112 L722 46 L790 120 L760 112 L735 128 L705 105 L680 122 Z" />
+              <polyline className={styles.rope} points={line} />
+              <polyline className={styles.climbed} points={line} pathLength={100} style={{ strokeDasharray: `${v} 100` }} />
+              {CAMP_AT.map((i, n) => <g key={i} className={styles.flag} data-on={n < reached} transform={`translate(${ROUTE[i][0]} ${ROUTE[i][1]})`}>
+                <line y1="0" y2="-34" /><path d="M0 -34 L20 -28 L0 -21 Z" /><text y="18" textAnchor="middle">{CLIMB.camps[n].name}</text>
+              </g>)}
+            </svg>
 
-          <div className={styles.climber} data-summit={summit} style={{ left: `${(x / W) * 100}%`, top: `${(y / H) * 100}%` } as CSSProperties}>
-            <Sherpie />
+            <div className={styles.climber} data-summit={summit} style={{ left: `${(x / W) * 100}%`, top: `${(y / H) * 100}%` } as CSSProperties}>
+              <Sherpie />
+            </div>
           </div>
 
           <div className={styles.camp} aria-live="polite">

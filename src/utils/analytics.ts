@@ -21,6 +21,19 @@ export function track(name: EventName, params: Record<string, string | number> =
   window.gtag?.('event', name, params)
 }
 
+/**
+ * The section a WhatsApp link to Buddy came from: every link's prefilled text ends with "ref: <section>".
+ * `searchParams` already decodes the text, so it must not be decoded again: a second decode throws on a
+ * message containing "%" (e.g. "Increase sales by 10%") and the click would go unrecorded.
+ */
+export function refFrom(href: string): string {
+  try {
+    return /ref: ([\w-]+)/.exec(new URL(href).searchParams.get('text') ?? '')?.[1] ?? 'unknown'
+  } catch {
+    return 'unknown'
+  }
+}
+
 /** Load gtag once, and report every WhatsApp click with the section it came from. */
 export function initAnalytics() {
   if (!ID || window.gtag) return
@@ -37,7 +50,6 @@ export function initAnalytics() {
   document.addEventListener('click', e => {
     const a = (e.target as Element).closest?.('a[href^="https://wa.me/"]') as HTMLAnchorElement | null
     if (!a) return
-    const ref = /ref: ([\w-]+)/.exec(decodeURIComponent(new URL(a.href).searchParams.get('text') ?? ''))?.[1] ?? 'unknown'
-    track('talk_to_buddy', { ref })
+    track('talk_to_buddy', { ref: refFrom(a.href) })
   })
 }
